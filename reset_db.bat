@@ -10,16 +10,16 @@ IF EXIST db.sqlite3 (
     del /f db.sqlite3
 )
 
-IF EXIST confectioners\migrations\*.py (
+IF EXIST shop\migrations\*.py (
     echo Видалення файлів міграцій...
-    del /f confectioners\migrations\*.py
+    del /f shop\migrations\*.py
     echo Створення нового файлу __init__.py...
-    type nul > confectioners\migrations\__init__.py
+    type nul > shop\migrations\__init__.py
 )
 
 :: Створюємо нові міграції та застосовуємо їх
 echo Створення нових міграцій...
-python manage.py makemigrations confectioners
+python manage.py makemigrations shop
 
 echo Застосування міграцій...
 python manage.py migrate
@@ -36,4 +36,4 @@ echo.
 echo Готово! База даних успішно скинута та перестворена.
 echo Створено нового суперкористувача.
 
-pause 
+pause
