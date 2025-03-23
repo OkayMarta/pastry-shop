@@ -1,0 +1,38 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Замовлення прийнято - Кондитерська{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title text-success mb-4">
+                        <i class="fas fa-check-circle"></i>
+                        Дякуємо за ваше замовлення!
+                    </h1>
+                    
+                    <p class="lead mb-4">
+                        Ваше замовлення успішно прийнято. Обраний кондитер зв'яжеться з вами 
+                        найближчим часом для уточнення деталей.
+                    </p>
+                    
+                    <div class="alert alert-info" role="alert">
+                        <p class="mb-0">
+                            Перевірте, будь ласка, вашу електронну пошту - ми надіслали вам 
+                            підтвердження замовлення.
+                        </p>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'shop:home' %}" class="btn btn-primary">
+                            Повернутися на головну
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

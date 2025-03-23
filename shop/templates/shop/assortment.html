@@ -1,0 +1,39 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Асортимент - Кондитерська{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-5">Наш асортимент</h1>
+
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+        {% for item in items %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="product-image-container"> <!--  Контейнер для зображення -->
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                    {% else %}
+                        <img src="{% static 'img/no-image.jpg' %}" alt="Зображення відсутнє">
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="card-text">
+                        <strong>Ціна:</strong> {{ item.price }} грн
+                    </p>
+                    <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="btn btn-primary w-100">Замовити</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                На жаль, зараз асортимент порожній. Спробуйте завітати пізніше.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Нове замовлення</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #6c757d;
+        }
+        .order-details {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Нове замовлення №{{ order.id }}</h1>
+        </div>
+        
+        <div class="content">
+            <h2>Деталі замовлення:</h2>
+            
+            <div class="order-details">
+                <p><strong>Замовник:</strong> {{ order.customer_name }}</p>
+                <p><strong>Телефон:</strong> {{ order.phone_number }}</p>
+                <p><strong>Email:</strong> {{ order.email }}</p>
+                <p><strong>Тип виробу:</strong> {{ order.get_product_type_display }}</p>
+                <p><strong>Кількість:</strong> {{ order.quantity }}</p>
+                <p><strong>Дата замовлення:</strong> {{ order.order_date }}</p>
+                <p><strong>Дата доставки:</strong> {{ order.delivery_date }}</p>
+                {% if order.comment %}
+                <p><strong>Коментар:</strong></p>
+                <p>{{ order.comment }}</p>
+                {% endif %}
+            </div>
+            
+            <p>
+                Будь ласка, зв'яжіться з клієнтом найближчим часом для підтвердження 
+                замовлення та уточнення деталей.
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>
+                Це автоматичне повідомлення, будь ласка, не відповідайте на нього.
+                Для управління замовленнями використовуйте адміністративну панель.
+            </p>
+        </div>
+    </div>
+</body>
+</html> 

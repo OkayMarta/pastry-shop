@@ -1,0 +1,163 @@
+/* Основні стилі */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Стилі для навігації */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    min-height: 60px; /*  Высота под текст */
+}
+
+.navbar-brand {
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    color: white; /*  Цвет текста */
+    font-size: 1.5rem; /* Размер текста */
+    font-weight: bold; /*  Жирность */
+}
+
+.navbar-brand:hover{
+    color: var(--bakery-pink);
+    transform: scale(1.08);
+}
+
+/* Стилі для карточок */
+.card {
+    transition: transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Стилі для форм */
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Стилі для кнопок */
+.btn {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Стилі для футера */
+.footer {
+    background-color: #f8f9fa;
+    padding: 1rem 0;
+    margin-top: auto;
+}
+
+/* Стилі для повідомлень */
+.alert {
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+/* Медіа-запити */
+/* Адаптація для планшетів */
+@media (max-width: 991px) {
+    .row-cols-md-3 {
+        grid-template-columns: repeat(2, 1fr) !important; /* В 1 рядку 2 фото */
+    }
+     .row-cols-lg-4 {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* Адаптація для телефонів */
+@media (max-width: 576px) {
+    .row-cols-md-3, .row-cols-lg-4 {
+        grid-template-columns: repeat(1, 1fr) !important; /* В 1 рядку 1 фото */
+    }
+}
+
+/* Анімації */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Кольори для кондитерської */
+:root {
+    --bakery-brown: #352c88;
+    --bakery-light-brown: #8D6E63;
+    --bakery-cream: #FFECB3;
+    --bakery-pink: #F8BBD0;
+}
+
+/* Перевизначення кольорів Bootstrap */
+.bg-dark {
+    background-color: var(--bakery-brown) !important;
+}
+
+.bg-light {
+    background-color: var(--bakery-cream) !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--bakery-pink);
+    transform: translateY(-2px);
+}
+
+/* Стилі для квадратних зображень з відступами */
+.product-image-container {
+    display: block; /* Забезпечує блочне відображення */
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Пропорція: ширина / висота */
+    overflow: hidden; /* Обрізає зображення, яке виходить за межі */
+    background-color: #f2f2f2; /* Опціонально: колір фону для порожніх контейнерів */
+}
+
+.product-image-container img {
+    display: block; /* Забезпечує блочне відображення, важливе для масштабування */
+    width: 100%; /* Розтягує зображення на весь контейнер по ширині */
+    height: 100%; /* Розтягує зображення по висоті контейнера */
+    object-fit: cover; /* Заповнює контейнер, обрізаючи зайве, без спотворення пропорцій */
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body .btn{
+    margin-top: auto; /* Притискає кнопку до низу */
+}

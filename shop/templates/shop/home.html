@@ -1,0 +1,68 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Головна - Кондитерська{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center py-5">
+    <h1 class="display-4">Ласкаво просимо до нашої кондитерської!</h1>
+    <p class="lead">Ми створюємо неймовірні солодощі для ваших особливих моментів</p>
+    <hr class="my-4">
+    <p>Оберіть кондитера та замовте свій ідеальний десерт прямо зараз</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'shop:assortment_list' %}" role="button">
+    Переглянути асортимент
+    </a>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+    <h2 class="text-center mb-4">Наші бестселери</h2>
+</div>
+{% for item in assortment_items %}
+<div class="col-md-3 mb-4">
+    <div class="card h-100">
+        <div class="product-image-container">
+            {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+            {% else %}
+            <img src="{% static 'img/no-image.jpg' %}" alt="Зображення відсутнє">
+            {% endif %}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text">{{ item.description|truncatewords:30 }}</p>
+            <p class="text-primary fw-bold">{{ item.price }} грн</p>
+            <a href="{% url 'shop:order_create' %}?product_id={{item.id}}" class="btn btn-primary">
+                Замовити
+            </a>
+        </div>
+    </div>
+</div>
+{% empty %}
+<div class="col-12 text-center">
+    <p>На цей час асортимент порожній.</p>
+</div>
+{% endfor %}
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="text-center">
+            <h3>Якість</h3>
+            <p>Ми використовуємо тільки найкращі інгредієнти для наших виробів</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="text-center">
+            <h3>Індивідуальний підхід</h3>
+            <p>Кожне замовлення виконується з урахуванням ваших побажань</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="text-center">
+            <h3>Своєчасна доставка</h3>
+            <p>Ми гарантуємо доставку ваших замовлень точно в строк</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
