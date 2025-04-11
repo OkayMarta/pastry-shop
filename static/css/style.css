@@ -1,32 +1,57 @@
-/* Основні стилі */
+/* --- Загальні стилі --- */
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    font-family: 'Montserrat', sans-serif; /* Базовий шрифт */
+    color: #333; /* Основний колір тексту */
 }
 
-main {
-    flex: 1;
+main.main-content {
+    flex: 1; /* Займає весь доступний простір між хедером і футером */
+    padding-top: 2rem; /* Додаємо відступ зверху для контенту */
+    padding-bottom: 2rem; /* Додаємо відступ знизу для контенту */
 }
 
-/* Стилі для навігації */
-.navbar {
-    box-shadow: 0 2px 4px rgba(0,0,0,.1);
-    min-height: 60px; /*  Высота под текст */
+
+/* --- Стилі Хедера --- */
+.header-custom {
+    background-color: #FFF7F5; /* Світло-рожевий/бежевий фон, як у дизайні */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Легка тінь */
+    border-bottom: 1px solid #eee; /* Тонка лінія знизу */
 }
 
-.navbar-brand {
-    padding: 12px 15px;
-    display: flex;
-    align-items: center;
-    color: white; /*  Цвет текста */
-    font-size: 1.5rem; /* Размер текста */
-    font-weight: bold; /*  Жирность */
+/* Перевизначення стилів для світлої навігації */
+.header-custom .navbar-nav .nav-link {
+    color: #555; /* Темно-сірий колір посилань */
+    font-weight: 600; /* Трохи жирніший шрифт */
+    padding-left: 1rem;
+    padding-right: 1rem;
+    transition: color 0.3s ease;
+}
+
+.header-custom .navbar-nav .nav-link:hover,
+.header-custom .navbar-nav .nav-link.active { /* Стиль для активного посилання (якщо буде) */
+    color: #E83E8C; /* Рожевий колір при наведенні (підберіть точний) */
+}
+
+.navbar-toggler {
+    border-color: rgba(0,0,0,.1);
+}
+.navbar-toggler-icon {
+     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(50, 50, 50, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .navbar-brand:hover{
     color: var(--bakery-pink);
     transform: scale(1.08);
+}
+
+/* Стиль для логотипа в шапке */
+.navbar-logo {
+    height: 75px; /* Задана висота логотипу */
+    width: auto;
+    display: block;
 }
 
 /* Стилі для карточок */
@@ -62,12 +87,81 @@ main {
     border-color: #0056b3;
 }
 
-/* Стилі для футера */
-.footer {
-    background-color: #f8f9fa;
-    padding: 1rem 0;
-    margin-top: auto;
+/* --- Стилі Футера --- */
+.footer-custom {
+    background-color: #FFF7F5; /* Той самий фон, що і в хедері */
+    color: #555; /* Основний колір тексту футера */
+    font-size: 0.9rem; /* Трохи менший шрифт */
 }
+
+.footer-title {
+    margin-top: 0;
+    color: #333; /* Колір заголовків у футері */
+    font-weight: 700; /* Жирний шрифт для заголовків */
+    font-family: 'Playfair Display', serif; /* Інший шрифт для заголовків (якщо використовується) */
+}
+
+.footer-link {
+    color: #555;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #E83E8C; /* Рожевий при наведенні */
+    text-decoration: none;
+}
+
+.footer-custom p {
+    margin-bottom: 0.5rem; /* Менший відступ між параграфами */
+}
+
+.footer-custom hr {
+    border-top: 1px solid #ddd; /* Колір лінії */
+}
+
+.copyright-text {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.footer-logo-img {
+    max-height: 60px; /* Обмеження висоти логотипу, підберіть значення */
+    width: auto;      /* Автоматична ширина для збереження пропорцій */
+    /* max-width: 100%; */ /* Можна використовувати замість height, якщо краще */
+    display: block;   /* Виправляє можливі нижні відступи */
+}
+
+/* Вирівнювання тексту для мобільних */
+@media (max-width: 767px) {
+    .footer-custom .col-md-3 { /* Або загальний селектор для колонок футера */
+         text-align: center !important; /* Центруємо вміст колонок на мобільних */
+         margin-bottom: 1.5rem; /* Додаємо відступ між колонками при вертикальному відображенні */
+    }
+    .footer-custom .offset-md-3 {
+         margin-left: 0; /* Прибираємо відступ зліва на мобільних */
+    }
+
+    /* Центрування колонки з логотипом */
+    .footer-logo-column {
+        text-align: center !important;
+        margin-bottom: 2rem; /* Додаємо відступ під логотипом на мобільних */
+    }
+
+     /* Центрування текстових колонок (якщо ще не зроблено) */
+    .footer-custom .col-md-3 {
+         text-align: center !important;
+         margin-bottom: 1.5rem;
+    }
+    .footer-custom .offset-md-3 { /* Це правило вже не потрібне, бо offset видалено */
+         /* margin-left: 0; */
+    }
+    /* Переконайтесь, що копірайт також центрується, якщо потрібно */
+    .copyright-text {
+        text-align: center !important;
+    }
+}
+
 
 /* Стилі для повідомлень */
 .alert {
