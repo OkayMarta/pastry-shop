@@ -1,68 +1,142 @@
 {% extends 'shop/base.html' %}
 {% load static %}
 
-{% block title %}Головна - Кондитерська{% endblock %}
+{% block title %}Головна - Confititeria{% endblock %}
 
 {% block content %}
-<div class="jumbotron text-center py-5">
-    <h1 class="display-4">Ласкаво просимо до нашої кондитерської!</h1>
-    <p class="lead">Ми створюємо неймовірні солодощі для ваших особливих моментів</p>
-    <hr class="my-4">
-    <p>Оберіть кондитера та замовте свій ідеальний десерт прямо зараз</p>
-    <a class="btn btn-primary btn-lg" href="{% url 'shop:assortment_list' %}" role="button">
-    Переглянути асортимент
-    </a>
-</div>
 
-<div class="row mt-5">
-    <div class="col-md-12">
-    <h2 class="text-center mb-4">Наші бестселери</h2>
-</div>
-{% for item in assortment_items %}
-<div class="col-md-3 mb-4">
-    <div class="card h-100">
-        <div class="product-image-container">
-            {% if item.image %}
-            <img src="{{ item.image.url }}" alt="{{ item.name }}">
-            {% else %}
-            <img src="{% static 'img/no-image.jpg' %}" alt="Зображення відсутнє">
-            {% endif %}
+<!-- ======== Hero Section (Full Width) ======== -->
+<section class="hero-section-fullwidth">
+    <div class="container">
+        <div class="row align-items-center gy-4"> <!-- gy-4 для вертикального відступу на мобільних -->
+            <div class="col-lg-6 hero-text-column">
+                <h1 class="hero-title">Дозвольте собі<br>трохи щастя!</h1>
+                <p class="hero-subtitle">
+                    Насолоджуйтесь кожним моментом життя, додаючи до нього солодкої радості. Наші десерти створені, щоб дарувати тепло, ніжність і посмішку у будь-яку мить.
+                </p>
+                <a href="{% url 'shop:assortment_list' %}" class="btn btn-hero">
+                    Переглянути асортимент →
+                </a>
+            </div>
+            <div class="col-lg-6 hero-image-column text-center text-lg-end">
+                 <img src="{% static 'img/hero-cake.png' %}" alt="Святковий торт з полуницею" class="img-fluid hero-cake-img">
+            </div>
         </div>
-        <div class="card-body">
-            <h5 class="card-title">{{ item.name }}</h5>
-            <p class="card-text">{{ item.description|truncatewords:30 }}</p>
-            <p class="text-primary fw-bold">{{ item.price }} грн</p>
-            <a href="{% url 'shop:order_create' %}?product_id={{item.id}}" class="btn btn-primary">
-                Замовити
+    </div>
+</section>
+<!-- ======== End Hero Section ======== -->
+
+
+<!-- ======== Content Sections (Contained) ======== -->
+<div class="container main-page-content"> <!-- Контейнер для решти контенту -->
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us-section text-center py-5">
+        <h2 class="section-title mb-5">Чому Нас Обирають?</h2>
+        <div class="row gy-4">
+            <div class="col-md-4">
+                <img src="{% static 'img/icon-individual.png' %}" alt="Індивідуальний підхід" class="icon-why-choose-us mb-3">
+                <h3 class="feature-title">ІНДИВІДУАЛЬНИЙ ПІДХІД</h3>
+                <p>Кожне замовлення виконується з урахуванням ваших побажань</p>
+            </div>
+            <div class="col-md-4">
+                <img src="{% static 'img/icon-quality.png' %}" alt="Якість" class="icon-why-choose-us mb-3">
+                <h3 class="feature-title">ЯКІСТЬ</h3>
+                <p>Ми використовуємо тільки <span class="highlight">найкращі</span> інгредієнти для наших виробів</p>
+            </div>
+            <div class="col-md-4">
+                <img src="{% static 'img/icon-delivery.png' %}" alt="Своєчасна доставка" class="icon-why-choose-us mb-3">
+                <h3 class="feature-title">СВОЄЧАСНА ДОСТАВКА</h3>
+                <p>Гарантуємо доставку ваших замовлень <span class="highlight">швидко</span> та вчасно</p>
+            </div>
+        </div>
+        <div class="row text-center mt-5 stats-row">
+             <div class="col-4">
+                 <div class="stat-number">17000+</div>
+                 <div class="stat-label">Створених Десертів</div>
+             </div>
+             <div class="col-4">
+                 <div class="stat-number">8000+</div>
+                 <div class="stat-label">Задоволених Клієнтів</div>
+             </div>
+             <div class="col-4">
+                 <div class="stat-number">13000+</div>
+                 <div class="stat-label">Онлайн Замовлень</div>
+             </div>
+        </div>
+    </section>
+
+    <!-- Weekly Bestsellers Section -->
+    <section class="bestsellers-section text-center py-5">
+        <h2 class="section-title">Тижневі Бестселлери</h2>
+        <p class="section-subtitle mb-5">Ці десерти не затримуються на вітрині — спробуйте і дізнайтесь чому.</p>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            {% for item in assortment_items %}
+            <div class="col">
+                <div class="card h-100 product-card">
+                    <div class="product-image-container">
+                        {% if item.image %}
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                        {% else %}
+                        <img src="{% static 'img/no-image.jpg' %}" alt="Зображення відсутнє">
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title product-title">{{ item.name }}</h5>
+                        <p class="card-text product-price">{{ item.price }} ГРН</p>
+                        {# Можна додати кнопку "Замовити", якщо треба, як на сторінці асортименту #}
+                         <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="btn btn-outline-primary mt-auto">Замовити</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p>На цей час асортимент бестселерів порожній.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-5">
+            <a href="{% url 'shop:assortment_list' %}" class="btn btn-secondary-custom">
+                Повний асортимент
             </a>
         </div>
-    </div>
-</div>
-{% empty %}
-<div class="col-12 text-center">
-    <p>На цей час асортимент порожній.</p>
-</div>
-{% endfor %}
-</div>
+    </section>
 
-<div class="row mt-5">
-    <div class="col-md-4">
-        <div class="text-center">
-            <h3>Якість</h3>
-            <p>Ми використовуємо тільки найкращі інгредієнти для наших виробів</p>
+    <!-- Sweet Magic Everyday Section -->
+    <section class="sweet-magic-section py-5">
+        <div class="row align-items-center gy-4">
+            <div class="col-lg-6">
+                <h2 class="section-title mb-3">Солодка Магія Щодня</h2>
+                <p class="mb-4">
+                    Там, де інші бачать просто борошно, цукор і крем, ми бачимо можливість створити маленьке диво, яке з першого погляду викликає усмішку. У кожному нашому торті ховається не лише рецепт, а й трохи магії, щіпка натхнення, велика порція любові та бажання зробити ваш день по-справжньому особливим.
+                </p>
+                <a href="{% url 'shop:about' %}" class="btn btn-hero"> {# Використовуємо той же стиль кнопки? Або інший #}
+                    Дізнатися більше →
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-3"> {# g-3 для відступів між картинками #}
+                    <div class="col-6">
+                        <img src="{% static 'img/magic-image-1.jpg' %}" alt="Приготування десерту" class="img-fluid rounded shadow-sm">
+                    </div>
+                    <div class="col-6">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <img src="{% static 'img/magic-image-2.jpg' %}" alt="Готовий торт" class="img-fluid rounded shadow-sm">
+                            </div>
+                            <div class="col-12">
+                                <img src="{% static 'img/magic-image-3.jpg' %}" alt="Упаковка тортів" class="img-fluid rounded shadow-sm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="text-center">
-            <h3>Індивідуальний підхід</h3>
-            <p>Кожне замовлення виконується з урахуванням ваших побажань</p>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="text-center">
-            <h3>Своєчасна доставка</h3>
-            <p>Ми гарантуємо доставку ваших замовлень точно в строк</p>
-        </div>
-    </div>
-</div>
+    </section>
+
+</div> <!-- /.container main-page-content -->
+<!-- ======== End Content Sections ======== -->
+
 {% endblock %}

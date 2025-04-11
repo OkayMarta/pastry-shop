@@ -255,3 +255,250 @@ main.main-content {
 .card-body .btn{
     margin-top: auto; /* Притискає кнопку до низу */
 }
+
+/* --- Загальні стилі сторінки --- */
+h1, h2, h3 {
+     font-family: 'Playfair Display', serif; /* Шрифт для заголовків */
+     font-weight: 700;
+}
+
+.section-title {
+    color: #333; /* Темний колір для заголовків секцій */
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem; /* Розмір заголовка секції */
+}
+
+.section-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+    max-width: 600px; /* Обмеження ширини підзаголовка */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.highlight { /* Для виділення тексту в секції "Чому нас обирають" */
+    color: #E83E8C; /* Рожевий колір */
+    font-weight: 600;
+}
+
+.main-page-content { /* Додаткові відступи для основного контейнера */
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+/* --- Hero Section --- */
+.hero-section-fullwidth {
+    background-color: #FFF7F5; /* Світло-рожевий фон */
+    padding: 4rem 0; /* Вертикальні відступи */
+    overflow: hidden; /* Запобігає виходу фонових елементів */
+    position: relative; /* Для можливого позиціонування фонових фігур */
+}
+
+/* Опціонально: додати фонову фігуру (кружечок) */
+.hero-section-fullwidth::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    right: -15%;
+    width: 50%; /* Розмір фігури */
+    padding-bottom: 50%; /* Робить елемент круглим (співвідношення 1:1) */
+    background-color: rgba(255, 223, 230, 0.5); /* Напівпрозорий рожевий */
+    border-radius: 50%;
+    z-index: 0; /* Позаду контенту */
+    display: block; /* Потрібно для before/after */
+}
+
+
+.hero-text-column {
+    z-index: 1; /* Переконуємось, що текст поверх фонової фігури */
+    position: relative; /* Щоб z-index спрацював */
+}
+
+.hero-image-column {
+     z-index: 1;
+     position: relative;
+}
+
+.hero-title {
+    font-size: 3.5rem; /* Розмір головного заголовка */
+    color: #222;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    font-weight: 900; /* Дуже жирний */
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2rem;
+    max-width: 500px; /* Обмеження ширини тексту */
+}
+
+.hero-cake-img {
+    max-width: 100%; /* Максимальна ширина */
+    height: auto;
+    /* Можна додати анімацію появи, якщо потрібно */
+}
+
+.btn-hero {
+    background-color: #FFF7F5; /* Фон кнопки */
+    color: #E83E8C; /* Рожевий текст */
+    border: 1px solid #E83E8C; /* Рожева рамка */
+    padding: 12px 30px;
+    border-radius: 50px; /* Дуже заокруглені кути */
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(232, 62, 140, 0.2); /* Тінь кнопки */
+}
+
+.btn-hero:hover {
+    background-color: #E83E8C;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(232, 62, 140, 0.3);
+}
+
+/* --- Why Choose Us Section --- */
+.icon-why-choose-us {
+    max-height: 50px; /* Розмір іконок */
+    margin-bottom: 1.5rem;
+}
+
+.feature-title {
+    font-size: 1.2rem;
+    font-family: 'Montserrat', sans-serif; /* Інший шрифт для підзаголовків */
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px; /* Невеликий розрив між літерами */
+}
+
+.why-choose-us-section p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.stats-row .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #E83E8C; /* Рожевий колір для цифр */
+}
+
+.stats-row .stat-label {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+
+/* --- Bestsellers Section --- */
+.product-card {
+    border: 1px solid #eee; /* Тонка рамка */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.product-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+.product-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+.product-price {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #E83E8C; /* Рожева ціна */
+    margin-bottom: 1rem;
+}
+.btn-outline-primary { /* Стиль для кнопки "Замовити" в картці */
+    border-color: #E83E8C;
+    color: #E83E8C;
+    font-weight: 600;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+}
+.btn-outline-primary:hover {
+    background-color: #E83E8C;
+    color: #fff;
+}
+
+.btn-secondary-custom { /* Стиль для кнопки "Повний асортимент" */
+    background-color: #FFF7F5; /* Той же фон, що і в .btn-hero */
+    color: #E83E8C;
+    border: 1px solid #E83E8C;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn-secondary-custom:hover {
+    background-color: #E83E8C;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* --- Sweet Magic Section --- */
+.sweet-magic-section .section-title {
+    text-align: left; /* Вирівнювання заголовка в цій секції */
+}
+.sweet-magic-section p {
+    text-align: left;
+    color: #555;
+    line-height: 1.7;
+}
+.sweet-magic-section img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.sweet-magic-section img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Адаптивність --- */
+@media (max-width: 991px) {
+    .hero-title {
+        font-size: 2.8rem;
+    }
+    .hero-section-fullwidth::before { /* Зменшуємо або ховаємо фігуру на менших екранах */
+        width: 70%;
+        padding-bottom: 70%;
+        top: -5%;
+        right: -25%;
+    }
+     .hero-text-column, .hero-image-column {
+        text-align: center !important; /* Центруємо текст і картинку */
+    }
+    .hero-subtitle, .hero-title {
+         margin-left: auto;
+         margin-right: auto; /* Центруємо текст */
+    }
+    .hero-cake-img {
+        margin-top: 2rem; /* Відступ для торта на планшетах */
+    }
+     .sweet-magic-section .section-title, .sweet-magic-section p {
+        text-align: center; /* Центруємо текст в "Магії" на планшетах */
+    }
+    .sweet-magic-section .row.align-items-center > div:last-child { /* Колонка з картинками */
+        margin-top: 2rem; /* Відступ зверху для картинок на планшетах */
+    }
+}
+
+@media (max-width: 767px) {
+    .section-title {
+        font-size: 2rem;
+    }
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    .hero-section-fullwidth::before { /* Можна повністю сховати фігуру */
+       display: none;
+    }
+    .stats-row .stat-number {
+        font-size: 1.5rem;
+    }
+    .stats-row .stat-label {
+        font-size: 0.8rem;
+    }
+}
