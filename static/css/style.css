@@ -49,7 +49,7 @@ main.main-content {
 
 /* Стиль для логотипа в шапке */
 .navbar-logo {
-    height: 75px; /* Задана висота логотипу */
+    height: 80px; /* Задана висота логотипу */
     width: auto;
     display: block;
 }
@@ -288,7 +288,6 @@ h1, h2, h3 {
 
 /* --- Hero Section --- */
 .hero-section-fullwidth {
-    background-color: #FFF7F5; /* Світло-рожевий фон */
     padding: 4rem 0; /* Вертикальні відступи */
     overflow: hidden; /* Запобігає виходу фонових елементів */
     position: relative; /* Для можливого позиціонування фонових фігур */
@@ -298,14 +297,16 @@ h1, h2, h3 {
 .hero-section-fullwidth::before {
     content: '';
     position: absolute;
-    top: -10%;
-    right: -15%;
-    width: 50%; /* Розмір фігури */
-    padding-bottom: 50%; /* Робить елемент круглим (співвідношення 1:1) */
-    background-color: rgba(255, 223, 230, 0.5); /* Напівпрозорий рожевий */
+    /* --- Підберіть ці значення, щоб коло було за тортом --- */
+    top: -15%;       /* Можливо, трохи вище або нижче */
+    right: -10%;      /* Ближче до правого краю або далі */
+    width: 45%;       /* Розмір кола - можливо, менше */
+    padding-bottom: 45%; /* Зберігаємо пропорцію для кола */
+    /* --- Кінець налаштування позиції/розміру --- */
+    background-color: rgba(255, 223, 230, 0.6); /* Можна зробити трохи менш прозорим? */
     border-radius: 50%;
-    z-index: 0; /* Позаду контенту */
-    display: block; /* Потрібно для before/after */
+    z-index: 0;
+    display: block;
 }
 
 
@@ -335,9 +336,15 @@ h1, h2, h3 {
 }
 
 .hero-cake-img {
-    max-width: 100%; /* Максимальна ширина */
+    max-width: 85%; /* Зменшуємо розмір торта (було 100%) */
     height: auto;
-    /* Можна додати анімацію появи, якщо потрібно */
+    display: block; /* Важливо для правильного застосування transform/margin */
+    margin-left: auto; /* Вирівнюємо блок зображення праворуч у колонці */
+    margin-right: 0; /* Зайвим не буде */
+    transform: translateX(30%); /* Зсуваємо трохи праворуч (підберіть %) */
+    position: relative; /* Додамо, щоб точно бути над ::before */
+    z-index: 1; /* Переконуємось, що торт поверх ::before */
+    margin-top: -40px; /*Піднімаємо картинку */
 }
 
 .btn-hero {
@@ -360,22 +367,23 @@ h1, h2, h3 {
 
 /* --- Why Choose Us Section --- */
 .icon-why-choose-us {
-    max-height: 50px; /* Розмір іконок */
+    max-height: 65px; /* Розмір іконок */
     margin-bottom: 1.5rem;
 }
 
 .feature-title {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-family: 'Montserrat', sans-serif; /* Інший шрифт для підзаголовків */
     font-weight: 700;
     color: #333;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     letter-spacing: 0.5px; /* Невеликий розрив між літерами */
 }
 
-.why-choose-us-section p {
+.feature-description {
     color: #666;
-    font-size: 0.95rem;
+    font-size: 1.05rem; /* Збільшуємо розмір тексту опису (було ~0.95rem) */
+    line-height: 1.6;   /* Можна налаштувати міжрядковий інтервал */
 }
 
 .stats-row .stat-number {
@@ -461,21 +469,24 @@ h1, h2, h3 {
     .hero-title {
         font-size: 2.8rem;
     }
-    .hero-section-fullwidth::before { /* Зменшуємо або ховаємо фігуру на менших екранах */
-        width: 70%;
-        padding-bottom: 70%;
-        top: -5%;
-        right: -25%;
+    .hero-section-fullwidth::before { /* Коригуємо коло для планшетів */
+        width: 60%;
+        padding-bottom: 60%;
+        top: 0; /* Можливо, інакше позиціонувати */
+        right: -20%;
     }
      .hero-text-column, .hero-image-column {
-        text-align: center !important; /* Центруємо текст і картинку */
+        text-align: center !important;
     }
     .hero-subtitle, .hero-title {
          margin-left: auto;
          margin-right: auto; /* Центруємо текст */
     }
     .hero-cake-img {
-        margin-top: 2rem; /* Відступ для торта на планшетах */
+        max-width: 70%; /* Ще менший торт на планшеті? */
+        transform: translateX(0); /* Прибираємо зсув */
+        margin-left: auto;
+        margin-right: auto; /* Центруємо торт */
     }
      .sweet-magic-section .section-title, .sweet-magic-section p {
         text-align: center; /* Центруємо текст в "Магії" на планшетах */
@@ -495,6 +506,13 @@ h1, h2, h3 {
     .hero-section-fullwidth::before { /* Можна повністю сховати фігуру */
        display: none;
     }
+    .hero-cake-img {
+         max-width: 75%; /* Розмір торта на мобільних */
+         margin-top: 2rem; /* Залишаємо відступ зверху */
+         transform: translateX(0); /* Без зсуву */
+         margin-left: auto;
+         margin-right: auto; /* Центруємо */
+     }
     .stats-row .stat-number {
         font-size: 1.5rem;
     }
