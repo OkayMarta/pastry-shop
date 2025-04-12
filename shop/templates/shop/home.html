@@ -13,14 +13,16 @@
             <div class="col-lg-6 hero-text-column">
                 <h1 class="hero-title">Дозвольте собі<br>трохи щастя!</h1>
                 <p class="hero-subtitle">
-                    Насолоджуйтесь кожним моментом життя, додаючи до нього солодкої радості. Наші десерти створені, щоб дарувати тепло, ніжність і посмішку у будь-яку мить.
+                    Насолоджуйтесь кожним моментом життя, додаючи до нього солодкої радості. Наші десерти створені, щоб дарувати тепло, ніжність і посмішку в будь-яку мить.
                 </p>
                 <a href="{% url 'shop:assortment_list' %}" class="btn btn-hero">
                     Переглянути асортимент →
                 </a>
             </div>
             <div class="col-lg-6 hero-image-column text-center text-lg-end">
-                 <img src="{% static 'img/hero-cake.png' %}" alt="Святковий торт з полуницею" class="img-fluid hero-cake-img">
+                <div class="hero-cake-image-wrapper-mobile">
+                     <img src="{% static 'img/hero-cake.png' %}" alt="Святковий торт з полуницею" class="img-fluid hero-cake-img">
+                </div>
             </div>
         </div>
     </div>
@@ -125,27 +127,30 @@
             <div class="col-lg-6">
                 <h2 class="section-title mb-3">Солодка Магія Щодня</h2>
                 <p class="mb-4">
-                    Там, де інші бачать просто борошно, цукор і крем, ми бачимо можливість створити маленьке диво, яке з першого погляду викликає усмішку. У кожному нашому торті ховається не лише рецепт, а й трохи магії, щіпка натхнення, велика порція любові та бажання зробити ваш день по-справжньому особливим.
+                    Там, де інші бачать просто борошно, цукор і крем, ми бачимо можливість створити маленьке диво, яке з першого погляду викликає усмішку. У кожному нашому торті ховається не лише рецепт, а й трохи магії, дрібка натхнення, велика порція любові та бажання зробити ваш день по-справжньому особливим.
                 </p>
                 <a href="{% url 'shop:about' %}" class="btn btn-hero">
                     Дізнатися більше →
                 </a>
             </div>
             <div class="col-lg-6">
-                <div class="row g-3">
-                    <div class="col-6">
-                        <img src="{% static 'img/magic-image-1.jpg' %}" alt="Приготування десерту" class="img-fluid rounded shadow-sm">
-                    </div>
-                    <div class="col-6">
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <img src="{% static 'img/magic-image-2.jpg' %}" alt="Готовий торт" class="img-fluid rounded shadow-sm">
-                            </div>
-                            <div class="col-12">
-                                <img src="{% static 'img/magic-image-3.jpg' %}" alt="Упаковка тортів" class="img-fluid rounded shadow-sm">
-                            </div>
+                <div class="row g-3 h-100 align-items-stretch"> {# Используем align-items-stretch для выравнивания высоты колонок #}
+
+                    {# Левая колонка для img 1 и 2 #}
+                    <div class="col-md-5 d-flex flex-column justify-content-between"> {# Используем flex для распределения фото #}
+                        <div> {# Обертка для верхнего фото #}
+                             <img src="{% static 'img/magic-image-1.jpg' %}" alt="Приготування десерту" class="img-fluid rounded shadow-sm mb-3"> {# Добавлен mb-3 для отступа #}
+                        </div>
+                        <div> {# Обертка для нижнего фото #}
+                            <img src="{% static 'img/magic-image-2.jpg' %}" alt="Готовий торт" class="img-fluid rounded shadow-sm">
                         </div>
                     </div>
+
+                    {# Правая колонка для img 3 #}
+                    <div class="col-md-7">
+                        <img src="{% static 'img/magic-image-3.jpg' %}" alt="Упаковка тортів" class="img-fluid rounded shadow-sm h-100" style="object-fit: cover;"> {# h-100 и object-fit: cover для растягивания и обрезки #}
+                    </div>
+
                 </div>
             </div>
         </div>

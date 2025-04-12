@@ -36,11 +36,11 @@ main.main-content {
     color: #555;
     font-weight: 600;
     /* Изменено: Увеличиваем отступы между пунктами меню */
-    padding-left: 1.8rem;  /* Было 1rem */
-    padding-right: 1.8rem; /* Было 1rem */
+    padding-left: 4.5rem;  /* Было 1.8rem */
+    padding-right: 4.5rem; /* Было 1.8rem */
     transition: color 0.3s ease;
     /* Изменено: Увеличиваем размер шрифта пунктов меню */
-    font-size: 1.1rem; /* Подберите подходящий размер */
+    font-size: 1.2rem; /* Было 1.1rem, подберите точное значение при необходимости */
 }
 
 .header-custom .navbar-nav .nav-link:hover,
@@ -425,9 +425,9 @@ h1, h2, h3 {
     background-color: #FFF7F5; /* Светло-розовый фон */
     padding-top: 3rem;      /* Вертикальный отступ сверху */
     padding-bottom: 3rem;   /* Вертикальный отступ снизу */
-    /* Можно добавить горизонтальные отступы, если нужно */
-    /* padding-left: 1rem; */
-    /* padding-right: 1rem; */
+    /* Добавлено: Горизонтальные отступы для секции */
+    padding-left: 2rem;     /* Отступ слева */
+    padding-right: 2rem;    /* Отступ справа */
 }
 
 .product-card {
@@ -539,6 +539,9 @@ h1, h2, h3 {
     .hero-title {
         font-size: 2.2rem;
     }
+    .hero-text-column {
+        padding-top: 2rem; /* Добавляем отступ сверху для текста на мобильных */
+    }
     .hero-section-fullwidth::before { /* Можна повністю сховати фігуру */
        display: none;
     }
@@ -549,16 +552,63 @@ h1, h2, h3 {
         max-width: 95%; /* Тоже самое для другого подзаголовка */
      }
     .hero-cake-img {
-         max-width: 75%; /* Розмір торта на мобільних */
-         margin-top: 2rem; /* Залишаємо відступ зверху */
-         transform: translateX(0); /* Без зсуву */
-         margin-left: auto;
-         margin-right: auto; /* Центруємо */
-     }
+        /* Убедимся, что торт центрирован внутри уже центрированного круга */
+        display: block;
+        max-width: 100%; /* Торт не должен вылезать за пределы круга */
+        height: auto;
+        /* margin-top: 0; /* Убираем margin-top, который был для desktop */
+        /* transform: none; /* Убираем transform для desktop */
+        /* Убрали margin-left/right auto т.к. родитель теперь центрируется */
+    }
     .stats-row .stat-number {
         font-size: 1.5rem;
     }
     .stats-row .stat-label {
         font-size: 0.8rem;
+    }
+    .hero-cake-image-wrapper-mobile {
+        display: inline-block; /* Чтобы обертка была по размеру контента + padding */
+        background-color: rgba(255, 223, 230, 0.6); /* Полупрозрачный розовый фон */
+        border-radius: 50%; /* Делаем круг */
+        padding: 20px; /* Отступы внутри круга вокруг торта */
+        margin-top: 2rem; /* Отступ сверху от текста (дополнительно к padding-top у .hero-text-column) */
+        margin-left: auto; /* Центрирование блока */
+        margin-right: auto; /* Центрирование блока */
+        max-width: 85%; /* Ограничиваем максимальную ширину круга */
+        box-sizing: border-box; /* Учитываем padding в общей ширине/высоте */
+    }
+
+    .sweet-magic-section .row > .col-lg-6:first-child { /* :first-child выбирает левую колонку (с текстом) */
+        text-align: center;
+    }
+
+    /* Уточнение для кнопки, если text-align родителя не сработал */
+    .sweet-magic-section .btn-hero {
+         /* Можно добавить display: inline-block; если кнопка блочная,
+            но text-align: center у родителя должен работать для inline-block */
+         /* Если кнопка все еще слева, можно попробовать: */
+         /* margin-left: auto; */
+         /* margin-right: auto; */
+    }
+
+    /* Стили для всех 3х изображений в Sweet Magic */
+    .sweet-magic-section .row [class*="col-md-"] img { /* Выбираем img внутри колонок col-md-5 и col-md-7 */
+        max-width: 85%; /* Уменьшаем максимальную ширину (было 100% или не задано) */
+        height: auto;
+        display: block; /* Для использования margin: auto */
+        margin-left: auto; /* Центрирование */
+        margin-right: auto; /* Центрирование */
+        margin-bottom: 1rem; /* Отступ снизу между картинками при вертикальном расположении */
+    }
+
+     /* Убираем отступ у последней картинки */
+    .sweet-magic-section .row .col-md-7 img {
+        margin-bottom: 0;
+    }
+
+    /* Если flex мешает на мобильных, сбрасываем его для левой колонки */
+    .sweet-magic-section .row .col-md-5 {
+         display: block; /* Сброс flex-поведения */
+         /* justify-content: initial; /* Сброс выравнивания */
     }
 }
