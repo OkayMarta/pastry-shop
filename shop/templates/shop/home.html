@@ -20,7 +20,16 @@
                 </a>
             </div>
             <div class="col-lg-6 hero-image-column text-center text-lg-end">
-                <div class="hero-cake-image-wrapper-mobile">
+                <!-- Обертка для планшетов (отображается только на планшетах) -->
+                <div class="hero-cake-image-wrapper-tablet d-none d-md-inline-block d-lg-none">
+                     <img src="{% static 'img/hero-cake.png' %}" alt="Святковий торт з полуницею" class="img-fluid hero-cake-img">
+                </div>
+                <!-- Обертка для мобильных (отображается только на мобильных) -->
+                <div class="hero-cake-image-wrapper-mobile d-inline-block d-md-none">
+                     <img src="{% static 'img/hero-cake.png' %}" alt="Святковий торт з полуницею" class="img-fluid hero-cake-img">
+                </div>
+                <!-- Обертка для десктопов (отображается только на десктопах) -->
+                <div class="d-none d-lg-block">
                      <img src="{% static 'img/hero-cake.png' %}" alt="Святковий торт з полуницею" class="img-fluid hero-cake-img">
                 </div>
             </div>

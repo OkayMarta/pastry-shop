@@ -504,27 +504,48 @@ h1, h2, h3 {
     .hero-title {
         font-size: 2.8rem;
     }
-    .hero-section-fullwidth::before { /* Коригуємо коло для планшетів */
-        width: 60%;
-        padding-bottom: 60%;
-        top: 0; /* Можливо, інакше позиціонувати */
-        right: -20%;
+    .hero-section-fullwidth::before { /* Скрываем фоновый круг для планшетов как в мобильной версии */
+        display: none;
     }
-     .hero-text-column, .hero-image-column {
+    .hero-text-column, .hero-image-column {
         text-align: center !important;
+    }
+    .hero-text-column {
+        padding-top: 2rem; /* Добавляем отступ сверху для текста как в мобильной версии */
     }
     .hero-subtitle, .hero-title {
          margin-left: auto;
          margin-right: auto; /* Центруємо текст */
+         max-width: 90%; /* Позволяем занять больше ширины как на мобильных */
     }
     .hero-cake-img {
-        max-width: 70%; /* Ще менший торт на планшеті? */
+        max-width: 80%; /* Размер торта для планшета */
         transform: translateX(0); /* Прибираємо зсув */
         margin-left: auto;
         margin-right: auto; /* Центруємо торт */
+        display: block;
     }
-     .sweet-magic-section .section-title, .sweet-magic-section p {
+    /* Добавляем обертку для торта с фоном-кругом как в мобильной версии */
+    .hero-cake-image-wrapper-tablet {
+        display: inline-block; /* Чтобы обертка была по размеру контента + padding */
+        background-color: rgba(255, 223, 230, 0.6); /* Полупрозрачный розовый фон */
+        border-radius: 50%; /* Делаем круг */
+        padding: 25px; /* Отступы внутри круга вокруг торта (немного больше чем на мобильных) */
+        margin-top: 2rem; /* Отступ сверху от текста */
+        margin-left: auto; /* Центрирование блока */
+        margin-right: auto; /* Центрирование блока */
+        max-width: 80%; /* Ограничиваем максимальную ширину круга */
+        box-sizing: border-box; /* Учитываем padding в общей ширине/высоте */
+    }
+    .sweet-magic-section .section-title, .sweet-magic-section p {
         text-align: center; /* Центруємо текст в "Магії" на планшетах */
+    }
+    /* Центрируем кнопку в секции "Солодка Магія Щодня" на планшетах */
+    .sweet-magic-section .btn-hero {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: fit-content;
     }
     .sweet-magic-section .row.align-items-center > div:last-child { /* Колонка з картинками */
         margin-top: 2rem; /* Відступ зверху для картинок на планшетах */
