@@ -6,8 +6,9 @@
 {% block content %}
 
 <!-- ======== Hero Section (Full Width) ======== -->
+{# Этот блок теперь не вложен в .container.main-page-content #}
 <section class="hero-section-fullwidth">
-    <div class="container">
+    <div class="container"> {# Внутренний контейнер для контента секции #}
         <div class="row align-items-center gy-4"> <!-- gy-4 для вертикального відступу на мобільних -->
             <div class="col-lg-6 hero-text-column">
                 <h1 class="hero-title">Дозвольте собі<br>трохи щастя!</h1>
@@ -28,7 +29,8 @@
 
 
 <!-- ======== Content Sections (Contained) ======== -->
-<div class="container main-page-content"> <!-- Контейнер для решти контенту -->
+{# Добавляем отступ сверху к этому контейнеру, т.к. убрали его из main.main-content #}
+<div class="container main-page-content" style="padding-top: 3rem;"> <!-- Контейнер для решти контенту -->
 
 <!-- Why Choose Us Section -->
 <section class="why-choose-us-section text-center py-5">
@@ -40,7 +42,8 @@
                 <p class="feature-description">
                     Кожне замовлення<br>
                     виконується з урахуванням<br>
-                    ваших побажань
+                    {# Изменено: Добавлен span.highlight #}
+                    <span class="highlight">ваших</span> побажань
                 </p>
             </div>
             <div class="col-md-4">
@@ -86,6 +89,7 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
             {% for item in assortment_items %}
             <div class="col">
+                {# Карточка товара теперь имеет скругленные углы через CSS #}
                 <div class="card h-100 product-card">
                     <div class="product-image-container">
                         {% if item.image %}
@@ -97,7 +101,6 @@
                     <div class="card-body">
                         <h5 class="card-title product-title">{{ item.name }}</h5>
                         <p class="card-text product-price">{{ item.price }} ГРН</p>
-                        {# Можна додати кнопку "Замовити", якщо треба, як на сторінці асортименту #}
                          <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="btn btn-outline-primary mt-auto">Замовити</a>
                     </div>
                 </div>
@@ -124,12 +127,12 @@
                 <p class="mb-4">
                     Там, де інші бачать просто борошно, цукор і крем, ми бачимо можливість створити маленьке диво, яке з першого погляду викликає усмішку. У кожному нашому торті ховається не лише рецепт, а й трохи магії, щіпка натхнення, велика порція любові та бажання зробити ваш день по-справжньому особливим.
                 </p>
-                <a href="{% url 'shop:about' %}" class="btn btn-hero"> {# Використовуємо той же стиль кнопки? Або інший #}
+                <a href="{% url 'shop:about' %}" class="btn btn-hero">
                     Дізнатися більше →
                 </a>
             </div>
             <div class="col-lg-6">
-                <div class="row g-3"> {# g-3 для відступів між картинками #}
+                <div class="row g-3">
                     <div class="col-6">
                         <img src="{% static 'img/magic-image-1.jpg' %}" alt="Приготування десерту" class="img-fluid rounded shadow-sm">
                     </div>

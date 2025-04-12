@@ -18,6 +18,7 @@
 <body>
     <!-- Навігаційне меню (Header) -->
     <header class="header-custom">
+        {# Изменено: Уменьшены отступы внутри контейнера навбара для компактности #}
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 {% load static %}
@@ -27,8 +28,10 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
+                {# Изменено: Добавлен 'justify-content-center' для центрирования меню #}
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    {# Изменено: Убран 'ms-auto' для отмены выравнивания вправо #}
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'shop:about' %}">Про нас</a>
                         </li>
@@ -67,16 +70,17 @@
     <!-- Футер (Footer) -->
     <footer class="footer-custom pt-5 pb-4">
         <div class="container text-md-left">
-            <div class="row text-md-left align-items-center"> <!-- Додано align-items-center для вертикального вирівнювання -->
+            <div class="row text-md-left align-items-center">
                     <!-- Колонка для Логотипу -->
-                    <div class="col-md-3 col-lg-3 col-xl-3 mt-3 footer-logo-column"> <!-- Нова колонка -->
-                        {% load static %} {# Переконайтесь, що load static вже є на початку файлу #}
+                    <div class="col-md-3 col-lg-3 col-xl-3 mt-3 footer-logo-column">
+                        {% load static %}
                         <a href="{% url 'shop:home' %}">
-                            <img src="{% static 'img/logo.png' %}" alt="Логотип Confititeria (Футер)" class="img-fluid footer-logo-img"> {# Додаємо лого #}
+                            {# Логотип теперь стилизуется через CSS для разных размеров экрана #}
+                            <img src="{% static 'img/logo.png' %}" alt="Логотип Confititeria (Футер)" class="img-fluid footer-logo-img">
                         </a>
                     </div>
 
-                    <!-- Колонка Навігація (без offset) -->
+                    <!-- Колонка Навігація -->
                     <div class="col-md-3 col-lg-3 col-xl-3 mt-3">
                         <h5 class="text-uppercase mb-4 font-weight-bold footer-title">Навігація</h5>
                         <ul class="list-unstyled">
@@ -106,8 +110,8 @@
             <hr class="mb-4">
 
             <div class="row align-items-center">
-                <div class="col-md-12"> <!-- Займає всю ширину -->
-                    <p class="text-center copyright-text">© {% now "Y" %} Confititeria. Всі права захищені.</p> <!-- Завжди по центру -->
+                <div class="col-md-12">
+                    <p class="text-center copyright-text">© {% now "Y" %} Confititeria. Всі права захищені.</p>
                 </div>
             </div>
         </div>
