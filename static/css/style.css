@@ -25,9 +25,8 @@ main.main-content {
 }
 
 .header-custom .navbar {
-    padding-top: 0.1rem; /* Было больше по умолчанию */
-    padding-bottom: 0.1rem; /* Было больше по умолчанию */
-    /* Убедимся, что минимальная высота не мешает */
+    padding-top: 0.2rem; /* Було 0.1rem, можна ще трохи */
+    padding-bottom: 0.2rem; /* Було 0.1rem */
     min-height: auto;
 }
 
@@ -62,7 +61,7 @@ main.main-content {
 
 /* Стиль для логотипа в шапке */
 .navbar-logo {
-    height: 80px; /* Задана висота логотипу */
+    height: 70px; /* Було 80px */
     width: auto;
     display: block;
 }
