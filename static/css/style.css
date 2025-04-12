@@ -123,6 +123,7 @@ h1, h2, h3 {
     padding: 12px 30px; /* Більші відступи */
     font-weight: 600;
     box-shadow: 0 4px 15px rgba(232, 62, 140, 0.2); /* Тінь */
+    max-width: fit-content; /* Додано: ширина за вмістом */
 }
 
 .btn-hero:hover {
@@ -175,7 +176,7 @@ h1, h2, h3 {
 .card-body .btn {
     margin-top: auto; /* Притискає кнопку до низу картки */
     align-self: flex-start; /* Вирівнює кнопку по лівому краю (за замовчуванням) */
-    /* Якщо потрібне центрування: align-self: center; */
+    align-self: center;
     /* Якщо кнопка має займати всю ширину: align-self: stretch; width: 100%; */
 }
 
@@ -612,6 +613,11 @@ h1, h2, h3 {
     }
 
     /* --- Hero Section --- */
+    .hero-text-column .btn-hero {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
     .hero-section-fullwidth {
         padding-top: 2rem;
         padding-bottom: 3rem;
@@ -826,6 +832,11 @@ h1, h2, h3 {
     }
 
     /* --- Sweet Magic Section --- */
+     .btn-hero {
+        display: block; /* Робимо кнопку блочною */
+        margin-left: auto; /* Центрування */
+        margin-right: auto; /* Центрування */
+    }
     .sweet-magic-section .row > .col-lg-6:first-child { /* Колонка з текстом */
         text-align: center; /* Центрування тексту */
         order: 2; /* Текст після картинок */
