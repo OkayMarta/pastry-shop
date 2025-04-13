@@ -158,7 +158,7 @@ h1, h2, h3 {
     overflow: hidden; /* Обрізає контент, що виходить за межі */
     display: flex; /* Дозволяє використовувати flex властивості для дочірніх */
     flex-direction: column; /* Елементи в картці розташовуються вертикально */
-    height: 100%; /* Картка займає всю висоту батьківського контейнера (важливо для сіток) */
+    height: auto;
 }
 
 .card:hover {
@@ -477,9 +477,8 @@ h1, h2, h3 {
     background-color: #FFF7F5; /* Світло-рожевий фон секції */
     padding-top: 4rem;      /* Вертикальний відступ зверху */
     padding-bottom: 4rem;   /* Вертикальний відступ знизу */
-    /* Горизонтальні відступи для секції (додано відступи контейнеру Bootstrap) */
-    /* padding-left: 2rem;  */
-    /* padding-right: 2rem; */
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 
