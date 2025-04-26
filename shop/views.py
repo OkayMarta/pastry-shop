@@ -12,6 +12,7 @@ def home(request):
     return render(request, 'shop/home.html', {'assortment_items': assortment_items})
 
 
+
 def assortment_list(request):
     """Список асортименту"""
     items = AssortmentItem.objects.all()
@@ -76,3 +77,27 @@ def order_success(request):
 def about(request):
     """Сторінка "Про нас" """
     return render(request, 'shop/about.html')
+
+
+
+# shop/views.py
+from django.shortcuts import render
+from .models import AssortmentItem
+
+def assortment_list(request):
+    items = AssortmentItem.objects.all()
+
+    q = request.GET.get('q', '')
+    if q:
+        items = items.filter(name__icontains=q)
+
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
+
+    if min_price:
+        items = items.filter(price__gte=min_price)
+
+    if max_price:
+        items = items.filter(price__lte=max_price)
+
+    return render(request, 'shop/assortment.html', {'items': items})
