@@ -420,13 +420,14 @@ h1, h2, h3 {
 
 
 /* ------------------------------------------
-   4.2 Why Choose Us Section (Чому нас обирають)
+   4.2 y Choose Us Section (Чому нас обирають)
    ------------------------------------------ */
 .why-choose-us-section { /* Додамо клас для секції для можливої стилізації */
     padding-top: 4rem; /* Відступи секції */
     padding-bottom: 4rem;
     background-color: #fff; /* Фон секції */
 }
+
 
 /* Стилі для іконок переваг */
 .icon-why-choose-us {
@@ -528,7 +529,6 @@ h1, h2, h3 {
     gap: 1.5rem; /* Відстань між двома зображеннями */
 }
 
-
 /* ==========================================================================
    5. СТИЛІ ФУТЕРА
    ========================================================================== */
@@ -598,8 +598,258 @@ h1, h2, h3 {
 
 
 /* ==========================================================================
+   6. СТИЛІ ПРО НАС
+   ========================================================================== */
+
+
+.about-us {
+  margin: 0 auto;
+  padding: 0rem 1rem;
+  max-width: 1300px;
+}
+
+.cardd {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.cardd-text {
+    padding-left: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    margin-right: 2rem;
+    flex: 1;
+}
+
+.cardd-img {
+    width: 33rem;
+    height: auto;
+    border-radius: 1rem;
+    flex-shrink: 0;
+}
+
+.cardd-text p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+
+.about-us h2 {
+  color: #B57D7D;
+  font-size: 2.5rem;
+  border-bottom: 3px solid #B57D7D;
+  padding-bottom: 7px; /* трошки відступу, щоб виглядало акуратно */
+}
+
+.eye-h2 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+
+.cardd {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+border-radius: 1rem;
+}
+
+.cardd:hover {
+  background-color: #fceeee;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.cardd.reverse {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.common-photo-container {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.up-photos {
+    display:flex;
+        gap: 3.5rem;
+
+}
+
+.down-photos {
+    display:flex;
+    gap: 3.5rem;
+
+}
+
+.left-photo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+.img-1 {
+    width: 30rem;
+    height: 100%;
+    object-fit: cover;
+        max-width: 100%;
+
+}
+.img-2 {
+    width: 18rem;
+    height: 15.5rem;
+    object-fit: cover;
+    max-width: 100%;
+
+}
+.img-3 {
+    width: 25rem;
+    height: 15.5rem;
+    object-fit: cover;
+    max-width: 100%;
+
+}
+.img-4 {
+    width: 23rem;
+    height: 15.5rem;
+    object-fit: cover;
+    max-width: 100%;
+
+}
+ .img-5 {
+    width: 20rem;
+    height: 15.5rem;
+    object-fit: cover;
+    max-width: 100%;
+
+}
+
+
+ /* ==========================================================================
+   7. СТИЛІ АСОРТИМЕНТ
+   ========================================================================== */
+.assort {
+    background-color: #FFF2F2;
+}
+
+.card{
+    padding: 1rem;
+}
+.card-body {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.order-btn {
+    padding: 0.75rem 1rem;
+    color: #f4a8c7;
+    border: 2px solid #f4a8c7; /* Рамка на кнопці */
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    margin-top: auto; /* Розташовує кнопку внизу картки */
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ховер ефекти */
+.order-btn:hover {
+    background-color: #f4a8c7; /* Зміна фону при ховері */
+    color: #fff; /* Зміна кольору тексту */
+    border-color: #f4a8c7; /* Зміна кольору рамки */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Додавання тіні */
+}
+
+.custom-search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #f8c8dc; /* ніжно-рожева рамка */
+  border-radius: 12px;
+  background-color: #fff0f5; /* дуже світлий рожевий фон */
+  color: #6b4c4c;
+  width: 260px;
+  transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+  color: #d39dab; /* м’який рожево-коричневий для placeholder */
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #f4a8c7;
+  box-shadow: 0 0 10px rgb(246, 133, 178);
+}
+
+.search-btn {
+  padding: 0.6rem 1.2rem;
+  background-color: #f4a8c7; /* основний рожевий */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-btn:hover {
+background-color: #dd78a0;
+}
+
+/* ==========================================================================
    6. МЕДІА-ЗАПИТИ (Адаптивність)
    ========================================================================== */
+
+/* --- 6.0  (від 991px до 1400px) --- */
+
+@media (max-width: 1400px){
+
+.about-us h2{
+    font-size: 2.1rem;
+}
+.cardd-img {
+    width: 25rem;
+}
+.img-1 {
+    width: 25rem;
+
+}
+.img-2 {
+    width: 16rem;
+    height: 13.5rem;
+}
+.img-3 {
+    width: 23rem;
+    height: 13.5rem;
+}
+.img-4 {
+    width: 21rem;
+    height: 13.5rem;
+}
+ .img-5 {
+    width: 18rem;
+    height: 13.5rem;
+}
+ .about-us {
+     padding: 0 5rem;
+ }
+
+}
+
+
 
 /* --- 6.1 Планшети (від 768px до 991px) --- */
 @media (max-width: 991px) {
@@ -723,6 +973,40 @@ h1, h2, h3 {
     .footer-logo-img {
         max-height: 80px; /* Збільшуємо лого в футері на планшетах та ПК */
     }
+
+     .cardd,
+    .cardd.reverse {
+        flex-direction: column;
+         text-align: center;
+         justify-content: center;
+         align-items: center;
+    }
+
+    .cardd-text {
+        padding-left: 0;
+        margin-right: 0;
+    }
+
+
+
+    .cardd-text p {
+        font-size: 1.1rem;
+    }
+
+
+    .common-photo-container {
+        flex-direction: column;
+    }
+
+.left-photo-container {
+    gap: 3rem;
+}
+
+
+    .about-us{
+        padding: 0 5rem;
+    }
+
 }
 
 
@@ -877,6 +1161,15 @@ h1, h2, h3 {
     .copyright-text {
         text-align: center !important; /* Переконуємось, що копірайт центрується */
     }
+
+    .about-us{
+        padding: 0 1.5rem;
+    }
+
+
+    .custom-search-form{
+        flex-direction: column;
+    }
 }
 
 /* --- 6.3 Дуже маленькі екрани (до 576px) --- */
@@ -892,4 +1185,37 @@ h1, h2, h3 {
      .section-title {
         font-size: 1.8rem; /* Ще менші заголовки секцій */
      }
+
+
+         .cardd-text p {
+        font-size: 1rem;
+    }
+
+    .cardd-text h2 {
+        font-size: 1.5rem;
+    }
+
+
+    .up-photos{
+        flex-direction: column;
+    }
+
+    .down-photos{
+        flex-direction: column;
+    }
+
+    .img-1,
+    .img-2,
+    .img-3,
+    .img-4,
+    .img-5 {
+        height: 20rem;
+        width: 100%;
+    }
+
+
+
+ .cardd-img {
+    width: 20rem;
+}
 }
