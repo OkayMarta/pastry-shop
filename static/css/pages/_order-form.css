@@ -1,0 +1,84 @@
+/* ==========================================================================
+   7. СТИЛІ СТОРІНКИ ОФОРМЛЕННЯ ЗАМОВЛЕННЯ
+   ========================================================================== */
+
+.order-form-page-wrapper {
+    background-color: var(--bg-white);
+    flex-grow: 1; /* Займає доступний простір, якщо body це flex-контейнер */
+    min-height: calc(100vh - 150px); /* Орієнтовна висота, щоб футер був внизу (відніміть висоту хедера і футера) */
+    display: flex;
+    align-items: center; /* Центрування картки по вертикалі, якщо вміст короткий */
+}
+
+.order-form-card {
+    background-color: var(--bg-light-pink); /* Білий фон картки */
+    border: 1px solid var(--bg-light-pink-alt); /* Дуже ніжна рожева рамка */
+    border-radius: 0.75rem; /* Більш заокруглені кути */
+    padding: 2rem 2.5rem; /* Внутрішні відступи для картки (верх/низ право/ліво) */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); /* М'яка тінь */
+}
+
+.order-form-card .card-header {
+    background-color: transparent;
+    border-bottom: none;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 2px;
+    padding-bottom: 0; /* Прибираємо відступ, якщо h2 має свій mb-4 */
+}
+
+.order-form-card .card-header h2 {
+    color: var(--soft-pink-accent);
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    padding-bottom: 0.5rem; /* Додаємо невеликий відступ під текстом */
+    border-bottom: 3px solid var(--soft-pink-accent); /* Підкреслення насиченим рожевим */
+    display: inline-block; /* Щоб підкреслення було лише під текстом, а не на всю ширину */
+    margin-bottom: 1.5rem; /* Зберігаємо або коригуємо відступ знизу */
+}
+
+/* Стилізація полів форми (якщо потрібно додати специфічні акценти) */
+.order-form-card .form-control {
+    border-radius: 0.375rem; /* Стандартне заокруглення Bootstrap */
+    border-color: var(--form-input-border); /* Ніжно-рожева рамка для полів */
+    padding: 0.75rem 1rem; /* Трохи більші відступи в полях */
+}
+
+.order-form-card .form-control:focus {
+    border-color: var(--bg-light-pink); /* Вже визначено раніше, але для повноти */
+    box-shadow: 0 0 0 0.2rem rgba(232, 62, 140, 0.25); /* Вже визначено раніше */
+}
+
+.order-form-card .form-label {
+    font-weight: 500;
+    color: var(--text-form-label); /* Трохи темніший колір для лейблів */
+    margin-bottom: 0.3rem; /* Менший відступ під лейблом */
+}
+
+/* Перевизначаємо поведінку hover для картки форми замовлення,
+   щоб вона не "підстрибувала" і не змінювала тінь, як інші .card */
+.order-form-card:hover {
+    transform: none; /* Не рухатись */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); /* Та сама тінь, що й у спокійному стані */
+}
+
+
+/* Адаптивність для картки форми */
+@media (max-width: 767px) {
+    .order-form-page-wrapper {
+        padding-top: 2rem; /* Менший відступ зверху на мобільних */
+        padding-bottom: 2rem; /* Менший відступ знизу на мобільних */
+        align-items: flex-start; /* Картка буде зверху */
+    }
+    .order-form-card {
+        padding: 1.5rem;
+    }
+    .order-form-card .card-header h2 {
+        font-size: 1.8rem;
+    }
+    .order-form-page-wrapper .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}

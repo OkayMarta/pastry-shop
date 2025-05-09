@@ -4,7 +4,7 @@
 {% block title %}Асортимент - Кондитерська{% endblock %}
 
 {% block content %}
-<section class ="assort">
+<section class="assort"> {# Фон для всієї сторінки/секції асортименту #}
 <div class="container py-5">
 
     <div class="search">
@@ -13,43 +13,44 @@
             <input type="number" name="min_price" class="search-input" placeholder="Мін. ціна" value="{{ request.GET.min_price }}">
             <input type="number" name="max_price" class="search-input" placeholder="Макс. ціна" value="{{ request.GET.max_price }}">
         
-            <div class="search-btnn">
-                <button type="submit" class="search-btn">Пошук</button>
+            <div class="search-btnn"> {# Ваша обгортка, якщо вона потрібна #}
+                <button type="submit" class="btn btn-hero">Пошук</button>
             </div>
         </form>
-        </div>
+    </div>
 
        
     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-        {% for item in items %}
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="product-image-container">
-                    {% if item.image %}
-                        <img src="{{ item.image.url }}" alt="{{ item.name }}">
-                    {% else %}
-                        <img src="{% static 'img/no-image.jpg' %}" alt="Зображення відсутнє">
-                    {% endif %}
-                </div>
-                
-                <div class="card-body">
-                    <h5 class="card-title">{{ item.name }}</h5>
-                    <p class="card-text">
-                        <strong>Ціна:</strong> {{ item.price }} грн
-                    </p>
-                      <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="order-btn">Замовити</a>
+            {% for item in items %}
+            <div class="col">
+                {# Додаємо клас .assortment-item-card до основного .card #}
+                {# h-100 та shadow-sm - це Bootstrap класи, їх можна залишити #}
+                <div class="card h-100 shadow-sm product-card assortment-item-card">
+                    <div class="product-image-container">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                        {% else %}
+                            <img src="{% static 'img/no-image.jpg' %}" alt="Зображення відсутнє">
+                        {% endif %}
+                    </div>
 
+                    <div class="card-body">
+                        <h5 class="card-title product-title">{{ item.name }}</h5>
+                        <p class="card-text product-price">{{ item.price }} ГРН</p>
+                        {# Додаємо клас .btn для базових стилів кнопки #}
+                        <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="btn">Замовити</a>
+                        {# Клас .btn на кнопці вище вже стилізований через .assortment-item-card .btn в _assortment.css #}
+                    </div>
                 </div>
             </div>
-        </div>
-        {% empty %}
-        <div class="col-12">
-            <div class="alert alert-info text-center">
-                На жаль, зараз асортимент порожній. Спробуйте завітати пізніше.
+            {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    На жаль, зараз асортимент порожній. Спробуйте завітати пізніше.
+                </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-</div>
     </section>
 {% endblock %}

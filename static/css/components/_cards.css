@@ -1,0 +1,70 @@
+/* --- 2.2 Стилі для карточок (загальні та товарні) --- */
+.card {
+    border: 1px solid var(--border-light);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    border-radius: 0.375rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-white); /* Стандартний білий фон для всіх карток */
+    padding: 1rem;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Легкий підйом картки при наведенні */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Більш виражена тінь */
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1.25rem; /* Стандартний відступ Bootstrap, або ваш кастомний */
+    align-items: center; /* Для центрування вмісту, якщо потрібно */
+    text-align: center;  /* Для центрування тексту */
+}
+
+.card-body .btn { /* Загальне правило для кнопок в картках */
+    margin-top: auto; /* Притискає кнопку до низу картки */
+    align-self: center;
+}
+
+/* --- 2.2.1 Контейнер для квадратних зображень товарів --- */
+.product-image-container {
+    display: block; /* Елемент блочний */
+    position: relative; /* Для можливого позиціонування дочірніх елементів */
+    width: 100%; /* Ширина 100% батьківського елемента (.card) */
+    aspect-ratio: 1 / 1; /* Співвідношення сторін 1:1 (квадрат) */
+    overflow: hidden; /* Обрізає зображення, що не вміщається */
+    background-color: var(--bg-light-gray); /* Світло-сірий фон, поки завантажується зображення */
+}
+
+.product-image-container img {
+    display: block; /* Забезпечує блочне відображення */
+    width: 100%; /* Розтягує зображення на всю ширину контейнера */
+    height: 100%; /* Розтягує зображення на всю висоту контейнера */
+    object-fit: cover; /* Масштабує зображення, зберігаючи пропорції, та обрізає зайве, щоб заповнити контейнер */
+    transition: transform 0.3s ease; /* Плавний перехід для масштабування */
+}
+
+
+/* --- 2.2.2 Стилі для елементів картки товару --- */
+.product-card { /* Цей клас доданий до .card для специфічності, якщо потрібно */
+    /* Можна додати специфічні стилі саме для картки товару */
+}
+
+.product-title {
+    font-family: 'Montserrat', sans-serif; /* Використовуємо основний шрифт */
+    font-size: 1.1rem; /* Розмір назви товару */
+    font-weight: 600; /* Напівжирний шрифт */
+    color: var(--text-primary); /* Темний колір */
+    margin-bottom: 0.5rem; /* Відступ знизу */
+}
+
+.product-price {
+    font-size: 1rem; /* Розмір ціни */
+    font-weight: 700; /* Жирний шрифт */
+    color: var(--primary-pink); /* Рожева ціна */
+    margin-bottom: 1rem; /* Відступ до кнопки */
+}

@@ -1,59 +1,64 @@
 {% extends 'shop/base.html' %}
+{% load static %}
 
-{% block title %}Створення замовлення - Кондитерська{% endblock %}
+{% block title %}Оформлення замовлення - Confititeria{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-                <h2 class="text-center mb-0">Створення замовлення</h2>
-            </div>
-            <div class="card-body">
-                <form method="post" novalidate>
-                    {% csrf_token %}
-                    
-                    {% if form.non_field_errors %}
-                    <div class="alert alert-danger">
-                        {% for error in form.non_field_errors %}
-                        {{ error }}
-                        {% endfor %}
+<div class="order-form-page-wrapper py-5"> {# Обгортка для всієї сторінки з рожевим фоном та відступами #}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10"> {# Колонка для картки форми #}
+                <div class="card order-form-card"> {# Спеціальний клас для картки форми #}
+                    <div class="card-header text-center">
+                        <h2 class="mb-4">Створення замовлення</h2> {# Відступ знизу для заголовка #}
                     </div>
-                    {% endif %}
-                    
-                    {% for field in form %}
-                    <div class="mb-3">
-                        <label for="{{ field.id_for_label }}" class="form-label">
-                            {{ field.label }}
-                            {% if field.field.required %}
-                            <span class="text-danger">*</span>
+                    <div class="card-body">
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+
+                            {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.non_field_errors %}
+                                {{ error }}
+                                {% endfor %}
+                            </div>
                             {% endif %}
-                        </label>
-                        {{ field }}
-                        {% if field.help_text %}
-                        <div class="form-text">{{ field.help_text }}</div>
-                        {% endif %}
-                        {% if field.errors %}
-                        <div class="invalid-feedback d-block">
-                            {% for error in field.errors %}
-                            {{ error }}
+
+                            {% for field in form %}
+                            <div class="mb-3">
+                                <label for="{{ field.id_for_label }}" class="form-label">
+                                    {{ field.label }}
+                                    {% if field.field.required %}
+                                    <span class="text-danger">*</span>
+                                    {% endif %}
+                                </label>
+                                {{ field }} {# Django Crispy Forms додасть класи form-control автоматично, якщо налаштовано, або вони вже є у віджеті форми #}
+                                {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                                {% endif %}
+                                {% if field.errors %}
+                                <div class="invalid-feedback d-block"> {# d-block для відображення помилок під полем #}
+                                    {% for error in field.errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
                             {% endfor %}
-                        </div>
-                        {% endif %}
+
+                            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 mt-4 pt-3"> {# Контейнер для кнопок з flexbox #}
+                                <button type="submit" class="btn btn-hero">
+                                    Відправити замовлення
+                                </button>
+                                <a href="{% url 'shop:home' %}" class="btn btn-secondary-custom">
+                                    Скасувати
+                                </a>
+                            </div>
+                        </form>
                     </div>
-                    {% endfor %}
-                    
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            Відправити замовлення
-                        </button>
-                        <a href="{% url 'shop:home' %}" class="btn btn-outline-secondary">
-                            Скасувати
-                        </a>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
-{% endblock %} 
+{% endblock %}

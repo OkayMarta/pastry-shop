@@ -1,0 +1,230 @@
+.about-us {
+    margin: 0 auto;
+    padding: 0rem 1rem;
+    max-width: 1300px;
+}
+
+.cardd {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.cardd-text {
+    padding-left: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    margin-right: 2rem;
+    flex: 1;
+}
+
+.cardd-img {
+    width: 33rem;
+    height: auto;
+    border-radius: 1rem;
+    flex-shrink: 0;
+}
+
+.cardd-text p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+
+.about-us h2 {
+    color: var(--soft-pink-accent);
+    font-size: 2.5rem;
+    border-bottom: 3px solid var(--soft-pink-accent);
+    padding-bottom: 7px; /* трошки відступу, щоб виглядало акуратно */
+}
+
+.eye-h2 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+
+.cardd {
+    border-radius: 1rem;
+}
+
+.cardd.reverse {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.common-photo-container {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.up-photos {
+    display:flex;
+    gap: 3.5rem;
+}
+
+.down-photos {
+    display:flex;
+    gap: 3.5rem;
+}
+
+.left-photo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+.img-1 {
+    width: 30rem;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100%;
+}
+.img-2 {
+    width: 18rem;
+    height: 15.5rem;
+    object-fit: cover;
+    max-width: 100%;
+}
+
+.img-3 {
+    width: 25rem;
+    height: 15.5rem;
+    object-fit: cover;
+    max-width: 100%;
+}
+
+.img-4 {
+    width: 23rem;
+    height: 15.5rem;
+    object-fit: cover;
+    max-width: 100%;
+}
+
+.img-5 {
+    width: 20rem;
+    height: 15.5rem;
+    object-fit: cover;
+    max-width: 100%;
+}
+
+
+/* --- 6.0  (від 991px до 1400px) --- */
+
+@media (max-width: 1400px){
+    .about-us h2{
+        font-size: 2.1rem;
+    }
+
+    .cardd-img {
+        width: 25rem;
+    }
+
+    .img-1 {
+        width: 25rem;
+
+    }
+    .img-2 {
+        width: 16rem;
+        height: 13.5rem;
+    }
+    .img-3 {
+        width: 23rem;
+        height: 13.5rem;
+    }
+    .img-4 {
+        width: 21rem;
+        height: 13.5rem;
+    }
+    .img-5 {
+        width: 18rem;
+        height: 13.5rem;
+    }
+
+    .about-us {
+        padding: 0 5rem;
+    }
+}
+
+
+/* --- 6.1 Планшети (від 768px до 991px) --- */
+@media (max-width: 991px) {
+    .cardd,
+    .cardd.reverse {
+        flex-direction: column;
+         text-align: center;
+         justify-content: center;
+         align-items: center;
+    }
+
+    .cardd-text {
+        padding-left: 0;
+        margin-right: 0;
+    }
+
+
+    .cardd-text p {
+        font-size: 1.1rem;
+    }
+
+
+    .common-photo-container {
+        flex-direction: column;
+    }
+
+    .left-photo-container {
+        gap: 3rem;
+    }
+
+
+    .about-us{
+        padding: 0 5rem;
+    }
+}
+
+
+/* --- 6.2 Мобільні пристрої (до 767px) --- */
+@media (max-width: 767px) {
+    .about-us{
+        padding: 0 1.5rem;
+    }
+}
+
+
+/* --- 6.3 Дуже маленькі екрани (до 576px) --- */
+/* Тут можна додати специфічніші правила, якщо потрібно, наприклад, ще зменшити шрифти */
+@media (max-width: 576px) {
+    .cardd-text p {
+        font-size: 1rem;
+    }
+
+    .cardd-text h2 {
+        font-size: 1.5rem;
+    }
+
+
+    .up-photos{
+        flex-direction: column;
+    }
+
+    .down-photos{
+        flex-direction: column;
+    }
+
+    .img-1,
+    .img-2,
+    .img-3,
+    .img-4,
+    .img-5 {
+        height: 20rem;
+        width: 100%;
+    }
+
+     .cardd-img {
+        width: 20rem;
+    }
+}
