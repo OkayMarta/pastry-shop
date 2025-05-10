@@ -143,6 +143,27 @@
     box-shadow: 0 6px 15px rgba(var(--accent-pink), 0.3);
 }
 
+/* --- Блок для відображення загальної суми замовлення в тілі форми --- */
+.order-summary-total {
+    text-align: right; /* Вирівнюємо по правому краю */
+    margin-top: 1.5rem; /* Відступ зверху */
+    margin-bottom: 1.5rem; /* Відступ знизу перед розділювачем або чекбоксом */
+    padding: 0.75rem 0; /* Невеликий вертикальний внутрішній відступ */
+    border-top: 1px dashed var(--form-input-border, #f0d4dd); /* Декоративна лінія зверху */
+    /* border-bottom: 1px dashed var(--form-input-border, #f0d4dd); /* І знизу, якщо потрібно */
+}
+
+.order-summary-total h5 {
+    font-family: 'Montserrat', sans-serif; /* Шрифт як у основного тексту */
+    color: var(--text-primary, #333);
+    font-size: 1.1rem; /* Розмір тексту */
+}
+
+.order-summary-total #formOrderTotalAmount {
+    color: var(--primary-pink); /* Рожевий колір для самої суми */
+    font-size: 1.2rem; /* Трохи більший шрифт для суми */
+}
+
 /* Адаптивність для картки форми */
 @media (max-width: 767px) {
     .order-form-page-wrapper {

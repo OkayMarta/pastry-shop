@@ -50,7 +50,7 @@ def order_create(request):
                 Замовник: {order.customer_name}
                 Телефон: {order.phone_number}
                 Email: {order.email}
-                Товар: {order.product.name if order.product else 'Не вказано'}
+                Товар: {order.product.name}
                 Кількість: {order.quantity}
                 Дата доставки: {order.delivery_date}
                 Коментар: {order.comment}

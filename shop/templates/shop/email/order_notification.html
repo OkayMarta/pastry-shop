@@ -15,34 +15,33 @@
             padding: 20px;
         }
         .header {
-            background-color: #007bff;
+            background-color: var(--primary-pink);
             color: white;
             padding: 20px;
             text-align: center;
         }
         .content {
             padding: 20px;
-            background-color: #f8f9fa;
+            background-color:var(--bg-light-gray);
         }
         .footer {
             text-align: center;
             padding: 20px;
             font-size: 12px;
-            color: #6c757d;
+            color: var(--bg-light-pink);
         }
         .order-details {
             margin: 20px 0;
             padding: 15px;
             background-color: white;
             border-radius: 5px;
+            border: 1px solid var(--border-light);
         }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
+        .order-details p {
+            margin-bottom: 8px;
+        }
+        .order-details strong {
+            color: var(--text-secondary);
         }
     </style>
 </head>
@@ -59,7 +58,7 @@
                 <p><strong>Замовник:</strong> {{ order.customer_name }}</p>
                 <p><strong>Телефон:</strong> {{ order.phone_number }}</p>
                 <p><strong>Email:</strong> {{ order.email }}</p>
-                <p><strong>Тип виробу:</strong> {{ order.get_product_type_display }}</p>
+                <p><strong>Товар:</strong> {{ order.product.name }}</p>
                 <p><strong>Кількість:</strong> {{ order.quantity }}</p>
                 <p><strong>Дата замовлення:</strong> {{ order.order_date }}</p>
                 <p><strong>Дата доставки:</strong> {{ order.delivery_date }}</p>
@@ -74,13 +73,12 @@
                 замовлення та уточнення деталей.
             </p>
         </div>
-        
+
         <div class="footer">
             <p>
-                Це автоматичне повідомлення, будь ласка, не відповідайте на нього.
-                Для управління замовленнями використовуйте адміністративну панель.
+                Це автоматичне повідомлення. Для управління замовленнями використовуйте адміністративну панель.
             </p>
         </div>
     </div>
 </body>
-</html> 
+</html>

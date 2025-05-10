@@ -69,3 +69,32 @@
     color: var(--bg-white);
     transform: translateY(-2px);
 }
+
+.btn-order-product {
+    display: inline-block;
+    padding: 12px 30px; /* Або 12px 25px, якщо 30px зашироко для деяких карток */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: auto; /* Якщо батько .card-body - flex */
+    width: 100%;     /* Якщо кнопка завжди на всю ширину картки */
+
+    /* Стилі спокою */
+    background-color: var(--bg-light-pink);
+    color: var(--primary-pink);
+    border: 1px solid var(--primary-pink);
+    box-shadow: 0 4px 15px rgba(232, 62, 140, 0.2);
+}
+
+.btn-order-product:hover {
+    /* Стилі при наведенні */
+    background-color: var(--primary-pink);
+    color: var(--bg-white);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(232, 62, 140, 0.3);
+}

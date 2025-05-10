@@ -41,7 +41,10 @@
                             </div>
                             {% endfor %}
 
-                            <hr class="my-4">
+                            {# Новий блок для відображення суми замовлення #}
+                            <div class="mb-3 order-summary-total">
+                                <h5 class="mb-0">Загальна сума: <span id="formOrderTotalAmount" class="fw-bold">0.00</span> грн</h5>
+                            </div>
 
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" value="" id="onlinePaymentCheck">
@@ -96,7 +99,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const onlinePaymentCheck = document.getElementById('onlinePaymentCheck');
     const fakePaymentForm = document.getElementById('fakePaymentForm');
-    const orderTotalAmountSpan = document.getElementById('orderTotalAmount');
+    const orderTotalAmountSpanInButton = document.getElementById('orderTotalAmount'); // Сума в кнопці фейкової оплати
+    const formOrderTotalAmountSpan = document.getElementById('formOrderTotalAmount'); // НОВИЙ: Сума в тілі форми
 
     // Отримуємо елементи за стандартними ID, які генерує Django
     // Переконайтеся, що Django генерує саме ці ID, або адаптуйте
@@ -115,22 +119,26 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateTotalAmount() {
-        // Перевіряємо, чи елементи існують, перш ніж звертатися до їхніх властивостей
-        if (!productSelector || !quantityInput || !orderTotalAmountSpan) {
-            // Якщо якийсь з ключових елементів не знайдено, виводимо 0.00
-            if(orderTotalAmountSpan) orderTotalAmountSpan.textContent = '0.00';
-            return;
+        let currentTotal = '0.00'; // Значення за замовчуванням
+
+        if (productSelector && quantityInput) { // Перевірка, чи існують productSelector та quantityInput
+            const selectedProductId = productSelector.value;
+            const quantity = parseInt(quantityInput.value, 10);
+
+            if (selectedProductId && prices[selectedProductId] && !isNaN(quantity) && quantity > 0) {
+                const pricePerItem = parseFloat(prices[selectedProductId]);
+                const total = pricePerItem * quantity;
+                currentTotal = total.toFixed(2);
+            }
         }
 
-        const selectedProductId = productSelector.value;
-        const quantity = parseInt(quantityInput.value, 10); // Перетворюємо в число
-
-        if (selectedProductId && prices[selectedProductId] && !isNaN(quantity) && quantity > 0) {
-            const pricePerItem = parseFloat(prices[selectedProductId]);
-            const total = pricePerItem * quantity;
-            orderTotalAmountSpan.textContent = total.toFixed(2); // Форматуємо до двох знаків після коми
-        } else {
-            orderTotalAmountSpan.textContent = '0.00'; // Якщо дані невалідні, показуємо 0.00
+        // Оновлюємо суму в кнопці фейкової оплати
+        if (orderTotalAmountSpanInButton) {
+            orderTotalAmountSpanInButton.textContent = currentTotal;
+        }
+        // Оновлюємо суму в тілі форми
+        if (formOrderTotalAmountSpan) {
+            formOrderTotalAmountSpan.textContent = currentTotal;
         }
     }
 

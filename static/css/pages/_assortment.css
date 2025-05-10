@@ -4,43 +4,10 @@
     padding-bottom: 3rem;
 }
 
-/* --- Спеціальний стиль для карток ТІЛЬКИ на сторінці асортименту --- */
-/* Цей клас (.assortment-item-card) потрібно буде додати до карток в assortment.html */
+/* --- Спеціальний стиль для КАРТОК ТІЛЬКИ на сторінці асортименту --- */
 .assortment-item-card {
-    background-color: var(--bg-light-pink); /* Бажаний світло-рожевий фон */
-    /* Якщо потрібні ще якісь унікальні стилі для цих карток, додайте їх тут */
+    background-color: var(--bg-light-pink); /* Відновлюємо світло-рожевий фон для карток тут */
 }
-
-/* Стилі для кнопки "Замовити" на сторінці асортименту */
-/* (якщо вони відрізняються від кнопок на головній, або якщо ви не хочете використовувати .btn-hero) */
-.assortment-item-card .btn { /* Більш специфічний селектор для кнопки саме в цих картках */
-    /* Якщо використовуєте .custom-order-btn, то його стилі тут */
-    display: inline-block;
-    padding: 12px 30px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: auto;
-    width: 100%; /* Кнопка на всю ширину картки */
-
-    background-color: var(--bg-light-pink); /* Стан спокою - як у .btn-hero */
-    color: var(--primary-pink);
-    border: 1px solid var(--primary-pink);
-    box-shadow: 0 4px 15px rgba(232, 62, 140, 0.2);
-}
-
-.assortment-item-card .btn:hover {
-    background-color: var(--primary-pink); /* Стан при наведенні - як у .btn-hero */
-    color: var(--bg-white);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(232, 62, 140, 0.3);
-}
-
 
 /* --- Форма пошуку (залишається як було, або з невеликими корективами) --- */
 .custom-search-form {

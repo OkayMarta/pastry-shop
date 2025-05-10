@@ -109,7 +109,7 @@
                     <div class="card-body"> {# Тіло картки з інформацією про товар #}
                         <h5 class="card-title product-title">{{ item.name }}</h5> {# Назва товару #}
                         <p class="card-text product-price">{{ item.price }} ГРН</p> {# Ціна товару #}
-                         <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="btn btn-outline-primary mt-auto">Замовити</a> {# Кнопка "Замовити" з посиланням на форму замовлення та передачею ID товару #}
+                         <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="btn btn-order-product">Замовити</a>
                     </div>
                 </div>
             </div>

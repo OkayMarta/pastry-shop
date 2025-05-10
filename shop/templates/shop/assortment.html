@@ -37,9 +37,7 @@
                     <div class="card-body">
                         <h5 class="card-title product-title">{{ item.name }}</h5>
                         <p class="card-text product-price">{{ item.price }} ГРН</p>
-                        {# Додаємо клас .btn для базових стилів кнопки #}
-                        <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="btn">Замовити</a>
-                        {# Клас .btn на кнопці вище вже стилізований через .assortment-item-card .btn в _assortment.css #}
+                        <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="btn btn-order-product">Замовити</a>
                     </div>
                 </div>
             </div>
