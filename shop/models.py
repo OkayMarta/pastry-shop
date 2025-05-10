@@ -27,7 +27,7 @@ class Order(models.Model):
         ('доставлено', 'Доставлено'),
     ]
 
-    product = models.ForeignKey(AssortmentItem, on_delete=models.PROTECT, verbose_name="Товар", null=True, blank=True)
+    product = models.ForeignKey(AssortmentItem, on_delete=models.PROTECT, verbose_name="Товар")
     quantity = models.PositiveIntegerField(verbose_name="Кількість")
     order_date = models.DateField(verbose_name="Дата замовлення")
     delivery_date = models.DateField(verbose_name="Дата доставки")

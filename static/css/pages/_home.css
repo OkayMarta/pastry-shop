@@ -380,12 +380,12 @@
         margin-right: auto; /* Центрування */
     }
     .sweet-magic-section .row > .col-lg-6:first-child { /* Колонка з текстом */
-        text-align: center; /* Центрування тексту */
-        order: 2; /* Текст після картинок */
+        text-align: center;
+        order: 1; /* Текст тепер ПЕРШИЙ */
+        margin-bottom: 2rem; /* Додаємо відступ під текстовим блоком перед картинками */
     }
      .sweet-magic-section .row > .col-lg-6:last-child { /* Колонка з картинками */
-        order: 1; /* Картинки перші */
-        margin-bottom: 2rem; /* Відступ під картинками */
+        order: 2; /* Картинки тепер ДРУГІ */
     }
     /* Центрування та зменшення зображень */
     .sweet-magic-section .row [class*="col-md-"] img {

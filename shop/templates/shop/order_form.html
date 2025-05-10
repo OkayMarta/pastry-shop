@@ -1,28 +1,22 @@
 {% extends 'shop/base.html' %}
 {% load static %}
 
+
 {% block title %}Оформлення замовлення - Confititeria{% endblock %}
 
 {% block content %}
-<div class="order-form-page-wrapper py-5"> {# Обгортка для всієї сторінки з рожевим фоном та відступами #}
+<div class="order-form-page-wrapper py-5">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10"> {# Колонка для картки форми #}
-                <div class="card order-form-card"> {# Спеціальний клас для картки форми #}
+            <div class="col-lg-8 col-md-10">
+                <div class="card order-form-card">
                     <div class="card-header text-center">
-                        <h2 class="mb-4">Створення замовлення</h2> {# Відступ знизу для заголовка #}
+                        <h2 class="mb-4 section-title-decorated">Створення замовлення</h2>
                     </div>
                     <div class="card-body">
-                        <form method="post" novalidate>
+                        {# Передаємо JSON з цінами в data-атрибут для легкого доступу з JS #}
+                        <form method="post" novalidate data-prices="{{ assortment_prices_json }}">
                             {% csrf_token %}
-
-                            {% if form.non_field_errors %}
-                            <div class="alert alert-danger">
-                                {% for error in form.non_field_errors %}
-                                {{ error }}
-                                {% endfor %}
-                            </div>
-                            {% endif %}
 
                             {% for field in form %}
                             <div class="mb-3">
@@ -32,12 +26,13 @@
                                     <span class="text-danger">*</span>
                                     {% endif %}
                                 </label>
-                                {{ field }} {# Django Crispy Forms додасть класи form-control автоматично, якщо налаштовано, або вони вже є у віджеті форми #}
+                                {{ field }} {# Django зазвичай генерує id="id_<field_name>" #}
+
                                 {% if field.help_text %}
                                 <small class="form-text text-muted">{{ field.help_text }}</small>
                                 {% endif %}
                                 {% if field.errors %}
-                                <div class="invalid-feedback d-block"> {# d-block для відображення помилок під полем #}
+                                <div class="invalid-feedback d-block">
                                     {% for error in field.errors %}
                                     {{ error }}
                                     {% endfor %}
@@ -46,7 +41,40 @@
                             </div>
                             {% endfor %}
 
-                            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 mt-4 pt-3"> {# Контейнер для кнопок з flexbox #}
+                            <hr class="my-4">
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="" id="onlinePaymentCheck">
+                                <label class="form-check-label" for="onlinePaymentCheck">
+                                    Оплатити онлайн зараз
+                                </label>
+                            </div>
+
+                            <div id="fakePaymentForm" class="fake-payment-form-container" style="display: none;">
+                                <h5 class="mb-3 text-center payment-form-title">Введіть дані картки</h5>
+                                <div class="mb-3">
+                                    <label for="cardNumber" class="form-label payment-label">Номер картки</label>
+                                    <input type="text" class="form-control payment-input" id="cardNumber" placeholder="XXXX XXXX XXXX XXXX" maxlength="19">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7 mb-3 mb-md-0">
+                                        <label for="expiryDate" class="form-label payment-label">Термін дії</label>
+                                        <input type="text" class="form-control payment-input" id="expiryDate" placeholder="ММ / РР" maxlength="7">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label for="cvv" class="form-label payment-label">
+                                            CVV/CVC
+                                            <span class="payment-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Три цифри на звороті картки">?</span>
+                                        </label>
+                                        <input type="text" class="form-control payment-input" id="cvv" placeholder="•••" maxlength="3">
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-payment-submit w-100 mt-4">
+                                    Оплатити <span id="orderTotalAmount">0.00</span> грн
+                                </button>
+                            </div>
+
+                            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 mt-4 pt-3">
                                 <button type="submit" class="btn btn-hero">
                                     Відправити замовлення
                                 </button>
@@ -61,4 +89,120 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const onlinePaymentCheck = document.getElementById('onlinePaymentCheck');
+    const fakePaymentForm = document.getElementById('fakePaymentForm');
+    const orderTotalAmountSpan = document.getElementById('orderTotalAmount');
+
+    // Отримуємо елементи за стандартними ID, які генерує Django
+    // Переконайтеся, що Django генерує саме ці ID, або адаптуйте
+    const productSelector = document.getElementById('id_product');
+    const quantityInput = document.getElementById('id_quantity');
+    const mainForm = document.querySelector('form[method="post"]');
+
+    let prices = {};
+    if (mainForm && mainForm.dataset.prices) {
+        try {
+            prices = JSON.parse(mainForm.dataset.prices);
+        } catch (e) {
+            console.error('Error parsing prices JSON:', e);
+            prices = {}; // Встановлюємо порожній об'єкт у випадку помилки
+        }
+    }
+
+    function updateTotalAmount() {
+        // Перевіряємо, чи елементи існують, перш ніж звертатися до їхніх властивостей
+        if (!productSelector || !quantityInput || !orderTotalAmountSpan) {
+            // Якщо якийсь з ключових елементів не знайдено, виводимо 0.00
+            if(orderTotalAmountSpan) orderTotalAmountSpan.textContent = '0.00';
+            return;
+        }
+
+        const selectedProductId = productSelector.value;
+        const quantity = parseInt(quantityInput.value, 10); // Перетворюємо в число
+
+        if (selectedProductId && prices[selectedProductId] && !isNaN(quantity) && quantity > 0) {
+            const pricePerItem = parseFloat(prices[selectedProductId]);
+            const total = pricePerItem * quantity;
+            orderTotalAmountSpan.textContent = total.toFixed(2); // Форматуємо до двох знаків після коми
+        } else {
+            orderTotalAmountSpan.textContent = '0.00'; // Якщо дані невалідні, показуємо 0.00
+        }
+    }
+
+    // Ініціалізація tooltip (якщо використовується Bootstrap 5)
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    if(onlinePaymentCheck){ // Перевіряємо, чи існує чекбокс
+        onlinePaymentCheck.addEventListener('change', function () {
+            if (this.checked) {
+                updateTotalAmount(); // Оновлюємо суму при показі форми
+                if(fakePaymentForm) fakePaymentForm.style.display = 'block';
+            } else {
+                if(fakePaymentForm) fakePaymentForm.style.display = 'none';
+            }
+        });
+    }
+
+
+    // Слухачі подій для оновлення суми
+    if (productSelector) {
+        productSelector.addEventListener('change', updateTotalAmount);
+    }
+    if (quantityInput) {
+        quantityInput.addEventListener('input', updateTotalAmount);
+    }
+
+    // Ініціальне оновлення суми (якщо поля вже заповнені)
+    // Краще викликати після того, як весь DOM точно завантажений і відрендерений
+    // і після того, як Django форми могли б встановити початкові значення.
+    // setTimeout гарантує, що це відбудеться після поточного стеку виконання.
+    setTimeout(updateTotalAmount, 0); // 0 мс достатньо, щоб перенести в наступний цикл подій
+
+    // Опціонально: форматування номера картки та терміну дії при введенні
+    const cardNumberInput = document.getElementById('cardNumber');
+    if (cardNumberInput) {
+        cardNumberInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+            e.target.value = formattedValue.trim();
+        });
+    }
+
+    const expiryDateInput = document.getElementById('expiryDate');
+    if (expiryDateInput) {
+        expiryDateInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            let formattedValue = '';
+            if (value.length > 2) {
+                formattedValue = value.substring(0, 2) + ' / ' + value.substring(2, 4);
+            } else {
+                formattedValue = value;
+            }
+            e.target.value = formattedValue;
+        });
+    }
+
+    const fakePayButton = document.querySelector('.btn-payment-submit');
+    if (fakePayButton) {
+        fakePayButton.addEventListener('click', function() {
+            // Можна додати якесь повідомлення або просто нічого не робити
+            // alert('Це фейкова оплата. Дані не відправлено.');
+        });
+    }
+});
+</script>
 {% endblock %}

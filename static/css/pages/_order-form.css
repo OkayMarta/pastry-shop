@@ -63,6 +63,85 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); /* Та сама тінь, що й у спокійному стані */
 }
 
+/* --- Стилі для фейкової форми оплати --- */
+.fake-payment-form-container {
+    border: 1px solid var(--form-input-border, #f0d4dd); /* Рамка контейнера */
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    background-color: var(--bg-light-pink, #FFF7F5); /* Світло-рожевий або бежевий фон */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.payment-form-title {
+    color: var(--soft-pink-accent, #B57D7D); /* Колір як у основного заголовка форми */
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; /* Трохи менший за основний заголовок */
+    font-weight: 600;
+}
+
+.payment-label {
+    font-weight: 500;
+    color: var(--text-secondary, #555); /* Колір міток */
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.payment-input {
+    background-color: var(--bg-white, #fff); /* Білий фон для полів вводу */
+    border: 1px solid var(--form-input-border, #f0d4dd);
+    color: var(--text-primary, #333);
+    /* Успадковує padding та border-radius з .form-control, якщо він є */
+}
+
+.payment-input::placeholder {
+    color: var(--search-input-placeholder, #d39dab); /* Колір плейсхолдера */
+    font-family: monospace; /* Моноширинний шрифт для плейсхолдерів картки */
+}
+
+.payment-input:focus {
+    border-color: var(--accent-pink, #f4a8c7);
+    box-shadow: 0 0 0 0.2rem var(--focus-box-shadow);
+}
+
+.payment-tooltip {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: var(--text-light-gray, #ccc);
+    color: var(--bg-white, #fff);
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: help;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.btn-payment-submit {
+    /* Стилізуємо схоже на .btn-hero, але можна трохи інакше */
+    background-color: var(--accent-pink); /* Яскравіший рожевий для кнопки "Оплатити" */
+    color: var(--bg-white);
+    border: 1px solid var(--accent-pink);
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(var(--accent-pink), 0.2);
+}
+
+.btn-payment-submit:hover {
+    background-color: #e78bb0; /* Затемнений варіант --accent-pink */
+    border-color: #e78bb0;
+    color: var(--bg-white);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(var(--accent-pink), 0.3);
+}
 
 /* Адаптивність для картки форми */
 @media (max-width: 767px) {
