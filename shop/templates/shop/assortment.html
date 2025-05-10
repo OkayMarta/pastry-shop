@@ -27,36 +27,48 @@
     <!-- Сітка для відображення карток товарів -->
     <!-- Класи Bootstrap: row, row-cols-*, g-4 - для адаптивного розташування колонок та відступів між ними -->
     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-            {% for item in items %} <!-- Цикл для перебору кожного товару зі списку 'items' -->
-            <div class="col"> <!-- Колонка Bootstrap для розміщення однієї картки товару -->
-                <!-- Картка товару з класами Bootstrap (h-100, shadow-sm) та кастомними класами -->
-                <div class="card h-100 shadow-sm product-card assortment-item-card">
-                    <!-- Контейнер для зображення товару -->
-                    <div class="product-image-container">
-                        {% if item.image %} <!-- Перевірка, чи існує зображення для товару -->
-                            <img src="{{ item.image.url }}" alt="{{ item.name }}"> <!-- Відображення зображення товару -->
-                        {% else %}
-                            <img src="{% static 'img/no-image.jpg' %}" alt="Зображення відсутнє"> <!-- Відображення зображення-заглушки, якщо основне відсутнє -->
-                        {% endif %}
-                    </div>
+        {% for item in items %} <!-- Цикл для перебору кожного товару зі списку 'items' -->
+        <div class="col"> <!-- Колонка Bootstrap для розміщення однієї картки товару -->
+            <!-- Картка товару з класами Bootstrap (h-100, shadow-sm) та кастомними класами -->
+            <div class="card h-100 shadow-sm product-card assortment-item-card">
+                <!-- Контейнер для зображення товару -->
+                <div class="product-image-container">
+                    {% if item.image %} <!-- Перевірка, чи існує зображення для товару -->
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}"> <!-- Відображення зображення товару -->
+                    {% else %}
+                        <img src="{% static 'img/no-image.jpg' %}" alt="Зображення відсутнє"> <!-- Відображення зображення-заглушки, якщо основне відсутнє -->
+                    {% endif %}
+                </div>
 
-                    <!-- Тіло картки з інформацією про товар -->
-                    <div class="card-body">
-                        <h5 class="card-title product-title">{{ item.name }}</h5> <!-- Назва товару -->
-                        <p class="card-text product-price">{{ item.price }} ГРН</p> <!-- Ціна товару -->
-                        <!-- Посилання-кнопка для переходу на сторінку створення замовлення з передачею ID поточного товару -->
-                        <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="btn btn-order-product">Замовити</a>
+                <!-- Тіло картки з інформацією про товар -->
+                <div class="card-body">
+                    <h5 class="card-title product-title">{{ item.name }}</h5> <!-- Назва товару -->
+                    <p class="card-text product-price">{{ item.price }} ГРН</p> <!-- Ціна товару -->
+                    <!-- Посилання-кнопка для переходу на сторінку створення замовлення з передачею ID поточного товару -->
+                    <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="btn btn-order-product">Замовити</a>
+                </div>
+            </div>
+        </div>
+        {% empty %} <!-- Блок, що виконується, якщо список 'items' порожній -->
+            <div class="col-12">
+                {% if request.GET.q or request.GET.min_price or request.GET.max_price %}
+                {# Якщо були параметри пошуку/фільтрації #}
+                <div class="d-flex justify-content-center"> <!-- Обгортка для центрування -->
+                    <div class="alert alert-pink-notice text-center" style="max-width: 70%; margin-top: 1rem; margin-bottom: 1rem;">
+                        На жаль, за вашими критеріями пошуку нічого не знайдено. <br>Спробуйте змінити параметри пошуку або переглянути повний асортимент.
                     </div>
                 </div>
-            </div>
-            {% empty %} <!-- Блок, що виконується, якщо список 'items' порожній -->
-            <div class="col-12"> <!-- Колонка на всю ширину для повідомлення -->
-                <div class="alert alert-info text-center"> <!-- Інформаційне повідомлення Bootstrap -->
-                    На жаль, зараз асортимент порожній. Спробуйте завітати пізніше.
+                {% else %}
+                {# Якщо параметрів пошуку не було, тобто асортимент порожній спочатку #}
+                <div class="d-flex justify-content-center"> <!-- Обгортка для центрування (опціонально, якщо також хочете центрувати цей блок) -->
+                    <div class="alert alert-info text-center" style="max-width: 70%; margin-top: 1rem; margin-bottom: 1rem;">
+                        На жаль, зараз асортимент порожній. Спробуйте завітати пізніше.
+                    </div>
                 </div>
+                {% endif %}
             </div>
-            {% endfor %} <!-- Кінець циклу перебору товарів -->
-        </div>
+        {% endfor %} <!-- Кінець циклу перебору товарів -->
     </div>
+</div>
 </section>
 {% endblock %} <!-- Кінець блоку основного контенту -->

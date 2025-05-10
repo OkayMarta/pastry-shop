@@ -3,3 +3,13 @@
     border-radius: 0.25rem; /* Заокруглення кутів */
     margin-bottom: 1rem;    /* Зовнішній відступ знизу */
 }
+
+/* Стиль для повідомлення "нічого не знайдено" */
+.alert-pink-notice {
+    color: var(--primary-pink);
+    background-color: var(--bg-light-pink-alt);
+    border-color: var(--accent-pink);
+    padding: 1rem 1.25rem;
+    border-width: 1px;
+    border-style: solid;
+}
