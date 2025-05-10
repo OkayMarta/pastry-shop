@@ -1,29 +1,33 @@
-{% extends 'shop/base.html' %}
-{% load static %}
+{% extends 'shop/base.html' %} <!-- Наслідування базового шаблону `base.html` -->
+{% load static %}                 <!-- Завантаження тегів Django для роботи зі статичними файлами -->
 
-{% block title %}Замовлення прийнято - Confititeria{% endblock %}
+{% block title %}Замовлення прийнято - Confititeria{% endblock %} <!-- Визначення заголовка сторінки -->
 
-{% block content %}
+{% block content %} <!-- Початок блоку основного контенту -->
+<!-- Обгортка для всієї сторінки підтвердження успішного замовлення -->
 <div class="order-success-page-wrapper py-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10 text-center">
+    <div class="container"> <!-- Основний контейнер Bootstrap для центрування контенту -->
+        <div class="row justify-content-center"> <!-- Рядок Bootstrap для центрування колонки -->
+            <div class="col-lg-8 col-md-10 text-center"> <!-- Колонка Bootstrap, що займає частину ширини та центрує текст -->
+                <!-- Картка для відображення повідомлення про успішне замовлення -->
                 <div class="card order-success-card">
-                    <div class="card-body">
+                    <div class="card-body"> <!-- Тіло картки -->
 
-                        <h1 class="order-success-title mb-4"> {# Збільшив mb, щоб був більший відступ до тексту #}
+                        <!-- Головний заголовок повідомлення -->
+                        <h1 class="order-success-title mb-4">
                             Дякуємо за ваше замовлення!
                         </h1>
 
-                        <p class="lead mb-5"> {# Збільшив mb для більшого відступу до кнопки #}
+                        <!-- Текст повідомлення для користувача -->
+                        <p class="lead mb-5">
                             Воно успішно оформлене. Наш менеджер зв'яжеться з вами найближчим часом для уточнення деталей та підтвердження.
                         </p>
 
-                        <div class="mt-4"> {# Зменшив mt, якщо блок alert видалено #}
-                            <a href="{% url 'shop:home' %}" class="btn btn-hero">
+                        <!-- Контейнер для кнопки повернення на головну сторінку -->
+                        <div class="mt-4">
+                            <a href="{% url 'shop:home' %}" class="btn btn-hero"> <!-- Кнопка-посилання на головну сторінку -->
                                 Повернутися на головну
                             </a>
-                            {# Другу кнопку "Переглянути асортимент" видалено #}
                         </div>
                     </div>
                 </div>
@@ -31,4 +35,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{% endblock %} <!-- Кінець блоку основного контенту -->

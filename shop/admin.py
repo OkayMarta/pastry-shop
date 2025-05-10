@@ -1,50 +1,64 @@
 from django.contrib import admin
-from .models import AssortmentItem, Order
+from .models import AssortmentItem, Order  # Імпорт моделей для реєстрації в адмін-панелі
 
 
+# Реєстрація моделі AssortmentItem в адмін-панелі з кастомними налаштуваннями
 @admin.register(AssortmentItem)
 class AssortmentAdmin(admin.ModelAdmin):
-    """Налаштування відображення моделі Асортименту в адмін-панелі"""
-    list_display = ('name', 'price', 'id') # Додав 'id' для зручності
-    search_fields = ('name',)
-    list_per_page = 20
+    """Клас для налаштування відображення моделі 'AssortmentItem' (Асортимент) в адмін-панелі Django."""
+
+    list_display = ('name', 'price', 'id') # Поля, що відображаються у списку об'єктів моделі
+    search_fields = ('name',) # Поля, за якими можна здійснювати пошук у списку
+    list_per_page = 20 # Кількість об'єктів на одній сторінці списку
 
 
+# Реєстрація моделі Order в адмін-панелі з кастомними налаштуваннями
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    """Налаштування відображення моделі Замовлення в адмін-панелі"""
+    """Клас для налаштування відображення моделі 'Order' (Замовлення) в адмін-панелі Django."""
+
+    # Поля, що відображаються у списку замовлень
     list_display = (
-        'id',
-        'customer_name',
-        'phone_number',  # <--- ДОДАНО
-        'email',  # <--- ДОДАНО
-        'product',
-        'delivery_date',
-        'status',
-        'created_at'
+        'id',  # Ідентифікатор замовлення
+        'customer_name',  # Ім'я замовника
+        'phone_number',  # Номер телефону замовника
+        'email',  # Email замовника
+        'product',  # Замовлений товар
+        'delivery_date',  # Дата доставки
+        'status',  # Статус замовлення
+        'created_at'  # Дата та час створення замовлення
     )
-    list_filter = ('status', 'product', 'delivery_date')  # Додав delivery_date до фільтрів
-    search_fields = ('customer_name', 'phone_number', 'email', 'product__name')  # Додав пошук за назвою товару
-    readonly_fields = ('created_at', 'updated_at', 'order_date')  # order_date тепер теж readonly
+    # Поля, за якими можна фільтрувати список замовлень
+    list_filter = ('status', 'product', 'delivery_date')
+    # Поля, за якими можна здійснювати пошук (включаючи пошук за назвою товару через зв'язок)
+    search_fields = ('customer_name', 'phone_number', 'email', 'product__name')
+    # Поля, які будуть доступні тільки для читання у формі редагування замовлення
+    readonly_fields = ('created_at', 'updated_at', 'order_date')
+    # Кількість замовлень на одній сторінці списку
     list_per_page = 20
 
+    # Структурування полів у формі редагування/створення замовлення за допомогою наборів полів (fieldsets)
     fieldsets = (
+        # Секція "Інформація про замовника"
         ('Інформація про замовника', {
             'fields': ('customer_name', 'phone_number', 'email')
         }),
+        # Секція "Деталі замовлення"
         ('Деталі замовлення', {
             'fields': ('product', 'quantity',
-                       'order_date',  # order_date тут, щоб бачити, але вона readonly
+                       'order_date',  # Поле дати замовлення (тільки для читання)
                        'delivery_date', 'comment')
         }),
+        # Секція "Статус"
         ('Статус', {
             'fields': ('status',)
         }),
+        # Секція "Системна інформація", згорнута за замовчуванням
         ('Системна інформація', {
-            'fields': ('created_at', 'updated_at'),
-            'classes': ('collapse',)  # 'collapse' робить цю секцію згорнутою за замовчуванням
+            'fields': ('created_at', 'updated_at'),  # Поля дати створення та оновлення
+            'classes': ('collapse',)  # CSS-клас для згортання секції
         }),
     )
 
-    # Можна додати сортування за замовчуванням
+    # Сортування списку замовлень за замовчуванням (від найновіших до найстаріших)
     ordering = ('-created_at',)

@@ -1,54 +1,62 @@
-{% extends 'shop/base.html' %}
-{% load static %}
+{% extends 'shop/base.html' %} <!-- Наслідування базового шаблону сайту -->
+{% load static %}                 <!-- Завантаження тегів для роботи зі статичними файлами -->
 
-{% block title %}Асортимент - Кондитерська{% endblock %}
+{% block title %}Асортимент - Кондитерська{% endblock %} <!-- Визначення заголовка сторінки -->
 
-{% block content %}
-<section class="assort"> {# Фон для всієї сторінки/секції асортименту #}
-<div class="container py-5">
+{% block content %} <!-- Початок блоку основного контенту сторінки -->
+<section class="assort"> <!-- Секція, що обгортає весь контент сторінки асортименту -->
+<div class="container py-5"> <!-- Основний контейнер Bootstrap з вертикальними відступами -->
 
+    <!-- Блок з формою пошуку та фільтрації товарів -->
     <div class="search">
         <form method="get" action="{% url 'shop:assortment_list' %}" class="custom-search-form">
+            <!-- Поле для пошуку за назвою товару -->
             <input type="text" name="q" class="search-input" placeholder="Пошук десерту..." value="{{ request.GET.q }}">
+            <!-- Поле для введення мінімальної ціни -->
             <input type="number" name="min_price" class="search-input" placeholder="Мін. ціна" value="{{ request.GET.min_price }}">
+            <!-- Поле для введення максимальної ціни -->
             <input type="number" name="max_price" class="search-input" placeholder="Макс. ціна" value="{{ request.GET.max_price }}">
-        
-            <div class="search-btnn"> {# Ваша обгортка, якщо вона потрібна #}
+
+            <!-- Контейнер для кнопки пошуку -->
+            <div class="search-btnn">
                 <button type="submit" class="btn btn-hero">Пошук</button>
             </div>
         </form>
     </div>
 
-       
+    <!-- Сітка для відображення карток товарів -->
+    <!-- Класи Bootstrap: row, row-cols-*, g-4 - для адаптивного розташування колонок та відступів між ними -->
     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-            {% for item in items %}
-            <div class="col">
-                {# Додаємо клас .assortment-item-card до основного .card #}
-                {# h-100 та shadow-sm - це Bootstrap класи, їх можна залишити #}
+            {% for item in items %} <!-- Цикл для перебору кожного товару зі списку 'items' -->
+            <div class="col"> <!-- Колонка Bootstrap для розміщення однієї картки товару -->
+                <!-- Картка товару з класами Bootstrap (h-100, shadow-sm) та кастомними класами -->
                 <div class="card h-100 shadow-sm product-card assortment-item-card">
+                    <!-- Контейнер для зображення товару -->
                     <div class="product-image-container">
-                        {% if item.image %}
-                            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                        {% if item.image %} <!-- Перевірка, чи існує зображення для товару -->
+                            <img src="{{ item.image.url }}" alt="{{ item.name }}"> <!-- Відображення зображення товару -->
                         {% else %}
-                            <img src="{% static 'img/no-image.jpg' %}" alt="Зображення відсутнє">
+                            <img src="{% static 'img/no-image.jpg' %}" alt="Зображення відсутнє"> <!-- Відображення зображення-заглушки, якщо основне відсутнє -->
                         {% endif %}
                     </div>
 
+                    <!-- Тіло картки з інформацією про товар -->
                     <div class="card-body">
-                        <h5 class="card-title product-title">{{ item.name }}</h5>
-                        <p class="card-text product-price">{{ item.price }} ГРН</p>
+                        <h5 class="card-title product-title">{{ item.name }}</h5> <!-- Назва товару -->
+                        <p class="card-text product-price">{{ item.price }} ГРН</p> <!-- Ціна товару -->
+                        <!-- Посилання-кнопка для переходу на сторінку створення замовлення з передачею ID поточного товару -->
                         <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="btn btn-order-product">Замовити</a>
                     </div>
                 </div>
             </div>
-            {% empty %}
-            <div class="col-12">
-                <div class="alert alert-info text-center">
+            {% empty %} <!-- Блок, що виконується, якщо список 'items' порожній -->
+            <div class="col-12"> <!-- Колонка на всю ширину для повідомлення -->
+                <div class="alert alert-info text-center"> <!-- Інформаційне повідомлення Bootstrap -->
                     На жаль, зараз асортимент порожній. Спробуйте завітати пізніше.
                 </div>
             </div>
-            {% endfor %}
+            {% endfor %} <!-- Кінець циклу перебору товарів -->
         </div>
     </div>
-    </section>
-{% endblock %}
+</section>
+{% endblock %} <!-- Кінець блоку основного контенту -->

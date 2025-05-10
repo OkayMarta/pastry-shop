@@ -1,129 +1,135 @@
-/* ==========================================================================
-   7. СТИЛІ СТОРІНКИ ОФОРМЛЕННЯ ЗАМОВЛЕННЯ
-   ========================================================================== */
-
+/* Загальний контейнер-обгортка для сторінки оформлення замовлення */
 .order-form-page-wrapper {
-    background-color: var(--bg-white);
-    flex-grow: 1; /* Займає доступний простір, якщо body це flex-контейнер */
-    min-height: calc(100vh - 150px); /* Орієнтовна висота, щоб футер був внизу (відніміть висоту хедера і футера) */
+    background-color: var(--bg-white); /* Фоновий колір сторінки */
+    flex-grow: 1;                      /* Дозволяє контейнеру займати весь доступний вертикальний простір */
+    min-height: calc(100vh - 150px);   /* Мінімальна висота для притискання футера донизу (орієнтовно) */
     display: flex;
-    align-items: center; /* Центрування картки по вертикалі, якщо вміст короткий */
+    align-items: center;               /* Вертикальне центрування картки форми, якщо вміст короткий */
 }
 
+/* Стилі для картки, що містить форму замовлення */
 .order-form-card {
-    background-color: var(--bg-light-pink); /* Білий фон картки */
-    border: 1px solid var(--bg-light-pink-alt); /* Дуже ніжна рожева рамка */
-    border-radius: 0.75rem; /* Більш заокруглені кути */
-    padding: 2rem 2.5rem; /* Внутрішні відступи для картки (верх/низ право/ліво) */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); /* М'яка тінь */
+    background-color: var(--bg-light-pink); /* Фоновий колір картки */
+    border: 1px solid var(--bg-light-pink-alt); /* Рамка картки */
+    border-radius: 0.75rem;            /* Заокруглення кутів картки */
+    padding: 2rem 2.5rem;              /* Внутрішні відступи картки */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); /* Тінь картки */
 }
 
+/* Заголовок картки форми */
 .order-form-card .card-header {
-    background-color: transparent;
-    border-bottom: none;
+    background-color: transparent; /* Прозорий фон заголовка */
+    border-bottom: none;           /* Без нижньої рамки для заголовка */
     padding-left: 0;
     padding-right: 0;
     padding-top: 2px;
-    padding-bottom: 0; /* Прибираємо відступ, якщо h2 має свій mb-4 */
+    padding-bottom: 0;
 }
 
+/* Текст заголовка h2 всередині .card-header */
 .order-form-card .card-header h2 {
     color: var(--soft-pink-accent);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-headings); /* Використання шрифту для заголовків */
     font-size: 2.2rem;
     font-weight: 700;
-    padding-bottom: 0.5rem; /* Додаємо невеликий відступ під текстом */
-    border-bottom: 3px solid var(--soft-pink-accent); /* Підкреслення насиченим рожевим */
-    display: inline-block; /* Щоб підкреслення було лише під текстом, а не на всю ширину */
-    margin-bottom: 1.5rem; /* Зберігаємо або коригуємо відступ знизу */
+    padding-bottom: 0.5rem; /* Внутрішній відступ знизу */
+    border-bottom: 3px solid var(--soft-pink-accent); /* Декоративне підкреслення */
+    display: inline-block;     /* Дозволяє підкресленню бути лише під текстом */
+    margin-bottom: 1.5rem;     /* Зовнішній відступ знизу */
 }
 
-/* Стилізація полів форми (якщо потрібно додати специфічні акценти) */
+/* Загальні стилі для полів вводу форми (.form-control) всередині картки */
 .order-form-card .form-control {
-    border-radius: 0.375rem; /* Стандартне заокруглення Bootstrap */
-    border-color: var(--form-input-border); /* Ніжно-рожева рамка для полів */
-    padding: 0.75rem 1rem; /* Трохи більші відступи в полях */
+    border-radius: 0.375rem;
+    border-color: var(--form-input-border); /* Колір рамки полів */
+    padding: 0.75rem 1rem;                 /* Внутрішні відступи полів */
 }
 
+/* Стилі для полів вводу при фокусі */
 .order-form-card .form-control:focus {
-    border-color: var(--bg-light-pink); /* Вже визначено раніше, але для повноти */
-    box-shadow: 0 0 0 0.2rem rgba(232, 62, 140, 0.25); /* Вже визначено раніше */
+    border-color: var(--focus-border-color); /* Колір рамки при фокусі (має бути --focus-border-color, а не --bg-light-pink) */
+    box-shadow: 0 0 0 0.2rem var(--focus-box-shadow); /* Тінь при фокусі */
 }
 
+/* Стилі для міток полів форми (.form-label) */
 .order-form-card .form-label {
     font-weight: 500;
-    color: var(--text-form-label); /* Трохи темніший колір для лейблів */
-    margin-bottom: 0.3rem; /* Менший відступ під лейблом */
+    color: var(--text-form-label); /* Колір тексту міток */
+    margin-bottom: 0.3rem;        /* Зовнішній відступ знизу від мітки */
 }
 
-/* Перевизначаємо поведінку hover для картки форми замовлення,
-   щоб вона не "підстрибувала" і не змінювала тінь, як інші .card */
+/* Скасування ефектів наведення для картки форми замовлення (якщо вони успадковані від загального .card) */
 .order-form-card:hover {
-    transform: none; /* Не рухатись */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); /* Та сама тінь, що й у спокійному стані */
+    transform: none; /* Без "підйому" картки */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); /* Збереження статичної тіні */
 }
 
-/* --- Стилі для фейкової форми оплати --- */
+/* Контейнер для блоку фейкової форми оплати */
 .fake-payment-form-container {
-    border: 1px solid var(--form-input-border, #f0d4dd); /* Рамка контейнера */
+    border: 1px solid var(--form-input-border); /* Рамка контейнера */
     border-radius: 0.5rem;
     padding: 1.5rem;
     margin-top: 1rem;
-    background-color: var(--bg-light-pink, #FFF7F5); /* Світло-рожевий або бежевий фон */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    background-color: var(--bg-light-pink); /* Фоновий колір контейнера */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Тінь контейнера */
 }
 
+/* Заголовок фейкової форми оплати */
 .payment-form-title {
-    color: var(--soft-pink-accent, #B57D7D); /* Колір як у основного заголовка форми */
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem; /* Трохи менший за основний заголовок */
+    color: var(--soft-pink-accent);
+    font-family: var(--font-headings); /* Використання шрифту для заголовків */
+    font-size: 1.5rem;
     font-weight: 600;
 }
 
+/* Мітки полів у фейковій формі оплати */
 .payment-label {
     font-weight: 500;
-    color: var(--text-secondary, #555); /* Колір міток */
+    color: var(--text-secondary);
     font-size: 0.9rem;
     margin-bottom: 0.25rem;
     display: block;
 }
 
+/* Поля вводу у фейковій формі оплати */
 .payment-input {
-    background-color: var(--bg-white, #fff); /* Білий фон для полів вводу */
-    border: 1px solid var(--form-input-border, #f0d4dd);
-    color: var(--text-primary, #333);
-    /* Успадковує padding та border-radius з .form-control, якщо він є */
+    background-color: var(--bg-white);
+    border: 1px solid var(--form-input-border);
+    color: var(--text-primary);
 }
 
+/* Текст-заповнювач (placeholder) у полях фейкової форми оплати */
 .payment-input::placeholder {
-    color: var(--search-input-placeholder, #d39dab); /* Колір плейсхолдера */
-    font-family: monospace; /* Моноширинний шрифт для плейсхолдерів картки */
+    color: var(--search-input-placeholder);
+    font-family: monospace; /* Моноширинний шрифт для номерів карт та дат */
 }
 
+/* Поля вводу фейкової форми оплати при фокусі */
 .payment-input:focus {
-    border-color: var(--accent-pink, #f4a8c7);
+    border-color: var(--accent-pink);
     box-shadow: 0 0 0 0.2rem var(--focus-box-shadow);
 }
 
+/* Підказка (tooltip) поруч з полем CVV/CVC */
 .payment-tooltip {
     display: inline-block;
     width: 16px;
     height: 16px;
     line-height: 16px;
     text-align: center;
-    border-radius: 50%;
-    background-color: var(--text-light-gray, #ccc);
-    color: var(--bg-white, #fff);
+    border-radius: 50%; /* Кругла форма */
+    background-color: var(--text-light-gray);
+    color: var(--bg-white);
     font-size: 0.75rem;
     font-weight: bold;
-    cursor: help;
+    cursor: help; /* Курсор у вигляді знаку питання */
     margin-left: 5px;
-    vertical-align: middle;
+    vertical-align: middle; /* Вертикальне вирівнювання */
 }
 
+/* Кнопка "Оплатити" у фейковій формі */
 .btn-payment-submit {
-    /* Стилізуємо схоже на .btn-hero, але можна трохи інакше */
-    background-color: var(--accent-pink); /* Яскравіший рожевий для кнопки "Оплатити" */
+    background-color: var(--accent-pink); /* Акцентний колір кнопки */
     color: var(--bg-white);
     border: 1px solid var(--accent-pink);
     padding: 0.75rem 1.5rem;
@@ -132,53 +138,54 @@
     letter-spacing: 0.5px;
     border-radius: 50px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(var(--accent-pink), 0.2);
+    box-shadow: 0 4px 10px rgba(244, 168, 199, 0.2); /* Тінь кнопки (використано прямий rgba від --accent-pink) */
 }
 
 .btn-payment-submit:hover {
-    background-color: #e78bb0; /* Затемнений варіант --accent-pink */
+    background-color: #e78bb0; /* Затемнений варіант --accent-pink для стану hover */
     border-color: #e78bb0;
     color: var(--bg-white);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 15px rgba(var(--accent-pink), 0.3);
+    transform: translateY(-1px); /* Невеликий підйом кнопки */
+    box-shadow: 0 6px 15px rgba(244, 168, 199, 0.3); /* Збільшена тінь */
 }
 
-/* --- Блок для відображення загальної суми замовлення в тілі форми --- */
+/* Блок для відображення загальної суми замовлення */
 .order-summary-total {
-    text-align: right; /* Вирівнюємо по правому краю */
-    margin-top: 1.5rem; /* Відступ зверху */
-    margin-bottom: 1.5rem; /* Відступ знизу перед розділювачем або чекбоксом */
-    padding: 0.75rem 0; /* Невеликий вертикальний внутрішній відступ */
-    border-top: 1px dashed var(--form-input-border, #f0d4dd); /* Декоративна лінія зверху */
-    /* border-bottom: 1px dashed var(--form-input-border, #f0d4dd); /* І знизу, якщо потрібно */
+    text-align: right; /* Вирівнювання тексту по правому краю */
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 0;
+    border-top: 1px dashed var(--form-input-border); /* Пунктирна лінія зверху */
 }
 
+/* Текст "Загальна сума" */
 .order-summary-total h5 {
-    font-family: 'Montserrat', sans-serif; /* Шрифт як у основного тексту */
-    color: var(--text-primary, #333);
-    font-size: 1.1rem; /* Розмір тексту */
+    font-family: var(--font-primary); /* Використання основного шрифту */
+    color: var(--text-primary);
+    font-size: 1.1rem;
 }
 
+/* Числове значення загальної суми */
 .order-summary-total #formOrderTotalAmount {
-    color: var(--primary-pink); /* Рожевий колір для самої суми */
-    font-size: 1.2rem; /* Трохи більший шрифт для суми */
+    color: var(--primary-pink); /* Акцентний колір для суми */
+    font-size: 1.2rem;
 }
 
-/* Адаптивність для картки форми */
+/* Адаптивні стилі для сторінки оформлення замовлення на мобільних пристроях */
 @media (max-width: 767px) {
     .order-form-page-wrapper {
-        padding-top: 2rem; /* Менший відступ зверху на мобільних */
-        padding-bottom: 2rem; /* Менший відступ знизу на мобільних */
-        align-items: flex-start; /* Картка буде зверху */
+        padding-top: 2rem;    /* Зменшені вертикальні відступи */
+        padding-bottom: 2rem;
+        align-items: flex-start; /* Картка форми вирівнюється по верху */
     }
     .order-form-card {
-        padding: 1.5rem;
+        padding: 1.5rem; /* Зменшені внутрішні відступи картки */
     }
     .order-form-card .card-header h2 {
-        font-size: 1.8rem;
+        font-size: 1.8rem; /* Зменшений розмір заголовка */
     }
     .order-form-page-wrapper .container {
-        padding-left: 1rem;
+        padding-left: 1rem;  /* Зменшені бічні відступи для контейнера */
         padding-right: 1rem;
     }
 }

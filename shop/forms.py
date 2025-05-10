@@ -1,77 +1,82 @@
 from django import forms
-from .models import Order
-from django.utils import timezone
+from .models import Order  # Імпорт моделі Order для створення форми на її основі
+from django.utils import timezone  # Для роботи з датою та часом, зокрема для встановлення поточної дати
 
+
+# Визначення форми для створення та редагування замовлень на основі моделі Order
 class OrderForm(forms.ModelForm):
-    """Форма для створення замовлення"""
+    """Форма для створення та валідації даних замовлення."""
 
     def __init__(self, *args, **kwargs):
+        """
+        Ініціалізатор форми.
+        Встановлює початкове значення для дати доставки та додає CSS-клас 'form-control'
+        до всіх полів форми для стилізації за допомогою Bootstrap.
+        Також встановлює мінімально допустиму дату для поля 'delivery_date'.
+        """
         super().__init__(*args, **kwargs)
-        # Встановлюємо мінімальну дату доставки як сьогодні (order_date видалено)
-        # self.fields['order_date'].initial = timezone.now().date() # Цей рядок більше не потрібен
+        # Встановлення початкового значення для поля 'delivery_date' як поточна дата
         self.fields['delivery_date'].initial = timezone.now().date()
 
-        for field in self.fields:
-            self.fields[field].widget.attrs.update({
+        # Додавання CSS-класу 'form-control' до всіх полів форми
+        for field_name, field in self.fields.items():
+            field.widget.attrs.update({
                 'class': 'form-control',
-                # 'placeholder': self.fields[field].label # Можливо, плейсхолдери краще прибрати, якщо є labels
             })
-            # Для дати доставки можна встановити мінімальну дату
-            if field == 'delivery_date':
-                 self.fields[field].widget.attrs.update({'min': timezone.now().date().isoformat()})
+            # Встановлення HTML-атрибуту 'min' для поля 'delivery_date',
+            # щоб обмежити вибір дати в минулому на стороні клієнта (в браузері)
+            if field_name == 'delivery_date':
+                field.widget.attrs.update({'min': timezone.now().date().isoformat()})
 
     class Meta:
-        model = Order
-        fields = ['product', 'quantity', # 'order_date' видалено звідси
-                  'delivery_date', 'customer_name', 'phone_number',
-                  'email', 'comment']
+        """
+        Мета-клас для конфігурації ModelForm.
+        Визначає модель, на основі якої створюється форма, список полів,
+        що відображаються, та кастомні віджети для окремих полів.
+        """
+        model = Order  # Модель, з якою пов'язана форма
+        # Список полів моделі, які будуть включені у форму
+        fields = ['product', 'quantity', 'delivery_date', 'customer_name',
+                  'phone_number', 'email', 'comment']
+        # Кастомні віджети для полів форми
         widgets = {
-            # 'order_date': forms.DateInput( # Віджет для order_date більше не потрібен
-            #     attrs={'type': 'date'},
-            #     format='%Y-%m-%d'
-            # ),
             'delivery_date': forms.DateInput(
-                attrs={'type': 'date'},
-                format='%Y-%m-%d'
+                attrs={'type': 'date'},  # Використання HTML5 віджета для вибору дати
+                format='%Y-%m-%d'  # Формат дати, що очікується від віджета
             ),
             'comment': forms.Textarea(
-                attrs={'rows': 4}
+                attrs={'rows': 4}  # Встановлення кількості рядків для текстового поля коментаря
             )
         }
 
+
+    # Загальний метод валідації форми (виконується після індивідуальних clean_<fieldname>() методів)
     def clean(self):
+        """
+        Загальний метод валідації для форми.
+        Перевіряє, чи дата доставки не встановлена в минулому.
+        """
         cleaned_data = super().clean()
-        # order_date = cleaned_data.get('order_date') # order_date більше не буде в cleaned_data з форми
         delivery_date = cleaned_data.get('delivery_date')
 
-        # Тепер order_date буде встановлюватися у view,
-        # тому валідацію order_date > delivery_date потрібно буде робити
-        # з урахуванням того, що order_date - це timezone.now().date()
-        # або перенести цю логіку в метод clean_delivery_date, якщо можливо
-
-        # Прибираємо валідацію, пов'язану з order_date, яка береться з форми
-        # if order_date and delivery_date:
-        #     if order_date > delivery_date:
-        #         raise forms.ValidationError(
-        #             "Дата доставки не може бути раніше дати замовлення"
-        #         )
-        #     if order_date < timezone.now().date(): # Це теж більше не актуально для поля форми
-        #         raise forms.ValidationError(
-        #             "Дата замовлення не може бути в минулому"
-        #         )
-
-        # Залишаємо валідацію для delivery_date, якщо потрібно
+        # Валідація, щоб дата доставки не була в минулому.
+        # Ця перевірка дублює логіку в clean_delivery_date.
+        # Варто залишити цю логіку тільки в одному місці (переважно в clean_delivery_date).
         if delivery_date and delivery_date < timezone.now().date():
             raise forms.ValidationError(
                 "Дата доставки не може бути в минулому."
             )
         return cleaned_data
 
-    # Опціонально, для більш чистої валідації дати доставки:
+    # Спеціальний метод для валідації поля 'delivery_date'
     def clean_delivery_date(self):
+        """
+        Валідація для поля 'delivery_date'.
+        Перевіряє, що обрана дата доставки не є датою в минулому.
+        """
         delivery_date = self.cleaned_data.get('delivery_date')
+        # Перевірка, що дата доставки не раніше поточної дати
         if delivery_date and delivery_date < timezone.now().date():
             raise forms.ValidationError("Дата доставки не може бути в минулому.")
-        # Якщо у вас є логіка, що дата доставки має бути не раніше сьогоднішньої дати + X днів,
-        # додайте її тут.
+
         return delivery_date

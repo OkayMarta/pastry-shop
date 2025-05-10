@@ -1,82 +1,88 @@
-/* --- Загальний фон сторінки асортименту --- */
+/* Загальний контейнер-обгортка для сторінки асортименту */
 .assort {
-    background-color: var(--bg-white);
-    padding-bottom: 3rem;
+    background-color: var(--bg-white); /* Фоновий колір сторінки */
+    padding-bottom: 3rem;             /* Внутрішній відступ знизу */
 }
 
-/* --- Спеціальний стиль для КАРТОК ТІЛЬКИ на сторінці асортименту --- */
+/* Специфічний стиль для карток товарів на сторінці асортименту */
 .assortment-item-card {
-    background-color: var(--bg-light-pink); /* Відновлюємо світло-рожевий фон для карток тут */
+    background-color: var(--bg-light-pink); /* Фоновий колір карток */
 }
 
-/* --- Форма пошуку (залишається як було, або з невеликими корективами) --- */
+/* Стилі для форми пошуку товарів */
 .custom-search-form {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
-  flex-wrap: wrap;
+  justify-content: center; /* Горизонтальне центрування елементів форми */
+  align-items: center;   /* Вертикальне центрування елементів форми */
+  gap: 1rem;               /* Відстань між елементами форми */
+  margin-bottom: 2.5rem;   /* Зовнішній відступ знизу від форми */
+  flex-wrap: wrap;         /* Дозволяє елементам переноситися на новий рядок, якщо не вміщаються */
 }
 
+/* Стилі для полів вводу у формі пошуку */
 .search-input {
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  border: 2px solid var(--accent-pink);
-  border-radius: 12px;
-  background-color: var(--bg-light-pink);
-  color: var(--text-search-input);
-  width: 260px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  padding: 0.75rem 1rem; /* Внутрішні відступи */
+  font-size: 1rem;       /* Розмір шрифту */
+  border: 2px solid var(--accent-pink); /* Рамка поля */
+  border-radius: 12px;   /* Заокруглення кутів */
+  background-color: var(--bg-light-pink); /* Фоновий колір поля */
+  color: var(--text-search-input); /* Колір тексту в полі */
+  width: 260px;          /* Ширина поля */
+  transition: all 0.3s ease; /* Плавний перехід для анімацій */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Тінь поля */
 }
 
+/* Стиль для тексту-заповнювача (placeholder) у полях пошуку */
 .search-input::placeholder {
   color: var(--search-input-placeholder);
 }
 
+/* Стилі для полів вводу у формі пошуку при фокусі */
 .search-input:focus {
-  outline: none;
-  border-color: var(--accent-pink);
-  box-shadow: 0 0 0 0.2rem var(--focus-box-shadow);
+  outline: none; /* Прибирає стандартний контур фокусу браузера */
+  border-color: var(--accent-pink); /* Колір рамки при фокусі */
+  box-shadow: 0 0 0 0.2rem var(--focus-box-shadow); /* Тінь при фокусі */
 }
 
+/* Адаптивні стилі для сторінки асортименту */
 
-/* ==========================================================================
-   АДАПТИВНІСТЬ ДЛЯ СТОРІНКИ АСОРТИМЕНТУ
-   ========================================================================== */
-/* ... (медіа-запити як у попередньому варіанті) ... */
+/* Адаптація для мобільних пристроїв (екрани до 767px) */
 @media (max-width: 767px) {
     .assort {
-        padding-left: 1rem;
+        padding-left: 1rem;  /* Бічні відступи для контейнера */
         padding-right: 1rem;
     }
+    /* Форма пошуку займає всю ширину, елементи розташовуються вертикально */
     .custom-search-form {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: column; /* Вертикальне розташування елементів */
+        align-items: stretch;   /* Елементи розтягуються на всю доступну ширину */
     }
     .search-input {
-        width: 100%;
-        margin-bottom: 0.5rem;
+        width: 100%;            /* Поля вводу займають всю ширину */
+        margin-bottom: 0.5rem;  /* Відступ знизу між полями */
     }
+    /* Прибирає відступ для останнього поля вводу */
     .search-input:last-of-type {
         margin-bottom: 0;
     }
-    .search-btn {
+    /* Кнопка пошуку також займає всю ширину */
+    .search-btn { /* Припускаючи, що є клас .search-btn для кнопки */
         width: 100%;
         margin-top: 0.5rem;
     }
 }
 
+/* Адаптація для дуже маленьких екранів (до 576px) */
 @media (max-width: 576px) {
     .assort {
-        padding-top: 2rem;
+        padding-top: 2rem;    /* Зменшені вертикальні відступи для контейнера */
         padding-bottom: 2rem;
     }
     .custom-search-form {
-        margin-bottom: 2rem;
+        margin-bottom: 2rem; /* Зменшений відступ під формою */
     }
-     .search-input, .search-btn {
+    /* Зменшення розміру шрифту та відступів для елементів форми */
+     .search-input, .search-btn { /* Припускаючи, що є клас .search-btn для кнопки */
         font-size: 0.9rem;
         padding-top: 0.6rem;
         padding-bottom: 0.6rem;

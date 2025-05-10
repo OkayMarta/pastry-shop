@@ -1,97 +1,95 @@
-/* ==========================================================================
-   5. СТИЛІ ФУТЕРА
-   ========================================================================== */
-
+/* Загальні стилі для блоку футера (підвалу сайту) */
 .footer-custom {
-    background-color: var(--bg-light-pink); /* Світло-рожевий фон футера (як у хедера) */
-    color: var(--text-secondary); /* Основний колір тексту */
-    font-size: 0.9rem; /* Розмір шрифту */
-    padding-top: 3rem; /* Відступ зверху */
-    padding-bottom: 1.5rem; /* Відступ знизу */
+    background-color: var(--bg-light-pink); /* Фоновий колір футера */
+    color: var(--text-secondary); /* Основний колір тексту у футері */
+    font-size: 0.9rem;            /* Розмір шрифту тексту */
+    padding-top: 3rem;            /* Внутрішній відступ зверху */
+    padding-bottom: 1.5rem;       /* Внутрішній відступ знизу */
 }
 
-/* --- 5.1 Логотип у футері --- */
+/* Стилі для колонки з логотипом у футері */
 .footer-logo-column {
-    /* Центрування для мобільних буде в медіа-запитах */
+    /* Специфічні стилі для цієї колонки, якщо потрібні */
 }
+
+/* Стилі для зображення логотипа у футері */
 .footer-logo-img {
-    max-height: 60px; /* Максимальна висота лого для мобільних */
-    width: auto; /* Автоматична ширина */
-    display: block; /* Блочний елемент */
-    margin-bottom: 1rem; /* Відступ знизу (особливо актуально на мобільних) */
+    max-height: 60px;      /* Максимальна висота логотипа */
+    width: auto;           /* Автоматична ширина для збереження пропорцій */
+    display: block;        /* Забезпечує блочне відображення */
+    margin-bottom: 1rem;   /* Зовнішній відступ знизу */
 }
 
-/* --- 5.2 Заголовки колонок у футері --- */
+/* Стилі для заголовків колонок у футері */
 .footer-title {
-    margin-top: 0; /* Забираємо верхній відступ */
-    margin-bottom: 1rem; /* Відступ під заголовком */
-    color: var(--text-primary); /* Темний колір заголовків */
-    font-weight: 700; /* Жирний шрифт */
-    font-family: 'Playfair Display', serif; /* Шрифт як у заголовків секцій */
-    font-size: 1.2rem; /* Розмір шрифту заголовків */
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-family: var(--font-headings); /* Використання шрифту для заголовків */
+    font-size: 1.2rem;
 }
 
-/* --- 5.3 Посилання у футері --- */
+/* Стилі для навігаційних посилань у футері */
 .footer-link {
-    color: var(--text-secondary); /* Основний колір посилання */
-    text-decoration: none; /* Без підкреслення */
-    transition: color 0.3s ease; /* Плавний перехід кольору */
-    display: block; /* Кожне посилання з нового рядка */
-    margin-bottom: 0.5rem; /* Відступ між посиланнями */
+    color: var(--text-secondary);
+    text-decoration: none;     /* Прибирає підкреслення посилань */
+    transition: color 0.3s ease; /* Плавний перехід кольору при наведенні */
+    display: block;            /* Кожне посилання займає весь рядок */
+    margin-bottom: 0.5rem;     /* Зовнішній відступ знизу між посиланнями */
 }
 
 .footer-link:hover {
-    color: var(--primary-pink); /* Рожевий при наведенні */
-    text-decoration: none; /* Все ще без підкреслення */
+    color: var(--primary-pink); /* Колір посилання при наведенні */
 }
 
-/* --- 5.4 Текст у футері (наприклад, адреса) --- */
+/* Стилі для текстових параграфів у футері (наприклад, адреса, телефон) */
 .footer-custom p {
-    margin-bottom: 0.5rem; /* Менший відступ між параграфами */
+    margin-bottom: 0.5rem;
     line-height: 1.6; /* Міжрядковий інтервал */
 }
 
-/* --- 5.5 Розділювальна лінія --- */
+/* Стилі для горизонтальної розділювальної лінії у футері */
 .footer-custom hr {
-    border-top: 1px solid #ddd; /* Світло-сіра лінія */
-    margin-top: 2rem; /* Відступ над лінією */
-    margin-bottom: 1.5rem; /* Відступ під лінією */
+    border-top: 1px solid var(--divider-light); /* Колір та товщина лінії */
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
 }
 
-/* --- 5.6 Текст копірайту --- */
+/* Стилі для тексту копірайту */
 .copyright-text {
-    font-size: 0.85rem; /* Менший шрифт */
-    color: var(--text-very-light-gray); /* Світліший сірий колір */
-    text-align: center; /* Центрування тексту копірайту */
+    font-size: 0.85rem;
+    color: var(--text-very-light-gray);
+    text-align: center; /* Центрування тексту */
 }
 
-
-/* --- 6.1 Планшети (від 768px до 991px) --- */
+/* Адаптивні стилі для футера на планшетах (екрани до 991px) */
 @media (max-width: 991px) {
-    /* --- Footer --- */
     .footer-logo-img {
-        max-height: 80px; /* Збільшуємо лого в футері на планшетах та ПК */
+        max-height: 80px; /* Збільшена максимальна висота логотипа */
     }
 }
 
-/* --- 6.2 Мобільні пристрої (до 767px) --- */
+/* Адаптивні стилі для футера на мобільних пристроях (екрани до 767px) */
 @media (max-width: 767px) {
-    /* --- Футер --- */
-    .footer-custom .col-md-3 {
-         text-align: center !important; /* Центрування тексту в колонках */
-         margin-bottom: 1.5rem; /* Відступ між колонками */
+    /* Стилі для колонок футера на мобільних */
+    .footer-custom .col-md-3 { /* Застосовується до колонок Bootstrap */
+         text-align: center !important; /* Примусове центрування тексту */
+         margin-bottom: 1.5rem;       /* Відступ між колонками при вертикальному розташуванні */
     }
+    /* Стилі для колонки з логотипом на мобільних */
     .footer-logo-column {
-        text-align: center !important; /* Центрування колонки з логотипом */
-        margin-bottom: 2rem; /* Більший відступ під лого */
+        text-align: center !important;
+        margin-bottom: 2rem;
     }
+    /* Стилі для зображення логотипа на мобільних */
     .footer-logo-img {
-        margin-left: auto; /* Центрування лого */
-        margin-right: auto;
-        max-height: 70px; /* Трохи більше лого для мобільних, ніж початкові 60px */
+        margin-left: auto;  /* Центрування блочного елемента */
+        margin-right: auto; /* Центрування блочного елемента */
+        max-height: 70px;
     }
+    /* Стилі для тексту копірайту на мобільних */
     .copyright-text {
-        text-align: center !important; /* Переконуємось, що копірайт центрується */
+        text-align: center !important;
     }
 }
-

@@ -1,60 +1,63 @@
-{% extends 'shop/base.html' %} {# Наслідування базового шаблону base.html #}
-{% load static %} {# Завантаження тегів для роботи зі статичними файлами #}
+{% extends 'shop/base.html' %} <!-- Наслідування базового шаблону `base.html` -->
+{% load static %}                 <!-- Завантаження тегів Django для роботи зі статичними файлами -->
 
-{% block title %}Головна - Confititeria{% endblock %} {# Визначення блоку заголовка сторінки #}
+{% block title %}Головна - Confititeria{% endblock %} <!-- Визначення заголовка для цієї сторінки -->
 
-{% block content %} {# Початок блоку основного контенту сторінки #}
+{% block content %} <!-- Початок блоку основного контенту, що буде вставлений у `base.html` -->
 
-<!-- ======== Hero Section (Full Width) ======== -->
-<section class="hero-section-fullwidth"> {# Секція "Hero", що займає всю ширину #}
-    <div class="container"> {# Внутрішній контейнер для обмеження ширини контенту #}
-        <div class="row align-items-center gy-4"> {# Рядок Bootstrap для розташування колонок, вирівнювання по вертикалі, відступи на мобільних #}
-            <div class="col-lg-6 hero-text-column"> {# Ліва колонка для тексту (видима на великих екранах) #}
-                <h1 class="hero-title">Дозвольте собі<br>трохи щастя!</h1> {# Головний заголовок #}
+<!-- Секція "Hero" (головний екран) на всю ширину -->
+<section class="hero-section-fullwidth">
+    <div class="container"> <!-- Внутрішній контейнер для обмеження ширини контенту -->
+        <div class="row align-items-center gy-4"> <!-- Рядок Bootstrap для гнучкого розташування колонок -->
+            <!-- Ліва колонка з текстом -->
+            <div class="col-lg-6 hero-text-column">
+                <h1 class="hero-title">Дозвольте собі<br>трохи щастя!</h1> <!-- Головний заклик/заголовок -->
                 <p class="hero-subtitle">
                     Насолоджуйтесь кожним моментом життя, додаючи до нього солодкої радості. Наші десерти створені, щоб дарувати тепло, ніжність і посмішку в будь-яку мить.
-                </p> {# Підзаголовок або опис #}
-                <a href="{% url 'shop:assortment_list' %}" class="btn btn-hero"> {# Кнопка-посилання на сторінку асортименту #}
+                </p> <!-- Описовий текст під заголовком -->
+                <a href="{% url 'shop:assortment_list' %}" class="btn btn-hero"> <!-- Кнопка-посилання на сторінку асортименту -->
                     Переглянути асортимент →
                 </a>
             </div>
-            <div class="col-lg-6 hero-image-column text-center text-lg-end"> {# Права колонка для зображення (видима на великих екранах), вирівнювання #}
-                <!-- Обертка для планшетів (відображається тільки на планшетах) -->
-                <div class="hero-cake-image-wrapper-tablet d-none d-md-inline-block d-lg-none"> {# Використовує класи Bootstrap для відображення тільки на середніх екранах (md) #}
-                     <img src="{% static 'img/hero-cake.png' %}" alt="Святковий торт з полуницею" class="img-fluid hero-cake-img"> {# Зображення торта #}
+            <!-- Права колонка із зображенням -->
+            <div class="col-lg-6 hero-image-column text-center text-lg-end">
+                <!-- Обгортки для адаптивного відображення зображення на різних пристроях -->
+                <!-- Для планшетів (Bootstrap класи: d-none d-md-inline-block d-lg-none) -->
+                <div class="hero-cake-image-wrapper-tablet d-none d-md-inline-block d-lg-none">
+                     <img src="{% static 'img/hero-cake.png' %}" alt="Святковий торт з полуницею" class="img-fluid hero-cake-img">
                 </div>
-                <!-- Обертка для мобільних (відображається тільки на мобільних) -->
-                <div class="hero-cake-image-wrapper-mobile d-inline-block d-md-none"> {# Використовує класи Bootstrap для відображення тільки на маленьких екранах (до md) #}
-                     <img src="{% static 'img/hero-cake.png' %}" alt="Святковий торт з полуницею" class="img-fluid hero-cake-img"> {# Зображення торта #}
+                <!-- Для мобільних (Bootstrap класи: d-inline-block d-md-none) -->
+                <div class="hero-cake-image-wrapper-mobile d-inline-block d-md-none">
+                     <img src="{% static 'img/hero-cake.png' %}" alt="Святковий торт з полуницею" class="img-fluid hero-cake-img">
                 </div>
-                <!-- Обертка для десктопів (відображається тільки на десктопах) -->
-                <div class="d-none d-lg-block"> {# Використовує класи Bootstrap для відображення тільки на великих екранах (lg та більше) #}
-                     <img src="{% static 'img/hero-cake.png' %}" alt="Святковий торт з полуницею" class="img-fluid hero-cake-img"> {# Зображення торта #}
+                <!-- Для десктопів (Bootstrap класи: d-none d-lg-block) -->
+                <div class="d-none d-lg-block">
+                     <img src="{% static 'img/hero-cake.png' %}" alt="Святковий торт з полуницею" class="img-fluid hero-cake-img">
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- ======== End Hero Section ======== -->
 
+<!-- Контейнер для наступних секцій контенту сторінки -->
+<div class="container main-page-content" style="padding-top: 3rem;">
 
-<!-- ======== Content Sections (Contained) ======== -->
-<div class="container main-page-content" style="padding-top: 3rem;"> {# Контейнер для решти контенту сторінки з верхнім відступом #}
-
-<!-- Why Choose Us Section -->
-<section class="why-choose-us-section text-center py-5"> {# Секція "Чому нас обирають" з центрованим текстом та вертикальними відступами #}
-    <h2 class="section-title mb-5">Чому Нас Обирають?</h2> {# Заголовок секції #}
-        <div class="row gy-4"> {# Рядок для переваг з вертикальними відступами #}
-            <div class="col-md-4"> {# Колонка для першої переваги (на середніх екранах і більше) #}
-                <img src="{% static 'img/icon-individual.png' %}" alt="Індивідуальний підхід" class="icon-why-choose-us mb-3"> {# Іконка переваги #}
-                <h3 class="feature-title">ІНДИВІДУАЛЬНИЙ ПІДХІД</h3> {# Назва переваги #}
+<!-- Секція "Чому нас обирають" -->
+<section class="why-choose-us-section text-center py-5">
+    <h2 class="section-title mb-5">Чому Нас Обирають?</h2> <!-- Заголовок секції -->
+        <div class="row gy-4"> <!-- Рядок для блоків з перевагами -->
+            <!-- Блок переваги: Індивідуальний підхід -->
+            <div class="col-md-4">
+                <img src="{% static 'img/icon-individual.png' %}" alt="Індивідуальний підхід" class="icon-why-choose-us mb-3">
+                <h3 class="feature-title">ІНДИВІДУАЛЬНИЙ ПІДХІД</h3>
                 <p class="feature-description">
                     Кожне замовлення<br>
                     виконується з урахуванням<br>
-                    <span class="highlight">ваших</span> побажань {# Виділений текст #}
-                </p> {# Опис переваги #}
+                    <span class="highlight">ваших</span> побажань <!-- Акцентний текст -->
+                </p>
             </div>
-            <div class="col-md-4"> {# Колонка для другої переваги #}
+            <!-- Блок переваги: Якість -->
+            <div class="col-md-4">
                 <img src="{% static 'img/icon-quality.png' %}" alt="Якість" class="icon-why-choose-us mb-3">
                 <h3 class="feature-title">ЯКІСТЬ</h3>
                 <p class="feature-description">
@@ -63,7 +66,8 @@
                     для наших виробів
                 </p>
             </div>
-            <div class="col-md-4"> {# Колонка для третьої переваги #}
+            <!-- Блок переваги: Своєчасна доставка -->
+            <div class="col-md-4">
                 <img src="{% static 'img/icon-delivery.png' %}" alt="Своєчасна доставка" class="icon-why-choose-us mb-3">
                 <h3 class="feature-title">СВОЄЧАСНА ДОСТАВКА</h3>
                 <p class="feature-description">
@@ -73,96 +77,96 @@
                 </p>
             </div>
         </div>
-        <div class="row text-center mt-5 stats-row"> {# Рядок для статистики з верхнім відступом #}
-             <div class="col-4"> {# Колонка для першого статистичного показника #}
-                 <div class="stat-number">17000+</div> {# Числове значення #}
-                 <div class="stat-label">Створених Десертів</div> {# Опис показника #}
+        <!-- Рядок зі статистичними даними -->
+        <div class="row text-center mt-5 stats-row">
+             <div class="col-4"> <!-- Статистика: Створених Десертів -->
+                 <div class="stat-number">17000+</div>
+                 <div class="stat-label">Створених Десертів</div>
              </div>
-             <div class="col-4"> {# Колонка для другого статистичного показника #}
+             <div class="col-4"> <!-- Статистика: Задоволених Клієнтів -->
                  <div class="stat-number">8000+</div>
                  <div class="stat-label">Задоволених Клієнтів</div>
              </div>
-             <div class="col-4"> {# Колонка для третього статистичного показника #}
+             <div class="col-4"> <!-- Статистика: Онлайн Замовлень -->
                  <div class="stat-number">13000+</div>
                  <div class="stat-label">Онлайн Замовлень</div>
              </div>
         </div>
     </section>
-<!-- End Why Choose Us Section -->
 
-    <!-- Weekly Bestsellers Section -->
-    <section class="bestsellers-section text-center py-5"> {# Секція "Тижневі Бестселери" #}
-        <h2 class="section-title">Тижневі Бестселлери</h2> {# Заголовок секції #}
-        <p class="section-subtitle mb-5">Ці десерти не затримуються на вітрині — спробуйте і дізнайтесь чому.</p> {# Підзаголовок секції #}
+    <!-- Секція "Тижневі Бестселери" -->
+    <section class="bestsellers-section text-center py-5">
+        <h2 class="section-title">Тижневі Бестселлери</h2> <!-- Заголовок секції -->
+        <p class="section-subtitle mb-5">Ці десерти не затримуються на вітрині — спробуйте і дізнайтесь чому.</p> <!-- Підзаголовок секції -->
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4"> {# Рядок для відображення товарів, адаптивна кількість колонок #}
-            {% for item in assortment_items %} {# Цикл для виведення товарів з асортименту #}
-            <div class="col"> {# Колонка для одного товару #}
-                <div class="card h-100 product-card"> {# Картка товару #}
-                    <div class="product-image-container"> {# Контейнер для зображення товару #}
-                        {% if item.image %} {# Перевірка, чи є зображення у товару #}
-                        <img src="{{ item.image.url }}" alt="{{ item.name }}"> {# Відображення зображення товару #}
-                        {% else %} {# Якщо зображення немає #}
-                        <img src="{% static 'img/no-image.jpg' %}" alt="Зображення відсутнє"> {# Відображення зображення-заглушки #}
+        <!-- Сітка для відображення карток товарів-бестселерів -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            {% for item in assortment_items %} <!-- Цикл для перебору товарів, переданих у контексті як 'assortment_items' -->
+            <div class="col"> <!-- Колонка для однієї картки товару -->
+                <div class="card h-100 product-card"> <!-- Картка товару -->
+                    <div class="product-image-container"> <!-- Контейнер для зображення -->
+                        {% if item.image %} <!-- Перевірка наявності зображення -->
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                        {% else %}
+                        <img src="{% static 'img/no-image.jpg' %}" alt="Зображення відсутнє"> <!-- Заглушка, якщо зображення немає -->
                         {% endif %}
                     </div>
-                    <div class="card-body"> {# Тіло картки з інформацією про товар #}
-                        <h5 class="card-title product-title">{{ item.name }}</h5> {# Назва товару #}
-                        <p class="card-text product-price">{{ item.price }} ГРН</p> {# Ціна товару #}
-                         <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="btn btn-order-product">Замовити</a>
+                    <div class="card-body"> <!-- Тіло картки з описом товару -->
+                        <h5 class="card-title product-title">{{ item.name }}</h5> <!-- Назва товару -->
+                        <p class="card-text product-price">{{ item.price }} ГРН</p> <!-- Ціна товару -->
+                         <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="btn btn-order-product">Замовити</a> <!-- Кнопка замовлення -->
                     </div>
                 </div>
             </div>
-            {% empty %} {# Виконується, якщо змінна assortment_items порожня #}
+            {% empty %} <!-- Виконується, якщо список 'assortment_items' порожній -->
             <div class="col-12">
-                <p>На цей час асортимент бестселерів порожній.</p> {# Повідомлення про відсутність товарів #}
+                <p>На цей час асортимент бестселерів порожній.</p> <!-- Повідомлення про відсутність товарів -->
             </div>
-            {% endfor %} {# Кінець циклу #}
+            {% endfor %} <!-- Кінець циклу -->
         </div>
 
-        <div class="mt-5"> {# Контейнер для кнопки "Повний асортимент" з верхнім відступом #}
-            <a href="{% url 'shop:assortment_list' %}" class="btn btn-secondary-custom"> {# Кнопка-посилання на повний асортимент #}
+        <!-- Кнопка для переходу на сторінку повного асортименту -->
+        <div class="mt-5">
+            <a href="{% url 'shop:assortment_list' %}" class="btn btn-secondary-custom">
                 Повний асортимент
             </a>
         </div>
     </section>
-    <!-- End Weekly Bestsellers Section -->
 
-    <!-- Sweet Magic Everyday Section -->
-    <section class="sweet-magic-section py-5"> {# Секція "Солодка магія щодня" #}
-        <div class="row align-items-center gy-4"> {# Рядок для розташування тексту та зображень #}
-            <div class="col-lg-6"> {# Ліва колонка для тексту #}
-                <h2 class="section-title mb-3">Солодка Магія Щодня</h2> {# Заголовок секції #}
+    <!-- Секція "Солодка магія щодня" -->
+    <section class="sweet-magic-section py-5">
+        <div class="row align-items-center gy-4"> <!-- Рядок для гнучкого розташування тексту та зображень -->
+            <!-- Ліва колонка з текстом -->
+            <div class="col-lg-6">
+                <h2 class="section-title mb-3">Солодка Магія Щодня</h2> <!-- Заголовок секції -->
                 <p class="mb-4">
                     Там, де інші бачать просто борошно, цукор і крем, ми бачимо можливість створити маленьке диво, яке з першого погляду викликає усмішку. У кожному нашому торті ховається не лише рецепт, а й трохи магії, дрібка натхнення, велика порція любові та бажання зробити ваш день по-справжньому особливим.
-                </p> {# Текст опису #}
-                <a href="{% url 'shop:about' %}" class="btn btn-hero"> {# Кнопка-посилання на сторінку "Про нас" #}
+                </p> <!-- Описовий текст -->
+                <a href="{% url 'shop:about' %}" class="btn btn-hero"> <!-- Кнопка-посилання на сторінку "Про нас" -->
                     Дізнатися більше →
                 </a>
             </div>
-            <div class="col-lg-6"> {# Права колонка для зображень #}
-                <div class="row g-3 h-100 align-items-stretch"> {# Внутрішній рядок для двох стовпців зображень #}
-
-                    <div class="col-md-5 d-flex flex-column justify-content-between"> {# Ліва колонка (менша) для двох зображень одне під одним #}
-                        <div> {# Обертка для верхнього фото #}
-                             <img src="{% static 'img/magic-image-1.jpg' %}" alt="Приготування десерту" class="img-fluid rounded shadow-sm mb-3"> {# Перше зображення #}
+            <!-- Права колонка із зображеннями -->
+            <div class="col-lg-6">
+                <div class="row g-3 h-100 align-items-stretch"> <!-- Внутрішній рядок для компонування зображень -->
+                    <!-- Ліва підколонка з двома меншими зображеннями -->
+                    <div class="col-md-5 d-flex flex-column justify-content-between">
+                        <div> <!-- Верхнє зображення -->
+                             <img src="{% static 'img/magic-image-1.jpg' %}" alt="Приготування десерту" class="img-fluid rounded shadow-sm mb-3">
                         </div>
-                        <div> {# Обертка для нижнього фото #}
-                            <img src="{% static 'img/magic-image-2.jpg' %}" alt="Готовий торт" class="img-fluid rounded shadow-sm"> {# Друге зображення #}
+                        <div> <!-- Нижнє зображення -->
+                            <img src="{% static 'img/magic-image-2.jpg' %}" alt="Готовий торт" class="img-fluid rounded shadow-sm">
                         </div>
                     </div>
-
-                    <div class="col-md-7"> {# Права колонка (більша) для одного високого зображення #}
-                        <img src="{% static 'img/magic-image-3.jpg' %}" alt="Упаковка тортів" class="img-fluid rounded shadow-sm h-100" style="object-fit: cover;"> {# Третє зображення, розтягнуте на висоту колонки #}
+                    <!-- Права підколонка з одним високим зображенням -->
+                    <div class="col-md-7">
+                        <img src="{% static 'img/magic-image-3.jpg' %}" alt="Упаковка тортів" class="img-fluid rounded shadow-sm h-100" style="object-fit: cover;">
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
-    <!-- End Sweet Magic Everyday Section -->
 
-</div> <!-- /.container main-page-content -->
-<!-- ======== End Content Sections ======== -->
+</div> <!-- Кінець контейнера .main-page-content -->
 
-{% endblock %} {# Кінець блоку основного контенту #}
+{% endblock %} <!-- Кінець блоку основного контенту -->

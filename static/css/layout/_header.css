@@ -1,118 +1,103 @@
-/* ==========================================================================
-   3. СТИЛІ ХЕДЕРА (НАВІГАЦІЯ)
-   ========================================================================== */
-
+/* Загальні стилі для блоку хедера (верхньої навігаційної панелі) */
 .header-custom {
-    background-color: var(--bg-light-pink); /* Світло-рожевий фон хедера */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Легка тінь */
-    border-bottom: 1px solid var(--border-light); /* Тонка лінія знизу */
-    position: sticky; /* Прилипає до верху при скролі */
-    top: 0; /* Позиція прилипання */
-    z-index: 1030; /* Вище за більшість елементів сторінки */
-    width: 100%; /* Ширина на весь екран */
+    background-color: var(--bg-light-pink); /* Фоновий колір хедера */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Тінь під хедером */
+    border-bottom: 1px solid var(--border-light); /* Нижня рамка хедера */
+    position: sticky; /* "Прилипаючий" хедер при прокручуванні сторінки */
+    top: 0;           /* Позиція прилипання до верху екрана */
+    z-index: 1030;    /* Визначає порядок накладання (щоб хедер був поверх інших елементів) */
+    width: 100%;      /* Ширина хедера на весь екран */
 }
 
+/* Стилізація внутрішнього Bootstrap .navbar компонента */
 .header-custom .navbar {
-    /* Зменшені вертикальні відступи для компактнішого вигляду */
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
-    min-height: auto; /* Автоматична мінімальна висота */
-    /* Контейнер всередині navbar за замовчуванням обмежує ширину */
+    padding-top: 0.2rem;    /* Внутрішній відступ зверху */
+    padding-bottom: 0.2rem; /* Внутрішній відступ знизу */
+    min-height: auto;       /* Автоматична мінімальна висота */
 }
 
-/* --- 3.1 Логотип в хедері --- */
+/* Стилі для бренду/логотипа в хедері */
 .navbar-brand {
-    padding-top: 0; /* Прибираємо зайві відступи */
+    padding-top: 0;
     padding-bottom: 0;
-    margin-right: 1rem; /* Відступ від лого до пунктів меню */
-    transition: color 0.3s ease, transform 0.3s ease; /* Плавний перехід для transform */
+    margin-right: 1rem; /* Зовнішній відступ праворуч від логотипа */
+    transition: color 0.3s ease, transform 0.3s ease; /* Плавні переходи для ефектів */
 }
 .navbar-brand:hover {
-    color: var(--primary-pink); /* Рожевий при наведенні */
-    transform: scale(1.08); /* Легке збільшення лого при наведенні */
+    color: var(--primary-pink); /* Колір при наведенні */
+    transform: scale(1.08);     /* Ефект збільшення при наведенні */
 }
+/* Стилі для зображення логотипа */
 .navbar-logo {
-    height: 70px; /* Висота логотипу */
-    width: auto; /* Автоматична ширина для збереження пропорцій */
-    display: block; /* Забирає зайві відступи під зображенням */
-    vertical-align: middle; /* Вертикальне вирівнювання (про всяк випадок) */
+    height: 70px;             /* Висота логотипа */
+    width: auto;              /* Автоматична ширина для збереження пропорцій */
+    display: block;           /* Забезпечує блочне відображення */
+    vertical-align: middle;   /* Вертикальне вирівнювання */
 }
 
-/* --- 3.2 Посилання в навігації --- */
+/* Стилі для посилань у навігаційному меню */
 .header-custom .navbar-nav .nav-link {
-    color: var(--soft-pink-accent); /* Ви змінили колір, це добре */
-    font-weight: 600;
-    /* Зменшуємо горизонтальні відступи, оскільки весь блок тепер праворуч */
-    padding-left: 11rem;   /* Наприклад, або 2rem - підберіть, як вам подобається */
-    padding-right: 1.5rem;  /* Наприклад */
+    color: var(--soft-pink-accent); /* Колір тексту посилань */
+    font-weight: 600;               /* Насиченість шрифту */
+    padding-left: 11rem;            /* Внутрішній відступ ліворуч (відрегулювати за потребою) */
+    padding-right: 1.5rem;          /* Внутрішній відступ праворуч (відрегулювати за потребою) */
     padding-top: 0.8rem;
     padding-bottom: 0.8rem;
-    transition: color 0.3s ease;
-    font-size: 1.2rem;
-    text-align: center;
+    transition: color 0.3s ease;    /* Плавний перехід кольору */
+    font-size: 1.2rem;              /* Розмір шрифту */
+    text-align: center;             /* Вирівнювання тексту по центру (для мобільного меню) */
 }
 
-/* Стилі для посилань при наведенні та для активного пункту */
+/* Стилі для посилань при наведенні курсора або для активного (поточного) посилання */
 .header-custom .navbar-nav .nav-link:hover,
 .header-custom .navbar-nav .nav-link.active {
-    color: var(--primary-pink); /* Рожевий колір при наведенні/активності */
+    color: var(--primary-pink); /* Колір тексту при наведенні/активності */
 }
 
-/* --- 3.3 Кнопка-"бургер" мобільного меню --- */
+/* Стилі для кнопки "бургер" мобільного меню */
 .navbar-toggler {
-    border-color: rgba(0,0,0,.1); /* Колір рамки */
-    padding: 0.25rem 0.75rem; /* Стандартні відступи Bootstrap */
+    border-color: rgba(0,0,0,.1); /* Колір рамки кнопки */
+    padding: 0.25rem 0.75rem;     /* Внутрішні відступи кнопки */
 }
+/* Іконка всередині кнопки "бургер" */
 .navbar-toggler-icon {
-     /* Кастомна іконка для "бургера" */
-     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(50, 50, 50, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
-
-/* --- 3.4 Стилі для темної навігації (приклад, якщо б використовувалась .navbar-dark) --- */
-/* Ці правила перевизначають стандартні стилі Bootstrap .navbar-dark */
-.navbar-dark .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, 0.8); /* Світлий колір посилань на темному фоні */
-    transition: all 0.3s ease; /* Плавний перехід */
-}
-.navbar-dark .navbar-nav .nav-link:hover {
-    color: var(--legacy-bakery-pink); /* Світло-рожевий при наведенні */
-    transform: translateY(-2px); /* Легкий підйом */
+     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(50, 50, 50, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); /* SVG-іконка для "бургера" */
 }
 
 
-/* --- 6.1 Планшети (від 768px до 991px) --- */
+/* Адаптивні стилі для хедера на планшетах (екрани до 991px) */
 @media (max-width: 991px){
-    /* --- Хедер --- */
     .header-custom .navbar-nav .nav-link {
-        padding-left: 1.5rem; /* Зменшуємо відступи між пунктами меню */
+        padding-left: 1.5rem;  /* Зменшені горизонтальні відступи для пунктів меню */
         padding-right: 1.5rem;
-        font-size: 1.1rem; /* Зменшуємо шрифт меню */
+        font-size: 1.1rem;     /* Зменшений розмір шрифту */
     }
 }
 
-/* --- 6.2 Мобільні пристрої (до 767px) --- */
+/* Адаптивні стилі для хедера на мобільних пристроях (екрани до 767px) */
 @media (max-width: 767px){
-    /* --- Хедер --- */
+    /* Стилі для контейнера навігаційних посилань у розгорнутому мобільному меню */
     .header-custom .navbar-nav {
-        margin-top: 1rem; /* Відступ над пунктами меню в мобільній версії */
+        margin-top: 1rem; /* Зовнішній відступ зверху */
     }
+    /* Стилі для окремих посилань у розгорнутому мобільному меню */
      .header-custom .navbar-nav .nav-link {
-        padding-left: 1rem; /* Ще зменшуємо відступи */
+        padding-left: 1rem;
         padding-right: 1rem;
         padding-top: 0.6rem;
         padding-bottom: 0.6rem;
-        font-size: 1.1rem; /* Можна залишити як на планшеті або ще трохи зменшити */
-        border-bottom: 1px solid #eee; /* Лінія між пунктами меню */
+        font-size: 1.1rem;
+        border-bottom: 1px solid var(--border-light); /* Розділювальна лінія між пунктами */
     }
+    /* Прибирає розділювальну лінію для останнього пункту меню */
     .header-custom .navbar-nav .nav-item:last-child .nav-link {
-        border-bottom: none; /* Прибираємо лінію в останнього */
+        border-bottom: none;
     }
 }
 
-/* --- 6.3 Дуже маленькі екрани (до 576px) --- */
+/* Адаптивні стилі для хедера на дуже маленьких екранах (до 576px) */
 @media (max-width: 576px){
-    /* Можливо, зменшити розмір шрифту пунктів меню ще більше */
      .header-custom .navbar-nav .nav-link {
-        font-size: 1rem;
+        font-size: 1rem; /* Додатково зменшений розмір шрифту */
      }
 }

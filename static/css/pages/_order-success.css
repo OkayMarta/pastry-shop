@@ -1,62 +1,59 @@
-/* ==========================================================================
-   СТИЛІ СТОРІНКИ УСПІШНОГО ЗАМОВЛЕННЯ
-   ========================================================================== */
-
+/* Загальний контейнер-обгортка для сторінки успішного оформлення замовлення */
 .order-success-page-wrapper {
-    background-color: var(--bg-light-pink);
+    background-color: var(--bg-light-pink); /* Фоновий колір сторінки */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: calc(100vh - 160px); /* Орієнтовно: висота вьюпорта мінус висота хедера і футера */
-    padding-top: 2rem; /* Додаємо відступи, щоб контент не прилипав, якщо футер не фіксований */
+    align-items: center;     /* Вертикальне центрування вмісту */
+    justify-content: center; /* Горизонтальне центрування вмісту */
+    min-height: calc(100vh - 160px); /* Мінімальна висота для притискання футера донизу (орієнтовно) */
+    padding-top: 2rem;       /* Внутрішні відступи зверху та знизу */
     padding-bottom: 2rem;
 }
 
+/* Стилі для картки, що відображає повідомлення про успішне замовлення */
 .order-success-card {
-    background-color: var(--bg-white);
-    border: 1px solid var(--border-light);
-    border-radius: 0.75rem;
-    padding: 2.5rem 2rem;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); /* Ваша статична тінь */
-    transition: none; /* Скасовуємо будь-які transition, успадковані від .card */
+    background-color: var(--bg-white); /* Фоновий колір картки */
+    border: 1px solid var(--border-light); /* Рамка картки */
+    border-radius: 0.75rem;            /* Заокруглення кутів */
+    padding: 2.5rem 2rem;              /* Внутрішні відступи */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); /* Тінь картки */
+    transition: none; /* Скасування анімацій переходу, успадкованих від загального класу .card */
 }
 
+/* Скасування ефектів наведення для картки успішного замовлення */
 .order-success-card:hover {
-    transform: none; /* Скасовуємо ефект "підйому" */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); /* Залишаємо ту саму тінь, що й у спокійному стані */
+    transform: none; /* Без "підйому" картки */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); /* Збереження статичної тіні */
 }
 
+/* Заголовок на сторінці успішного замовлення */
 .order-success-title {
-    color: var(--soft-pink-accent) !important;
-    font-family: 'Playfair Display', serif;
+    color: var(--soft-pink-accent) !important; /* Колір тексту заголовка (!important для перевизначення можливих конфліктів) */
+    font-family: var(--font-headings);       /* Шрифт для заголовків */
     font-size: 2.3rem;
     font-weight: 700;
-    padding-bottom: 0.6rem;
-    border-bottom: 2px solid var(--soft-pink-accent);
-    display: inline-block;
-    /* margin-bottom вже керується класом mb-4 в HTML */
+    padding-bottom: 0.6rem; /* Внутрішній відступ знизу */
+    border-bottom: 2px solid var(--soft-pink-accent); /* Декоративне підкреслення */
+    display: inline-block;     /* Дозволяє підкресленню бути лише під текстом */
 }
 
-/* Іконка, якщо використовуєте Font Awesome і хочете її стилізувати */
-.text-success-icon { /* Наприклад, якщо додали такий клас до <i> */
-    color: var(--primary-pink); /* Або інший колір */
+/* Стиль для іконки успіху (якщо використовується) */
+.text-success-icon {
+    color: var(--primary-pink); /* Колір іконки */
 }
 
-/* Кастомний стиль для блоку повідомлення про успіх */
+/* Кастомний стиль для блоку повідомлення про успіх (як альтернатива стандартним alert Bootstrap) */
 .alert-custom-success {
-    background-color: #e8f5e9; /* Дуже світло-зелений, або ваш фірмовий світлий */
-    /* background-color: var(--bg-light-pink-alt); /* Або світло-рожевий */
-    border-color: #c8e6c9; /* Світло-зелена рамка */
-    /* border-color: var(--accent-pink); /* Або рожева рамка */
-    color: #2e7d32; /* Темно-зелений текст */
-    /* color: var(--text-primary); /* Або ваш основний темний текст */
+    background-color: var(--bg-light-pink-alt); /* Фоновий колір блоку */
+    border-color: var(--accent-pink);     /* Колір рамки */
+    color: var(--text-primary);            /* Колір тексту */
     border-radius: 0.5rem;
     padding: 1rem 1.25rem;
 }
 
+/* Заголовок всередині кастомного блоку повідомлення про успіх */
 .alert-custom-success .alert-heading {
-    color: inherit; /* Успадковує колір від .alert-custom-success */
+    color: inherit; /* Успадковує колір тексту від батьківського .alert-custom-success */
     font-weight: 600;
 }
 
-/* Кнопки вже мають стилі .btn-hero та .btn-secondary-custom */
+/* Коментар: Стилі для кнопок на цій сторінці (наприклад, .btn-hero) вже визначені в _buttons.css */

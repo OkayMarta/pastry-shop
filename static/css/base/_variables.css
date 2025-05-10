@@ -1,45 +1,44 @@
 :root {
     /* === ОСНОВНА ПАЛІТРА КОНДИТЕРСЬКОЇ === */
-    --primary-pink: #E83E8C;         /* Насичений рожевий (головний акцент, кнопки, посилання) */
-    --accent-pink: #f4a8c7;          /* Другий акцентний рожевий (кнопки замовлення, пошук) */
-    --soft-pink-accent: #8f4e4e;     /* М'який рожево-коричневий (заголовки "Про нас", форми) */
+    --primary-pink: #E83E8C;
+    --primary-pink-darker: #c92a7a;
+    --accent-pink: #f4a8c7;
+    --soft-pink-accent: #8f4e4e;
 
     /* === ФОНОВІ КОЛЬОРИ === */
-    --bg-light-pink: #FFF7F5;        /* Дуже світло-рожевий (фон хедера, футера, секцій) */
-    --bg-light-pink-alt: #FFF2F2;    /* Інший світло-рожевий (фон сторінки асортименту) */
-    --bg-light-pink-hover: #fceeee;  /* Світло-рожевий для ховеру карток "Про нас" */
-    --bg-hero-circle: rgba(255, 223, 230, 0.6); /* Напівпрозорий рожевий для Hero */
-    --bg-white: #fff;                /* Білий фон (карточки, контент) */
-    --bg-light-gray: #f8f9fa;        /* Світло-сірий (наприклад, фон для .product-image-container) */
+    --bg-light-pink: #FFF7F5;
+    --bg-light-pink-alt: #FFF2F2;
+    --bg-light-pink-hover: #fceeee;
+    --bg-hero-circle: rgba(255, 223, 230, 0.6);
+    --bg-white: #fff;
+    --bg-light-gray: #f8f9fa;
 
     /* === КОЛЬОРИ ТЕКСТУ === */
-    --text-dark: #222;               /* Дуже темний (заголовок Hero) */
-    --text-primary: #333;            /* Основний темний текст (заголовки секцій, основний текст) */
-    --text-secondary: #555;          /* Сірий текст (підзаголовки, навігація, футер) */
-    --text-light-gray: #666;         /* Світліший сірий текст (описи) */
-    --text-very-light-gray: #777;    /* Дуже світлий сірий (копірайт) */
-    --text-form-label: #444;         /* Колір тексту для міток форм */
-    --text-search-input: #6b4c4c;    /* Колір тексту в полях пошуку */
+    --text-dark: #222;
+    --text-primary: #333;
+    --text-secondary: #555;
+    --text-light-gray: #666;
+    --text-very-light-gray: #777;
+    --text-form-label: #444;
+    --text-search-input: #6b4c4c;
 
     /* === КОЛЬОРИ ДЛЯ ФОРМ ТА ІНПУТІВ === */
-    --form-input-border: #f0d4dd;          /* Рамка полів форми замовлення */
-    --search-input-border: #f8c8dc;        /* Рамка полів пошуку */
-    --search-input-bg: #fff0f5;            /* Фон полів пошуку */
-    --search-input-placeholder: #d39dab;   /* Колір placeholder'а в пошуку */
-    --focus-border-color: var(--primary-pink); /* Колір рамки при фокусі */
-    --focus-box-shadow: rgba(232, 62, 140, 0.25); /* Тінь при фокусі */
+    --form-input-border: #f0d4dd;
+    --search-input-border: #f8c8dc;
+    --search-input-bg: #fff0f5;
+    --search-input-placeholder: #d39dab;
+    --focus-border-color: var(--primary-pink);
+    --focus-box-shadow: rgba(232, 62, 140, 0.25);
 
     /* === КОЛЬОРИ РАМОК ТА РОЗДІЛЮВАЧІВ === */
-    --border-light: #eee;            /* Світла рамка (карточки, хедер) */
-    --divider-light: #ddd;           /* Світлий розділювач (hr в футері) */
+    --border-light: #eee;
+    --divider-light: #ddd;
 
-    /* === ІНШІ КОЛЬОРИ (залишки з початкового :root, якщо ще потрібні) === */
-    --bakery-brown: #352c88;          /* Темно-фіолетовий (використовується для .bg-dark) */
-    --bakery-light-brown: #8D6E63;    /* Світло-коричневий */
-    --bakery-cream: #FFECB3;          /* Кремовий (використовується для .bg-light) */
-    --legacy-bakery-pink: #F8BBD0;    /* Старий світло-рожевий (перевірити, чи використовується) */
+    /* === ШРИФТИ === */
+    --font-primary: 'Montserrat', sans-serif; /* Основний шрифт */
+    --font-headings: 'Playfair Display', serif; /* Шрифт для заголовків */
 
-    /* === ШРИФТИ (приклад, якщо хочете винести) === */
-    /* --font-primary: 'Montserrat', sans-serif; */
-    /* --font-headings: 'Playfair Display', serif; */
+    /* === ІНШІ КОЛЬОРИ === */
+    --bakery-brown: #352c88; /* Темно-фіолетовий (для .bg-dark) */
+    --bakery-cream: #FFECB3; /* Кремовий (для .bg-light) */
 }

@@ -1,7 +1,6 @@
 {% extends 'shop/base.html' %}
 {% load static %}
 
-
 {% block title %}Оформлення замовлення - Confititeria{% endblock %}
 
 {% block content %}
@@ -26,8 +25,7 @@
                                     <span class="text-danger">*</span>
                                     {% endif %}
                                 </label>
-                                {{ field }} {# Django зазвичай генерує id="id_<field_name>" #}
-
+                                {{ field }}
                                 {% if field.help_text %}
                                 <small class="form-text text-muted">{{ field.help_text }}</small>
                                 {% endif %}
@@ -41,7 +39,6 @@
                             </div>
                             {% endfor %}
 
-                            {# Новий блок для відображення суми замовлення #}
                             <div class="mb-3 order-summary-total">
                                 <h5 class="mb-0">Загальна сума: <span id="formOrderTotalAmount" class="fw-bold">0.00</span> грн</h5>
                             </div>
@@ -99,29 +96,40 @@
 document.addEventListener('DOMContentLoaded', function () {
     const onlinePaymentCheck = document.getElementById('onlinePaymentCheck');
     const fakePaymentForm = document.getElementById('fakePaymentForm');
-    const orderTotalAmountSpanInButton = document.getElementById('orderTotalAmount'); // Сума в кнопці фейкової оплати
-    const formOrderTotalAmountSpan = document.getElementById('formOrderTotalAmount'); // НОВИЙ: Сума в тілі форми
+    const orderTotalAmountSpanInButton = document.getElementById('orderTotalAmount');
+    const formOrderTotalAmountSpan = document.getElementById('formOrderTotalAmount');
 
-    // Отримуємо елементи за стандартними ID, які генерує Django
-    // Переконайтеся, що Django генерує саме ці ID, або адаптуйте
-    const productSelector = document.getElementById('id_product');
-    const quantityInput = document.getElementById('id_quantity');
-    const mainForm = document.querySelector('form[method="post"]');
+    const mainForm = document.querySelector('form[method="post"]'); // Знаходимо нашу форму
 
-    let prices = {};
-    if (mainForm && mainForm.dataset.prices) {
-        try {
-            prices = JSON.parse(mainForm.dataset.prices);
-        } catch (e) {
-            console.error('Error parsing prices JSON:', e);
-            prices = {}; // Встановлюємо порожній об'єкт у випадку помилки
+    // Ініціалізуємо змінні для полів форми як null
+    let productSelector = null;
+    let quantityInput = null;
+    let prices = {}; // Об'єкт для зберігання цін
+
+    // Якщо форму знайдено, отримуємо доступ до її елементів та даних
+    if (mainForm) {
+        // Отримуємо елементи форми за їх атрибутом 'name'
+        productSelector = mainForm.elements.namedItem('product');
+        quantityInput = mainForm.elements.namedItem('quantity');
+
+        // Завантажуємо ціни з data-атрибута форми
+        if (mainForm.dataset.prices) {
+            try {
+                prices = JSON.parse(mainForm.dataset.prices);
+            } catch (e) {
+                console.error('Error parsing prices JSON:', e);
+                // Залишаємо prices порожнім об'єктом у випадку помилки
+            }
         }
+    } else {
+        console.error('The main form (form[method="post"]) was not found on the page.');
     }
 
     function updateTotalAmount() {
         let currentTotal = '0.00'; // Значення за замовчуванням
 
-        if (productSelector && quantityInput) { // Перевірка, чи існують productSelector та quantityInput
+        // Переконуємося, що productSelector та quantityInput існують і мають значення
+        if (productSelector && productSelector.value && quantityInput) {
             const selectedProductId = productSelector.value;
             const quantity = parseInt(quantityInput.value, 10);
 
@@ -132,11 +140,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Оновлюємо суму в кнопці фейкової оплати
         if (orderTotalAmountSpanInButton) {
             orderTotalAmountSpanInButton.textContent = currentTotal;
         }
-        // Оновлюємо суму в тілі форми
         if (formOrderTotalAmountSpan) {
             formOrderTotalAmountSpan.textContent = currentTotal;
         }
@@ -148,19 +154,18 @@ document.addEventListener('DOMContentLoaded', function () {
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 
-    if(onlinePaymentCheck){ // Перевіряємо, чи існує чекбокс
+    if (onlinePaymentCheck) {
         onlinePaymentCheck.addEventListener('change', function () {
             if (this.checked) {
-                updateTotalAmount(); // Оновлюємо суму при показі форми
-                if(fakePaymentForm) fakePaymentForm.style.display = 'block';
+                updateTotalAmount();
+                if (fakePaymentForm) fakePaymentForm.style.display = 'block';
             } else {
-                if(fakePaymentForm) fakePaymentForm.style.display = 'none';
+                if (fakePaymentForm) fakePaymentForm.style.display = 'none';
             }
         });
     }
 
-
-    // Слухачі подій для оновлення суми
+    // Додаємо слухачі подій, тільки якщо елементи форми були знайдені
     if (productSelector) {
         productSelector.addEventListener('change', updateTotalAmount);
     }
@@ -168,34 +173,35 @@ document.addEventListener('DOMContentLoaded', function () {
         quantityInput.addEventListener('input', updateTotalAmount);
     }
 
-    // Ініціальне оновлення суми (якщо поля вже заповнені)
-    // Краще викликати після того, як весь DOM точно завантажений і відрендерений
-    // і після того, як Django форми могли б встановити початкові значення.
-    // setTimeout гарантує, що це відбудеться після поточного стеку виконання.
-    setTimeout(updateTotalAmount, 0); // 0 мс достатньо, щоб перенести в наступний цикл подій
+    // Ініціальне оновлення суми, якщо поля вже заповнені
+    // setTimeout використовується, щоб дати браузеру час відрендерити все
+    // і для Django форм встановити початкові значення, якщо вони є
+    setTimeout(updateTotalAmount, 0);
 
     // Опціонально: форматування номера картки та терміну дії при введенні
+    // Ці ID не генеруються Django, тому document.getElementById тут доречний
     const cardNumberInput = document.getElementById('cardNumber');
     if (cardNumberInput) {
         cardNumberInput.addEventListener('input', function (e) {
-            let value = e.target.value.replace(/\D/g, '');
+            let value = e.target.value.replace(/\D/g, ''); // Видаляємо всі нецифрові символи
             let formattedValue = '';
             for (let i = 0; i < value.length; i++) {
                 if (i > 0 && i % 4 === 0) {
-                    formattedValue += ' ';
+                    formattedValue += ' '; // Додаємо пробіл кожні 4 цифри
                 }
                 formattedValue += value[i];
             }
-            e.target.value = formattedValue.trim();
+            e.target.value = formattedValue.trim(); // Встановлюємо відформатоване значення
         });
     }
 
     const expiryDateInput = document.getElementById('expiryDate');
     if (expiryDateInput) {
         expiryDateInput.addEventListener('input', function (e) {
-            let value = e.target.value.replace(/\D/g, '');
+            let value = e.target.value.replace(/\D/g, ''); // Видаляємо нецифрові
             let formattedValue = '';
             if (value.length > 2) {
+                // Форматуємо як ММ / РР
                 formattedValue = value.substring(0, 2) + ' / ' + value.substring(2, 4);
             } else {
                 formattedValue = value;
@@ -207,8 +213,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const fakePayButton = document.querySelector('.btn-payment-submit');
     if (fakePayButton) {
         fakePayButton.addEventListener('click', function() {
-            // Можна додати якесь повідомлення або просто нічого не робити
-            // alert('Це фейкова оплата. Дані не відправлено.');
+            // Тут може бути логіка для фейкової оплати, наприклад, показ повідомлення
+            // console.log('Fake payment attempt. Total: ', orderTotalAmountSpanInButton.textContent);
+            // alert('Це демонстраційна форма оплати. Замовлення буде оформлено без фактичної транзакції.');
         });
     }
 });

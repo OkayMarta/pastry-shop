@@ -1,194 +1,174 @@
-/* ------------------------------------------
-   4.1 Hero Section (Головний екран)
-   ------------------------------------------ */
+/* Стилі для головної секції (Hero Section) на всю ширину екрану */
 .hero-section-fullwidth {
-    padding-top: 2rem; /* Додаємо відступ зверху (замість 0) */
-    padding-bottom: 4rem; /* Нижній відступ */
-    overflow: hidden; /* Запобігає виходу фонової фігури за межі секції */
-    position: relative; /* Потрібно для позиціонування ::before */
-    background-color: var(--bg-white); /* Білий фон секції */
+    padding-top: 2rem;    /* Внутрішній відступ зверху */
+    padding-bottom: 4rem; /* Внутрішній відступ знизу */
+    overflow: hidden;     /* Обрізає вміст, що виходить за межі секції (наприклад, декоративне коло) */
+    position: relative;   /* Встановлює контекст позиціонування для дочірніх псевдоелементів (::before) */
+    background-color: var(--bg-white); /* Фоновий колір секції */
 }
 
-/* Фонова декоративна фігура (велике коло) - тільки для десктопу > 991px */
+/* Декоративне фонове коло для Hero секції (видиме на десктопних версіях) */
 .hero-section-fullwidth::before {
-    content: ''; /* Обов'язково для псевдоелементів */
-    position: absolute; /* Абсолютне позиціонування відносно .hero-section-fullwidth */
-    /* Розміщення та розмір кола (підібрано для десктопної версії) */
-    top: -15%;
+    content: '';          /* Обов'язкова властивість для псевдоелементів */
+    position: absolute;   /* Абсолютне позиціонування відносно батьківського .hero-section-fullwidth */
+    top: -15%;            /* Розташування та розміри кола */
     right: -10%;
     width: 45%;
-    padding-bottom: 45%; /* Зберігає пропорції кола (висота = ширині) */
-    background-color: rgba(255, 223, 230, 0.6); /* Напівпрозорий рожевий */
-    border-radius: 50%; /* Робить елемент круглим */
-    z-index: 0; /* Розміщує коло під контентом */
-    display: block; /* Відображається як блоковий елемент */
-    /* Примітка: цей елемент буде приховано на менших екранах за допомогою медіа-запитів */
+    padding-bottom: 45%; /* Співвідношення сторін для створення кола (висота дорівнює ширині) */
+    background-color: var(--bg-hero-circle); /* Напівпрозорий фоновий колір кола */
+    border-radius: 50%;   /* Робить елемент круглим */
+    z-index: 0;           /* Розміщує коло під основним контентом */
+    display: block;
 }
 
-/* Колонка з текстом в Hero секції */
+/* Колонка з текстовим контентом у Hero секції */
 .hero-text-column {
-    z-index: 1; /* Переконуємось, що текст знаходиться поверх фонового кола */
-    position: relative; /* Необхідно для роботи z-index */
-    padding-top: 2rem; /* Відступ зверху для кращого візуального балансу */
-    display: flex; /* Для вертикального центрування контенту (опціонально) */
-    flex-direction: column; /* Елементи в колонці вертикально */
-    justify-content: center; /* Центрування контенту по вертикалі */
+    z-index: 1;          /* Забезпечує, що текст буде поверх фонового кола */
+    position: relative;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Вертикальне центрування текстового контенту */
 }
 
-/* Колонка із зображенням торта в Hero секції */
+/* Колонка із зображенням у Hero секції */
 .hero-image-column {
-     z-index: 1; /* Зображення також поверх фонового кола */
+     z-index: 1;          /* Забезпечує, що зображення буде поверх фонового кола */
      position: relative;
-     display: flex; /* Для вирівнювання */
-     align-items: center; /* Вертикальне центрування торта */
-     justify-content: flex-end; /* Вирівнювання по правому краю */
+     display: flex;
+     align-items: center;   /* Вертикальне центрування зображення */
+     justify-content: flex-end; /* Горизонтальне вирівнювання зображення по правому краю */
 }
 
-/* Заголовок Hero секції */
+/* Головний заголовок у Hero секції */
 .hero-title {
-    font-size: 3.5rem; /* Великий розмір шрифту */
-    color: var(--text-dark); /* Темний колір */
-    line-height: 1.2; /* Міжрядковий інтервал */
-    margin-bottom: 1.5rem; /* Відступ знизу */
-    font-weight: 900; /* Дуже насичений шрифт */
+    font-size: 3.5rem;      /* Розмір шрифту */
+    color: var(--text-dark);
+    line-height: 1.2;       /* Міжрядковий інтервал */
+    margin-bottom: 1.5rem;  /* Зовнішній відступ знизу */
+    font-weight: 900;       /* Насиченість шрифту */
 }
 
-/* Підзаголовок Hero секції */
+/* Підзаголовок у Hero секції */
 .hero-subtitle {
     font-size: 1.1rem;
-    color: var(--text-secondary); /* Сірий колір */
-    margin-bottom: 2rem; /* Відступ знизу */
-    max-width: 560px; /* Обмеження ширини для кращої читабельності (підібрано для 3 рядків) */
-    /* Знято авто-центрирування, вирівнювання буде залежати від батька (.hero-text-column) */
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    max-width: 560px; /* Обмеження ширини для кращої читабельності */
 }
 
-/* Зображення торта в Hero секції (стилі для десктопу) */
+/* Зображення торта в Hero секції (стилі для десктопної версії) */
 .hero-cake-img {
-    max-width: 85%; /* Зменшений розмір зображення */
-    height: auto; /* Автоматична висота */
-    display: block; /* Важливо для margin та transform */
-    /* margin-left: auto; /* Замінено вирівнюванням батька */
-    /* margin-right: 0; */
-    transform: translateX(50%); /* Зсув праворуч для ефекту виходу за межі */
-    position: relative; /* Щоб бути поверх ::before */
+    max-width: 85%;  /* Максимальна ширина зображення */
+    height: auto;    /* Автоматична висота для збереження пропорцій */
+    display: block;
+    transform: translateX(50%); /* Горизонтальний зсув для візуального ефекту */
+    position: relative;
     z-index: 1;
-    margin-top: -10px; /* Невеликий відступ для кращого позиціонування */
-    /* Примітка: На мобільних та планшетах ці стилі будуть змінені */
+    margin-top: -10px; /* Незначний вертикальний зсув для кращого позиціонування */
 }
 
-/* Обгортка для зображення торта (використовується на планшетах/мобільних) */
+/* Обгортки для зображення торта, що використовуються для адаптивного відображення на планшетах та мобільних */
 .hero-cake-image-wrapper-tablet,
 .hero-cake-image-wrapper-mobile {
-    display: none; /* За замовчуванням приховано */
-    /* Стилі будуть визначені в медіа-запитах */
+    display: none; /* За замовчуванням приховані, активуються через медіа-запити */
 }
 
-
-/* ------------------------------------------
-   4.2 y Choose Us Section (Чому нас обирають)
-   ------------------------------------------ */
-.why-choose-us-section { /* Додамо клас для секції для можливої стилізації */
-    padding-top: 4rem; /* Відступи секції */
+/* Секція "Чому нас обирають" */
+.why-choose-us-section {
+    padding-top: 4rem;
     padding-bottom: 4rem;
-    background-color: var(--bg-white); /* Фон секції */
+    background-color: var(--bg-white);
 }
 
-
-/* Стилі для іконок переваг */
+/* Іконки переваг у секції "Чому нас обирають" */
 .icon-why-choose-us {
-    max-height: 65px; /* Максимальна висота іконки */
-    margin-bottom: 1.5rem; /* Відступ знизу */
+    max-height: 65px;
+    margin-bottom: 1.5rem;
 }
 
-/* Стилі для заголовка кожної переваги */
+/* Заголовок кожної переваги */
 .feature-title {
-    font-size: 1.4rem; /* Розмір шрифту */
-    font-family: 'Montserrat', sans-serif; /* Використовуємо базовий шрифт */
-    font-weight: 700; /* Насичений шрифт */
-    color: var(--text-primary); /* Темний колір */
-    margin-bottom: 0.75rem; /* Відступ знизу */
-    letter-spacing: 0.5px; /* Невеликий міжлітерний інтервал */
-}
-
-/* Стилі для опису кожної переваги */
-.feature-description {
-    color: var(--text-light-gray); /* Сірий колір тексту */
-    font-size: 1.05rem; /* Трохи більший розмір шрифту */
-    line-height: 1.6; /* Міжрядковий інтервал для кращої читабельності */
-}
-
-/* Стилі для рядка зі статистикою */
-.stats-row {
-    margin-top: 2rem; /* Відступ над статистикою */
-}
-.stats-row .stat-number {
-    font-size: 2rem; /* Розмір шрифту для цифр */
+    font-size: 1.4rem;
+    font-family: var(--font-primary);
     font-weight: 700;
-    color: var(--primary-pink); /* Рожевий колір цифр */
-    display: block; /* Щоб мітка була під цифрою */
-    margin-bottom: 0.25rem; /* Невеликий відступ між цифрою та міткою */
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.5px; /* Міжлітерний інтервал */
 }
+
+/* Опис кожної переваги */
+.feature-description {
+    color: var(--text-light-gray);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Рядок зі статистичними даними */
+.stats-row {
+    margin-top: 2rem;
+}
+/* Числові значення статистики */
+.stats-row .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-pink);
+    display: block; /* Для розташування мітки під числом */
+    margin-bottom: 0.25rem;
+}
+/* Текстові мітки статистики */
 .stats-row .stat-label {
-    font-size: 0.9rem; /* Розмір шрифту для міток */
-    color: var(--text-secondary); /* Сірий колір */
-    text-transform: uppercase; /* Великі літери для міток */
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-transform: uppercase; /* Текст у верхньому регістрі */
     letter-spacing: 0.5px;
 }
 
-
-/* ------------------------------------------
-   4.3 Bestsellers Section (Хіти продажів)
-   ------------------------------------------ */
+/* Секція "Тижневі бестселери" */
 .bestsellers-section {
-    background-color: var(--bg-light-pink); /* Світло-рожевий фон секції */
-    padding-top: 4rem;      /* Вертикальний відступ зверху */
-    padding-bottom: 4rem;   /* Вертикальний відступ знизу */
-    padding-left: 2rem;
+    background-color: var(--bg-light-pink);
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    padding-left: 2rem;  /* Бічні відступи для секції */
     padding-right: 2rem;
 }
 
-
-/* ------------------------------------------
-   4.4 Sweet Magic Section (Солодка магія щодня)
-   ------------------------------------------ */
+/* Секція "Солодка магія щодня" */
 .sweet-magic-section {
-    padding-top: 4rem; /* Відступи секції */
+    padding-top: 4rem;
     padding-bottom: 4rem;
-    background-color: var(--bg-white); /* Фон секції */
+    background-color: var(--bg-white);
 }
-
+/* Заголовок у секції "Солодка магія щодня" */
 .sweet-magic-section .section-title {
-    text-align: left; /* Вирівнювання заголовка ліворуч (для десктопу) */
-    margin-bottom: 1rem; /* Менший відступ */
+    text-align: left; /* Вирівнювання по лівому краю */
+    margin-bottom: 1rem;
 }
-
+/* Текст у секції "Солодка магія щодня" */
 .sweet-magic-section p {
-    text-align: left; /* Вирівнювання тексту ліворуч */
-    color: var(--text-secondary); /* Колір тексту */
-    line-height: 1.7; /* Міжрядковий інтервал */
-    margin-bottom: 1.5rem; /* Відступ під параграфами */
+    text-align: left;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
 }
-
+/* Кнопка у секції "Солодка магія щодня" */
 .sweet-magic-section .btn-hero {
-    margin-top: 1rem; /* Відступ над кнопкою */
-    /* Вирівнювання кнопки буде залежати від text-align батька або медіа-запитів */
+    margin-top: 1rem;
 }
 
-
-/* Розміщення зображень в правій колонці */
-.sweet-magic-section .row .col-md-7 { /* Колонка з двома меншими зображеннями */
+/* Контейнер для зображень у правій колонці секції "Солодка магія щодня" */
+.sweet-magic-section .row .col-md-7 { /* Застосовується до колонки Bootstrap */
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Відстань між двома зображеннями */
+    gap: 1.5rem; /* Відстань між зображеннями, якщо їх декілька в колонці */
 }
 
-
-/* --- 6.1 Планшети (від 768px до 991px) --- */
+/* Адаптивні стилі для планшетів (екрани до 991px) */
 @media (max-width: 991px) {
-    /* --- Hero Section --- */
-    .hero-text-column .btn-hero {
+    /* Hero секція */
+    .hero-text-column .btn-hero { /* Кнопка в текстовій колонці Hero */
         display: block;
-        margin-left: auto;
+        margin-left: auto; /* Горизонтальне центрування блочної кнопки */
         margin-right: auto;
     }
     .hero-section-fullwidth {
@@ -196,142 +176,133 @@
         padding-bottom: 3rem;
     }
     .hero-section-fullwidth::before {
-        display: none; /* Ховаємо велике фонове коло */
+        display: none; /* Приховування декоративного фонового кола */
     }
     .hero-text-column, .hero-image-column {
-        text-align: center !important; /* Центруємо контент в обох колонках */
-        justify-content: center; /* Центруємо flex-елементи */
+        text-align: center !important; /* Центрування контенту в колонках */
+        justify-content: center;
     }
     .hero-text-column {
-        order: 1 !important; /* Текст тепер перший */
+        order: 1 !important; /* Текстова колонка відображається першою */
     }
     .hero-image-column {
-        order: 2 !important; /* Картинка тепер друга */
-        align-items: center; /* Центруємо обгортку торта */
+        order: 2 !important; /* Колонка із зображенням відображається другою */
+        align-items: center;
     }
     .hero-title {
-        font-size: 2.8rem; /* Зменшуємо заголовок */
+        font-size: 2.8rem; /* Зменшення розміру заголовка */
         margin-left: auto;
-        margin-right: auto; /* Центрування */
-        max-width: 90%; /* Дозволяємо зайняти більше ширини */
+        margin-right: auto;
+        max-width: 90%;
     }
     .hero-subtitle {
          margin-left: auto;
-         margin-right: auto; /* Центруємо підзаголовок */
+         margin-right: auto;
          max-width: 90%;
     }
     .hero-cake-img {
-        transform: none !important; /* !important для перебиття десктопного стилю, якщо потрібно */
-        margin-top: 1rem !important; /* Повертаємо адекватний відступ зверху, або 0 */
+        transform: none !important; /* Скидання трансформацій */
+        margin-top: 1rem !important;
         margin-left: auto !important;
         margin-right: auto !important;
-        max-width: 80%; /* Зберігаємо потрібний розмір */
-        display: block; /* Переконуємось, що елемент блочний для центрування */
+        max-width: 80%;
+        display: block;
     }
-    /* Показуємо обгортку для торта і стилізуємо її */
+    /* Обгортка для зображення торта на планшетах */
     .hero-cake-image-wrapper-tablet {
-        display: inline-block; /* Щоб обгортка була за розміром контенту + padding */
-        background-color: rgba(255, 223, 230, 0.6); /* Напівпрозорий рожевий фон */
-        border-radius: 50%; /* Робимо коло */
-        padding: 25px; /* Відступи всередині кола (трохи більші, ніж на мобільних) */
-        margin-top: 1rem; /* Відступ зверху */
-        margin-bottom: 2rem; /* Відступ знизу перед текстом */
-        max-width: 70%; /* Обмежуємо максимальну ширину кола */
-        box-sizing: border-box; /* Враховуємо padding */
+        display: inline-block;
+        background-color: var(--bg-hero-circle);
+        border-radius: 50%; /* Кругла форма обгортки */
+        padding: 25px;      /* Внутрішні відступи */
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        max-width: 70%;
+        box-sizing: border-box; /* Врахування відступів та рамок у загальній ширині */
     }
     .hero-cake-image-wrapper-tablet img {
-        max-width: 100%; /* Торт не вилазить за межі кола */
+        max-width: 100%;
         height: auto;
         display: block;
         transform: none;
-        margin: 0; /* Скидаємо внутрішні відступи, якщо вони заважають */
+        margin: 0;
     }
 
-    /* --- Bestsellers/Product Grids --- */
+    /* Секція бестселерів / сітка товарів */
     .bestsellers-section {
-        /* Додаємо горизонтальні відступи для секції на планшетах */
-        padding-left: 2rem; /* Відступ зліва (можна зробити трохи більшим, ніж на моб.) */
-        padding-right: 2rem; /* Відступ справа (можна зробити трохи більшим, ніж на моб.) */
-        /* Зберігаємо або додаємо вертикальні відступи, якщо потрібно */
+        padding-left: 2rem;
+        padding-right: 2rem;
         padding-top: 3rem;
         padding-bottom: 3rem;
     }
-     /* Більш конкретний селектор для кнопки */
-    .product-card .card-body .btn {
-        /* Центруємо кнопку по горизонталі */
-        align-self: center;
-        /* Переконуємось, що margin-top: auto; все ще працює для притискання донизу */
-        margin-top: auto;
+    .product-card .card-body .btn { /* Кнопка в картці товару */
+        align-self: center; /* Горизонтальне центрування кнопки */
+        margin-top: auto;   /* Притискання кнопки донизу картки */
     }
-    .row-cols-md-3 { /* Якщо було 3 колонки на md */
-        grid-template-columns: repeat(2, 1fr) !important; /* В 1 рядку 2 фото */
-    }
-     .row-cols-lg-4 { /* Якщо було 4 колонки на lg */
-        grid-template-columns: repeat(2, 1fr) !important; /* В 1 рядку 2 фото */
+    /* Зміна кількості колонок у сітці товарів */
+    .row-cols-md-3,
+    .row-cols-lg-4 { /* Застосовується до Bootstrap класів для сітки */
+        grid-template-columns: repeat(2, 1fr) !important; /* Два товари в рядку */
     }
 
-     /* --- Sweet Magic Section --- */
+     /* Секція "Солодка магія щодня" */
     .sweet-magic-section .section-title, .sweet-magic-section p {
-        text-align: center; /* Центруємо текст в "Магії" на планшетах */
+        text-align: center; /* Центрування тексту */
     }
-    .sweet-magic-section .btn-hero {
-        display: block; /* Робимо кнопку блочною */
-        margin-left: auto; /* Центрування */
-        margin-right: auto; /* Центрування */
-        max-width: fit-content; /* Ширина по контенту */
+    .sweet-magic-section .btn-hero { /* Кнопка в секції */
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: fit-content; /* Ширина кнопки за вмістом */
     }
-    .sweet-magic-section .row.align-items-center > div:last-child { /* Колонка з картинками */
-        margin-top: 2rem; /* Відступ зверху для картинок на планшетах */
+    .sweet-magic-section .row.align-items-center > div:last-child { /* Колонка із зображеннями */
+        margin-top: 2rem; /* Відступ зверху перед зображеннями */
     }
-     /* Центрування зображень в Sweet Magic */
-    .sweet-magic-section img {
-    border-radius: 0.375rem; /* Залишаємо заокруглення кутів */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Початкова легка тінь */
-    width: 100%;
-    height: auto;
-}
-     .sweet-magic-section .row .col-md-7 { /* Колонка з двома меншими зображеннями */
-        gap: 1rem; /* Зменшуємо відстань між картинками */
+    .sweet-magic-section img { /* Зображення в секції */
+        border-radius: 0.375rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Тінь зображень */
+        width: 100%;
+        height: auto;
+    }
+    .sweet-magic-section .row .col-md-7 { /* Колонка з кількома зображеннями */
+        gap: 1rem; /* Зменшена відстань між зображеннями */
     }
 }
 
-/* --- 6.2 Мобільні пристрої (до 767px) --- */
+/* Адаптивні стилі для мобільних пристроїв (екрани до 767px) */
 @media (max-width: 767px) {
-    /* --- Hero Section --- */
+    /* Hero секція */
     .hero-title {
-        font-size: 2.2rem; /* Ще зменшуємо головний заголовок */
+        font-size: 2.2rem;
     }
     .hero-subtitle {
-        max-width: 90%; /* Дозволяємо зайняти більше ширини на мобільних */
-        font-size: 1rem; /* Зменшуємо шрифт */
+        max-width: 90%;
+        font-size: 1rem;
     }
     .hero-text-column {
-        order: 1 !important; /* Текст перший */
+        order: 1 !important;
     }
     .hero-image-column {
-        order: 2 !important; /* Картинка друга */
+        order: 2 !important;
     }
-    /* Додаємо скидання і для основного класу на мобільних про всяк випадок */
      .hero-cake-img {
          transform: none !important;
-         /* transform: translate(0, 0) !important; */
-         margin-top: 1rem !important; /* Або 0, або потрібний відступ */
+         margin-top: 1rem !important;
          margin-left: auto !important;
          margin-right: auto !important;
-         max-width: 100%; /* Дозволяємо зайняти всю ширину обгортки */
+         max-width: 100%;
          display: block;
      }
-    /* Використовуємо мобільну обгортку для торта */
+    /* Обгортка для зображення торта на мобільних */
     .hero-cake-image-wrapper-mobile {
-        display: inline-block; /* Аналогічно планшетній версії */
-        background-color: rgba(255, 223, 230, 0.6);
+        display: inline-block;
+        background-color: var(--bg-hero-circle);
         border-radius: 50%;
-        padding: 20px; /* Трохи менші відступи всередині кола */
-        margin-top: 1rem; /* Відступ зверху від тексту */
-        margin-bottom: 2rem; /* Відступ знизу */
-        max-width: 85%; /* Обмежуємо максимальну ширину кола */
+        padding: 20px;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        max-width: 85%;
         box-sizing: border-box;
-        transform: none;
+        transform: none; /* Скидання можливих трансформацій */
     }
      .hero-cake-image-wrapper-mobile img {
         max-width: 100%;
@@ -339,75 +310,68 @@
         display: block;
     }
 
-    /* --- Why Choose Us --- */
+    /* Секція "Чому нас обирають" */
     .stats-row .stat-number {
-        font-size: 1.5rem; /* Зменшуємо цифри статистики */
+        font-size: 1.5rem; /* Зменшення розміру чисел статистики */
     }
     .stats-row .stat-label {
-        font-size: 0.8rem; /* Зменшуємо мітки */
+        font-size: 0.8rem; /* Зменшення розміру міток статистики */
     }
     .why-choose-us-section .col-md-4 { /* Колонки переваг та статистики */
-        margin-bottom: 2rem; /* Додаємо відступ знизу між блоками на мобільних */
+        margin-bottom: 2rem; /* Відступ знизу між блоками */
     }
      .why-choose-us-section .col-md-4:last-child {
-        margin-bottom: 0;
+        margin-bottom: 0; /* Прибирає відступ для останнього блоку */
     }
 
-    /* --- Bestsellers/Product Grids --- */
+    /* Секція бестселерів / сітка товарів */
     .bestsellers-section {
-        /* Додаємо горизонтальні відступи для секції на мобільних */
-        padding-left: 1rem; /* Відступ зліва (можна змінити значення, напр. 1.5rem) */
-        padding-right: 1rem; /* Відступ справа (можна змінити значення, напр. 1.5rem) */
-        /* Зберігаємо або додаємо вертикальні відступи, якщо потрібно */
+        padding-left: 1rem;
+        padding-right: 1rem;
         padding-top: 3rem;
         padding-bottom: 3rem;
     }
-     /* Більш конкретний селектор для кнопки */
     .product-card .card-body .btn {
-        /* Центруємо кнопку по горизонталі */
         align-self: center;
-        /* Переконуємось, що margin-top: auto; все ще працює для притискання донизу */
         margin-top: auto;
     }
-    .row-cols-md-3, .row-cols-lg-4 { /* Якщо було 2+ колонки */
-        grid-template-columns: repeat(1, 1fr) !important; /* В 1 рядку 1 фото */
+    .row-cols-md-3, .row-cols-lg-4 {
+        grid-template-columns: repeat(1, 1fr) !important; /* Один товар в рядку */
     }
 
-    /* --- Sweet Magic Section --- */
-     .btn-hero {
-        display: block; /* Робимо кнопку блочною */
-        margin-left: auto; /* Центрування */
-        margin-right: auto; /* Центрування */
+    /* Секція "Солодка магія щодня" */
+     .btn-hero { /* Загальний стиль для кнопки, якщо вона центрується на мобільних */
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
-    .sweet-magic-section .row > .col-lg-6:first-child { /* Колонка з текстом */
+    .sweet-magic-section .row > .col-lg-6:first-child { /* Текстова колонка */
         text-align: center;
-        order: 1; /* Текст тепер ПЕРШИЙ */
-        margin-bottom: 2rem; /* Додаємо відступ під текстовим блоком перед картинками */
+        order: 1; /* Текст відображається першим */
+        margin-bottom: 2rem; /* Відступ під текстом перед зображеннями */
     }
-     .sweet-magic-section .row > .col-lg-6:last-child { /* Колонка з картинками */
-        order: 2; /* Картинки тепер ДРУГІ */
+     .sweet-magic-section .row > .col-lg-6:last-child { /* Колонка із зображеннями */
+        order: 2; /* Зображення відображаються другими */
     }
-    /* Центрування та зменшення зображень */
-    .sweet-magic-section .row [class*="col-md-"] img {
-        max-width: 85%; /* Зменшуємо зображення */
+    .sweet-magic-section .row [class*="col-md-"] img { /* Зображення в секції */
+        max-width: 85%; /* Зменшення максимальної ширини зображень */
         height: auto;
         display: block;
         margin-left: auto;
         margin-right: auto;
-        margin-bottom: 1rem; /* Відступ знизу між картинками при вертикальному розташуванні */
+        margin-bottom: 1rem; /* Відступ знизу між зображеннями при вертикальному розташуванні */
     }
-    .sweet-magic-section .row .col-md-7 img:last-child { /* Уточнення для останньої картинки в другій колонці */
-        margin-bottom: 0;
+    .sweet-magic-section .row .col-md-7 img:last-child { /* Останнє зображення в колонці */
+        margin-bottom: 0; /* Прибирає відступ для останнього зображення */
     }
-     .sweet-magic-section .row .col-md-5 { /* Колонка з великим зображенням */
+     .sweet-magic-section .row .col-md-5 { /* Колонка з одним великим зображенням */
          margin-bottom: 1rem; /* Відступ під великим зображенням */
     }
 }
 
-
-/* --- 6.3 Дуже маленькі екрани (до 576px) --- */
+/* Адаптивні стилі для дуже маленьких екранів (до 576px) */
 @media (max-width: 576px){
      .hero-title {
-        font-size: 1.8rem; /* Ще менший заголовок */
+        font-size: 1.8rem; /* Додаткове зменшення заголовка Hero */
      }
 }
