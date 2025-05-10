@@ -1,0 +1,95 @@
+/* Загальні стилі для блоку футера (підвалу сайту) */
+.footer-custom {
+    background-color: var(--bg-light-pink); /* Фоновий колір футера */
+    color: var(--text-secondary); /* Основний колір тексту у футері */
+    font-size: 0.9rem;            /* Розмір шрифту тексту */
+    padding-top: 3rem;            /* Внутрішній відступ зверху */
+    padding-bottom: 1.5rem;       /* Внутрішній відступ знизу */
+}
+
+/* Стилі для колонки з логотипом у футері */
+.footer-logo-column {
+    /* Специфічні стилі для цієї колонки, якщо потрібні */
+}
+
+/* Стилі для зображення логотипа у футері */
+.footer-logo-img {
+    max-height: 60px;      /* Максимальна висота логотипа */
+    width: auto;           /* Автоматична ширина для збереження пропорцій */
+    display: block;        /* Забезпечує блочне відображення */
+    margin-bottom: 1rem;   /* Зовнішній відступ знизу */
+}
+
+/* Стилі для заголовків колонок у футері */
+.footer-title {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-family: var(--font-headings); /* Використання шрифту для заголовків */
+    font-size: 1.2rem;
+}
+
+/* Стилі для навігаційних посилань у футері */
+.footer-link {
+    color: var(--text-secondary);
+    text-decoration: none;     /* Прибирає підкреслення посилань */
+    transition: color 0.3s ease; /* Плавний перехід кольору при наведенні */
+    display: block;            /* Кожне посилання займає весь рядок */
+    margin-bottom: 0.5rem;     /* Зовнішній відступ знизу між посиланнями */
+}
+
+.footer-link:hover {
+    color: var(--primary-pink); /* Колір посилання при наведенні */
+}
+
+/* Стилі для текстових параграфів у футері (наприклад, адреса, телефон) */
+.footer-custom p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6; /* Міжрядковий інтервал */
+}
+
+/* Стилі для горизонтальної розділювальної лінії у футері */
+.footer-custom hr {
+    border-top: 1px solid var(--divider-light); /* Колір та товщина лінії */
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Стилі для тексту копірайту */
+.copyright-text {
+    font-size: 0.85rem;
+    color: var(--text-very-light-gray);
+    text-align: center; /* Центрування тексту */
+}
+
+/* Адаптивні стилі для футера на планшетах (екрани до 991px) */
+@media (max-width: 991px) {
+    .footer-logo-img {
+        max-height: 80px; /* Збільшена максимальна висота логотипа */
+    }
+}
+
+/* Адаптивні стилі для футера на мобільних пристроях (екрани до 767px) */
+@media (max-width: 767px) {
+    /* Стилі для колонок футера на мобільних */
+    .footer-custom .col-md-3 { /* Застосовується до колонок Bootstrap */
+         text-align: center !important; /* Примусове центрування тексту */
+         margin-bottom: 1.5rem;       /* Відступ між колонками при вертикальному розташуванні */
+    }
+    /* Стилі для колонки з логотипом на мобільних */
+    .footer-logo-column {
+        text-align: center !important;
+        margin-bottom: 2rem;
+    }
+    /* Стилі для зображення логотипа на мобільних */
+    .footer-logo-img {
+        margin-left: auto;  /* Центрування блочного елемента */
+        margin-right: auto; /* Центрування блочного елемента */
+        max-height: 70px;
+    }
+    /* Стилі для тексту копірайту на мобільних */
+    .copyright-text {
+        text-align: center !important;
+    }
+}

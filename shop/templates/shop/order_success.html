@@ -1,37 +1,38 @@
-{% extends 'shop/base.html' %}
+{% extends 'shop/base.html' %} <!-- Наслідування базового шаблону `base.html` -->
+{% load static %}                 <!-- Завантаження тегів Django для роботи зі статичними файлами -->
 
-{% block title %}Замовлення прийнято - Кондитерська{% endblock %}
+{% block title %}Замовлення прийнято - Confititeria{% endblock %} <!-- Визначення заголовка сторінки -->
 
-{% block content %}
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8 text-center">
-            <div class="card">
-                <div class="card-body">
-                    <h1 class="card-title text-success mb-4">
-                        <i class="fas fa-check-circle"></i>
-                        Дякуємо за ваше замовлення!
-                    </h1>
-                    
-                    <p class="lead mb-4">
-                        Ваше замовлення успішно прийнято. З вами зв'яжуться найближчим часом для уточнення деталей.
-                    </p>
-                    
-                    <div class="alert alert-info" role="alert">
-                        <p class="mb-0"> /*ОЦЕ ФІГНЯ!!!!!! ЗАБРАТИ. ЗАМОВНИКУ НЕ ПРИХОДИТЬ НІЧОГО НА ЕЛ. ПОШТУ*/
-                            Перевірте, будь ласка, вашу електронну пошту - ми надіслали вам 
-                            підтвердження замовлення.
+{% block content %} <!-- Початок блоку основного контенту -->
+<!-- Обгортка для всієї сторінки підтвердження успішного замовлення -->
+<div class="order-success-page-wrapper py-5">
+    <div class="container"> <!-- Основний контейнер Bootstrap для центрування контенту -->
+        <div class="row justify-content-center"> <!-- Рядок Bootstrap для центрування колонки -->
+            <div class="col-lg-8 col-md-10 text-center"> <!-- Колонка Bootstrap, що займає частину ширини та центрує текст -->
+                <!-- Картка для відображення повідомлення про успішне замовлення -->
+                <div class="card order-success-card">
+                    <div class="card-body"> <!-- Тіло картки -->
+
+                        <!-- Головний заголовок повідомлення -->
+                        <h1 class="order-success-title mb-4">
+                            Дякуємо за ваше замовлення!
+                        </h1>
+
+                        <!-- Текст повідомлення для користувача -->
+                        <p class="lead mb-5">
+                            Воно успішно оформлене. Наш менеджер зв'яжеться з вами найближчим часом для уточнення деталей та підтвердження.
                         </p>
-                    </div>
-                    
-                    <div class="mt-4">
-                        <a href="{% url 'shop:home' %}" class="btn btn-primary">
-                            Повернутися на головну
-                        </a>
+
+                        <!-- Контейнер для кнопки повернення на головну сторінку -->
+                        <div class="mt-4">
+                            <a href="{% url 'shop:home' %}" class="btn btn-hero"> <!-- Кнопка-посилання на головну сторінку -->
+                                Повернутися на головну
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{% endblock %} 
+{% endblock %} <!-- Кінець блоку основного контенту -->

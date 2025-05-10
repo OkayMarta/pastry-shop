@@ -1,0 +1,219 @@
+/* Загальний контейнер для контенту сторінки "Про нас" */
+.about-us {
+    margin: 0 auto;     /* Центрування блоку */
+    padding: 0rem 1rem; /* Внутрішні відступи з боків */
+    max-width: 1300px;  /* Максимальна ширина контенту */
+}
+
+/* Стилі для інформаційних блоків (карток) з текстом та зображенням */
+.cardd {
+    display: flex;                  /* Використання Flexbox для розташування елементів */
+    align-items: center;            /* Вертикальне вирівнювання по центру */
+    justify-content: space-between; /* Розподіл простору між елементами */
+    gap: 2rem;                      /* Відстань між текстом та зображенням */
+    margin-bottom: 3rem;            /* Зовнішній відступ знизу */
+    border-radius: 1rem;            /* Заокруглення кутів для всього блоку .cardd */
+}
+
+/* Текстова частина інформаційного блоку */
+.cardd-text {
+    padding-left: 5rem;   /* Внутрішній відступ ліворуч */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;            /* Відстань між елементами всередині текстового блоку */
+    margin-right: 2rem;   /* Зовнішній відступ праворуч */
+    flex: 1;              /* Дозволяє текстовому блоку займати доступний простір */
+}
+
+/* Зображення в інформаційному блоці */
+.cardd-img {
+    width: 33rem;         /* Ширина зображення */
+    height: auto;         /* Автоматична висота для збереження пропорцій */
+    border-radius: 1rem;  /* Заокруглення кутів зображення */
+    flex-shrink: 0;       /* Забороняє зображенню стискатися, якщо не вистачає місця */
+}
+
+/* Стилі для параграфів тексту в інформаційних блоках */
+.cardd-text p {
+    font-size: 1.3rem;
+    line-height: 1.6;     /* Міжрядковий інтервал */
+}
+
+/* Стилі для заголовків h2 всередині .about-us (наприклад, "ІСТОРІЯ", "ФІЛОСОФІЯ") */
+.about-us h2 {
+    color: var(--soft-pink-accent);
+    font-size: 2.5rem;
+    border-bottom: 3px solid var(--soft-pink-accent); /* Декоративне підкреслення */
+    padding-bottom: 7px; /* Внутрішній відступ знизу до підкреслення */
+}
+
+/* Стиль для заголовка секції "Наші десерти очима клієнтів" */
+.eye-h2 {
+    text-align: center; /* Вирівнювання тексту по центру */
+    font-size: 2rem;
+}
+
+/* Модифікатор для інформаційного блоку .cardd з реверсивним порядком елементів (зображення зліва, текст справа) */
+.cardd.reverse {
+    flex-direction: row-reverse; /* Змінює напрямок головної осі Flexbox */
+}
+
+/* Контейнер для галереї фотографій клієнтів */
+.common-photo-container {
+    display: flex;
+    gap: 3rem;          /* Відстань між основними блоками фотографій */
+    margin-top: 3rem;   /* Зовнішній відступ зверху */
+}
+
+/* Контейнер для верхнього ряду фотографій у лівій частині галереї */
+.up-photos {
+    display:flex;
+    gap: 3.5rem;        /* Відстань між фотографіями */
+}
+
+/* Контейнер для нижнього ряду фотографій у лівій частині галереї */
+.down-photos {
+    display:flex;
+    gap: 3.5rem;        /* Відстань між фотографіями */
+}
+
+/* Лівий блок з двома рядами фотографій у галереї */
+.left-photo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Розподіл простору між верхнім та нижнім рядом фото */
+}
+
+/* Стилі для окремих зображень у галереї клієнтів */
+.img-1 {
+    width: 30rem;
+    height: 100%;         /* Висота займає всю доступну висоту батьківського елемента */
+    object-fit: cover;    /* Масштабування зображення для заповнення контейнера */
+    max-width: 100%;      /* Забезпечує адаптивність зображення */
+}
+.img-2 {
+    width: 18rem;
+    height: 15.5rem;
+    object-fit: cover;
+    max-width: 100%;
+}
+.img-3 {
+    width: 25rem;
+    height: 15.5rem;
+    object-fit: cover;
+    max-width: 100%;
+}
+.img-4 {
+    width: 23rem;
+    height: 15.5rem;
+    object-fit: cover;
+    max-width: 100%;
+}
+.img-5 {
+    width: 20rem;
+    height: 15.5rem;
+    object-fit: cover;
+    max-width: 100%;
+}
+
+/* Заокруглення кутів для всіх зображень у секції "Наші десерти очима клієнтів" */
+.client_eyes .common-photo-container img,
+.client_eyes .left-photo-container img {
+    border-radius: 15px; /* Радіус заокруглення */
+}
+
+/* Адаптивні стилі для екранів шириною до 1400px */
+@media (max-width: 1400px){
+    .about-us h2{
+        font-size: 2.1rem;
+    }
+    .cardd-img {
+        width: 25rem;
+    }
+    .img-1 {
+        width: 25rem;
+    }
+    .img-2 {
+        width: 16rem;
+        height: 13.5rem;
+    }
+    .img-3 {
+        width: 23rem;
+        height: 13.5rem;
+    }
+    .img-4 {
+        width: 21rem;
+        height: 13.5rem;
+    }
+    .img-5 {
+        width: 18rem;
+        height: 13.5rem;
+    }
+    .about-us {
+        padding: 0 5rem; /* Збільшені бічні відступи для контейнера */
+    }
+}
+
+/* Адаптивні стилі для планшетів (екрани до 991px) */
+@media (max-width: 991px) {
+    /* Зміна розташування елементів в інформаційних блоках на вертикальне */
+    .cardd,
+    .cardd.reverse {
+        flex-direction: column;
+         text-align: center;
+         justify-content: center;
+         align-items: center;
+    }
+    .cardd-text {
+        padding-left: 0; /* Скидання відступу */
+        margin-right: 0; /* Скидання відступу */
+    }
+    .cardd-text p {
+        font-size: 1.1rem; /* Зменшення розміру тексту */
+    }
+    /* Зміна розташування елементів у галереї клієнтів на вертикальне */
+    .common-photo-container {
+        flex-direction: column;
+    }
+    .left-photo-container {
+        gap: 3rem; /* Відстань між блоками фотографій при вертикальному відображенні */
+    }
+    .about-us{
+        padding: 0 5rem;
+    }
+}
+
+/* Адаптивні стилі для мобільних пристроїв (екрани до 767px) */
+@media (max-width: 767px) {
+    .about-us{
+        padding: 0 1.5rem; /* Зменшені бічні відступи для контейнера */
+    }
+}
+
+/* Адаптивні стилі для дуже маленьких екранів (до 576px) */
+@media (max-width: 576px) {
+    .cardd-text p {
+        font-size: 1rem;
+    }
+    .cardd-text h2 { /* Ймовірно, малось на увазі .about-us h2, але залишено як є для відповідності запиту */
+        font-size: 1.5rem;
+    }
+    /* Зміна розташування фотографій у галереї на вертикальне в один стовпець */
+    .up-photos,
+    .down-photos{
+        flex-direction: column;
+    }
+    /* Фотографії галереї розтягуються на всю ширину і мають фіксовану висоту */
+    .img-1,
+    .img-2,
+    .img-3,
+    .img-4,
+    .img-5 {
+        height: 20rem;
+        width: 100%;
+    }
+     .cardd-img {
+        width: 20rem; /* Зменшення ширини зображення в інформаційних блоках */
+    }
+}

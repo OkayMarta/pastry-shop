@@ -1,42 +1,53 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk"> <!-- Встановлення мови документа як українська -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Confititeria - Кондитерська{% endblock %}</title> {# Заголовок сторінки, може бути перевизначений у дочірніх шаблонах #}
-    <!-- Bootstrap CSS -->
+    <meta charset="UTF-8"> <!-- Кодування символів документа -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Налаштування для адаптивного відображення на різних пристроях -->
+
+    <!-- Динамічний заголовок сторінки, що може бути перевизначений у дочірніх шаблонах.
+         За замовчуванням "Confititeria - Кондитерська". -->
+    <title>{% block title %}Confititeria - Кондитерська{% endblock %}</title>
+
+    <!-- Підключення Bootstrap CSS з CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Власні стилі CSS -->
-    {% load static %} {# Завантаження тегів для статичних файлів #}
-    <link href="{% static 'css/style.css' %}" rel="stylesheet"> {# Підключення основного файлу стилів #}
-    <!-- Підключення шрифтів Google Fonts -->
+
+    {% load static %} <!-- Завантаження тегів Django для роботи зі статичними файлами -->
+    <!-- Підключення власного основного файлу CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <!-- Підключення шрифтів з Google Fonts (Montserrat та Playfair Display) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
+    <!-- Блок для додаткових тегів у <head>, що можуть бути визначені у дочірніх шаблонах -->
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
-    <!-- Навігаційне меню (Header) -->
+    <!-- Секція навігаційного меню (Header) -->
     <header class="header-custom">
-        <nav class="navbar navbar-expand-lg"> {# Основний контейнер навігації Bootstrap #}
-            <div class="container"> {# Контейнер для обмеження ширини контенту навігації #}
-                {% load static %}
-                <a class="navbar-brand" href="{% url 'shop:home' %}"> {# Логотип сайту як посилання на головну сторінку #}
+        <nav class="navbar navbar-expand-lg"> <!-- Основний контейнер навігації Bootstrap -->
+            <div class="container"> <!-- Контейнер для обмеження ширини та центрування контенту навігації -->
+                {% load static %} <!-- Повторне завантаження static (не обов'язково, якщо вже є вище, але не шкодить) -->
+                <!-- Логотип сайту, що є посиланням на головну сторінку -->
+                <a class="navbar-brand" href="{% url 'shop:home' %}">
                     <img src="{% static 'img/logo.png' %}" alt="Логотип Confititeria" class="navbar-logo">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"> {# Кнопка для мобільного меню #}
-                    <span class="navbar-toggler-icon"></span> {# Іконка для мобільного меню #}
+                <!-- Кнопка "бургер" для розгортання мобільного меню -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span> <!-- Іконка для кнопки мобільного меню -->
                 </button>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNav"> {# Контейнер для пунктів меню, що згортається на мобільних #}
-                    <ul class="navbar-nav"> {# Список пунктів навігації #}
+                <!-- Контейнер для пунктів навігаційного меню, що згортається на мобільних пристроях -->
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav"> <!-- Список пунктів навігації -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'shop:about' %}">Про нас</a> {# Посилання на сторінку "Про нас" #}
+                            <a class="nav-link" href="{% url 'shop:about' %}">Про нас</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'shop:assortment_list' %}">Асортимент</a> {# Посилання на сторінку "Асортимент" #}
+                            <a class="nav-link" href="{% url 'shop:assortment_list' %}">Асортимент</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'shop:order_create' %}">Зробити замовлення</a> {# Посилання на сторінку створення замовлення #}
+                            <a class="nav-link" href="{% url 'shop:order_create' %}">Зробити замовлення</a>
                         </li>
                     </ul>
                 </div>
@@ -44,42 +55,45 @@
         </nav>
     </header>
 
-    <!-- Основний контент -->
+    <!-- Секція основного контенту сторінки -->
     <main class="main-content">
-        {% if messages %} {# Перевірка наявності повідомлень Django (наприклад, після відправки форми) #}
-        <div class="container mt-3">
+        {% if messages %} <!-- Перевірка, чи є повідомлення Django для відображення (наприклад, після відправки форми) -->
+        <div class="container mt-3"> <!-- Контейнер для повідомлень з верхнім відступом -->
             <div class="messages">
-                {% for message in messages %} {# Цикл для виведення всіх повідомлень #}
-                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert"> {# Клас alert-{message.tags} дозволяє використовувати різні стилі повідомлень (success, error, warning, info) #}
-                    {{ message }} {# Текст повідомлення #}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> {# Кнопка для закриття повідомлення #}
+                {% for message in messages %} <!-- Цикл для ітерації по всіх повідомленнях -->
+                <!-- Блок повідомлення Bootstrap з можливістю закриття.
+                     Клас 'alert-{{ message.tags }}' дозволяє стилізувати повідомлення залежно від його типу (success, error, etc.). -->
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }} <!-- Текст повідомлення -->
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> <!-- Кнопка закриття повідомлення -->
                 </div>
                 {% endfor %}
             </div>
         </div>
         {% endif %}
 
-        {% block content %} {# Блок, в який буде вставлено унікальний контент кожної сторінки #}
-        {# Сюди буде підставлятися контент з інших шаблонів #}
+        <!-- Блок, в який буде вставлено унікальний контент для кожної конкретної сторінки,
+             що наслідує цей базовий шаблон. -->
+        {% block content %}
         {% endblock %}
     </main>
 
-    <!-- Футер (Footer) -->
+    <!-- Секція підвалу сайту (Footer) -->
     <footer class="footer-custom pt-5 pb-4">
-        <div class="container-fluid text-md-left px-md-5"> {# Контейнер на всю ширину з відступами для великих екранів #}
-            <div class="row align-items-center"> {# Рядок для розташування колонок футера #}
-                    <!-- Колонка для Логотипу -->
+        <div class="container-fluid text-md-left px-md-5"> <!-- Контейнер на всю ширину з бічними відступами на середніх та великих екранах -->
+            <div class="row align-items-center"> <!-- Рядок Bootstrap для розміщення колонок футера, з вертикальним вирівнюванням -->
+                    <!-- Колонка для логотипу у футері -->
                     <div class="col-md-3 col-lg-3 col-xl-3 mt-3 footer-logo-column">
                         {% load static %}
                         <a href="{% url 'shop:home' %}">
-                            <img src="{% static 'img/logo.png' %}" alt="Логотип Confititeria (Футер)" class="img-fluid footer-logo-img"> {# Логотип у футері #}
+                            <img src="{% static 'img/logo.png' %}" alt="Логотип Confititeria (Футер)" class="img-fluid footer-logo-img">
                         </a>
                     </div>
 
-                    <!-- Колонка Навігація -->
+                    <!-- Колонка "Навігація" -->
                     <div class="col-md-3 col-lg-3 col-xl-3 mt-3">
-                        <h5 class="text-uppercase mb-4 font-weight-bold footer-title">Навігація</h5> {# Заголовок колонки #}
-                        <ul class="list-unstyled"> {# Список посилань без маркерів #}
+                        <h5 class="text-uppercase mb-4 font-weight-bold footer-title">Навігація</h5>
+                        <ul class="list-unstyled"> <!-- Список посилань без стандартних маркерів -->
                             <li class="mb-2"><a href="{% url 'shop:home' %}" class="footer-link">Головна</a></li>
                             <li class="mb-2"><a href="{% url 'shop:about' %}" class="footer-link">Про нас</a></li>
                             <li class="mb-2"><a href="{% url 'shop:assortment_list' %}" class="footer-link">Асортимент</a></li>
@@ -87,37 +101,38 @@
                         </ul>
                     </div>
 
-                    <!-- Колонка Інформація -->
+                    <!-- Колонка "Інформація" (контактні дані) -->
                     <div class="col-md-3 col-lg-3 col-xl-3 mt-3">
-                        <h5 class="text-uppercase mb-4 font-weight-bold footer-title">Інформація</h5> {# Заголовок колонки #}
-                        <p><i class="fas fa-phone mr-3"></i> +380 (44) 123-45-67</p> {# Телефон #}
-                        <p><i class="fas fa-envelope mr-3"></i> info@confitteria.com</p> {# Email #}
-                        <p><i class="fas fa-home mr-3"></i> м. Львів, вул. Солодка, 123</p> {# Адреса #}
+                        <h5 class="text-uppercase mb-4 font-weight-bold footer-title">Інформація</h5>
+                        <p>+380 (44) 123-45-67</p>
+                        <p>info@confitteria.com</p>
+                        <p>м. Львів, вул. Солодка, 123</p>
                     </div>
 
-                    <!-- Колонка Час роботи -->
+                    <!-- Колонка "Час роботи" -->
                     <div class="col-md-3 col-lg-3 col-xl-3 mt-3">
-                        <h5 class="text-uppercase mb-4 font-weight-bold footer-title">Час роботи</h5> {# Заголовок колонки #}
-                        <p>Пн-Пт: 9:00-20:00</p> {# Графік роботи у будні #}
-                        <p>Сб-Нд: 10:00-18:00</p> {# Графік роботи у вихідні #}
+                        <h5 class="text-uppercase mb-4 font-weight-bold footer-title">Час роботи</h5>
+                        <p>Пн-Пт: 9:00-20:00</p>
+                        <p>Сб-Нд: 10:00-18:00</p>
                     </div>
                 </div>
 
-            <hr class="mb-4"> {# Горизонтальна лінія розділювач #}
+            <hr class="mb-4"> <!-- Горизонтальна лінія-розділювач -->
 
-            <div class="row align-items-center"> {# Рядок для копірайту #}
+            <div class="row align-items-center"> <!-- Рядок для тексту копірайту -->
                 <div class="col-md-12">
-                    <p class="text-center copyright-text">© {% now "Y" %} Confititeria. Всі права захищені.</p> {# Текст копірайту з поточним роком #}
+                    <!-- Текст копірайту з автоматичним оновленням поточного року -->
+                    <p class="text-center copyright-text">© {% now "Y" %} Confititeria. Всі права захищені.</p>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> {# Основний файл JavaScript для Bootstrap (включає Popper.js) #}
-    <!-- Font Awesome (для іконок, якщо потрібні в футері) -->
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit-code.js" crossorigin="anonymous"></script> {# Підключення скрипту Font Awesome для іконок (потрібно замінити your-fontawesome-kit-code на власний) #}
-    <!-- Власні скрипти JS -->
-    {% block extra_js %}{% endblock %} {# Блок для підключення додаткових JavaScript файлів у дочірніх шаблонах #}
+    <!-- Підключення основного JavaScript файлу Bootstrap (включає Popper.js для деяких компонентів) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Блок для підключення додаткових або специфічних для сторінки JavaScript файлів.
+         Може бути перевизначений у дочірніх шаблонах. -->
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

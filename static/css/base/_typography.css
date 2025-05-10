@@ -1,0 +1,77 @@
+/* --- Базові стилі для тега body та основного контенту main --- */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-primary); /* Базовий шрифт для всього сайту */
+    color: var(--text-primary);
+}
+
+main.main-content {
+    flex: 1; /* Дозволяє <main> зайняти весь доступний простір між хедером і футером */
+    padding-bottom: 2rem;
+}
+
+/* --- Шрифти для основних заголовків (h1, h2, h3) --- */
+h1, h2, h3 {
+     font-family: var(--font-headings); /* Спеціальний шрифт для заголовків */
+     font-weight: 700; /* Насиченість шрифту */
+}
+
+/* --- Стилі для загальних заголовків та підзаголовків секцій --- */
+.section-title {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+}
+
+.section-subtitle {
+    color: var(--text-light-gray);
+    font-size: 1.1rem;
+    max-width: 700px; /* Максимальна ширина для кращої читабельності */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+}
+
+/* --- Допоміжний клас для акцентного виділення тексту --- */
+.highlight {
+    color: var(--primary-pink);
+    font-weight: 600;
+}
+
+/* --- Анімація плавної появи елементів --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Клас для застосування анімації fadeIn */
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* --- Адаптивні стилі для мобільних пристроїв (до 767px) --- */
+@media (max-width: 767px) {
+    /* Загальні заголовки секцій */
+    .section-title {
+        font-size: 2rem;
+    }
+    .section-subtitle {
+        max-width: 95%;
+        font-size: 1rem;
+    }
+}
+
+/* --- Адаптивні стилі для дуже маленьких екранів (до 576px) --- */
+@media (max-width: 576px){
+     .section-title {
+        font-size: 1.8rem;
+     }
+}

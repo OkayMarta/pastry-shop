@@ -1,86 +1,97 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk"> <!-- Вказання мови документа як українська -->
 <head>
-    <meta charset="UTF-8">
-    <title>Нове замовлення</title>
+    <meta charset="UTF-8"> <!-- Кодування символів документа -->
+    <title>Нове замовлення</title> <!-- Заголовок документа, видимий у вкладці браузера -->
     <style>
+        /* Загальні стилі для тіла email-повідомлення */
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: Arial, sans-serif; /* Основний шрифт та запасний варіант */
+            line-height: 1.6;               /* Міжрядковий інтервал */
+            color: #333;                    /* Основний колір тексту */
         }
+        /* Контейнер, що обмежує ширину та центрує вміст листа */
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
+            max-width: 600px;    /* Максимальна ширина контейнера */
+            margin: 0 auto;      /* Автоматичні відступи з боків для центрування */
+            padding: 20px;       /* Внутрішні відступи */
         }
+        /* Стилі для заголовка (шапки) листа */
         .header {
-            background-color: #007bff;
-            color: white;
+            background-color: var(--primary-pink); /* Фоновий колір (має бути визначений або замінений на конкретне значення, напр. #E83E8C) */
+            color: white;                          /* Колір тексту */
             padding: 20px;
-            text-align: center;
+            text-align: center;                    /* Вирівнювання тексту по центру */
         }
+        /* Стилі для основного контенту листа */
         .content {
             padding: 20px;
-            background-color: #f8f9fa;
+            background-color: var(--bg-light-gray); /* Фоновий колір (має бути визначений або замінений, напр. #f8f9fa) */
         }
+        /* Стилі для підвалу листа */
         .footer {
             text-align: center;
             padding: 20px;
-            font-size: 12px;
-            color: #6c757d;
+            font-size: 12px;                    /* Розмір шрифту */
+            color: var(--bg-light-pink);        /* Колір тексту (має бути визначений або замінений, напр. #FFF7F5) */
         }
+        /* Стилі для блоку з деталями замовлення */
         .order-details {
-            margin: 20px 0;
+            margin: 20px 0; /* Зовнішні відступи зверху/знизу */
             padding: 15px;
             background-color: white;
-            border-radius: 5px;
+            border-radius: 5px; /* Заокруглення кутів */
+            border: 1px solid var(--border-light); /* Рамка (має бути визначений або замінений, напр. #eee) */
         }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
+        /* Стилі для параграфів всередині блоку деталей замовлення */
+        .order-details p {
+            margin-bottom: 8px; /* Відступ знизу */
+        }
+        /* Стилі для виділеного тексту (міток) у деталях замовлення */
+        .order-details strong {
+            color: var(--text-secondary); /* Колір тексту (має бути визначений або замінений, напр. #555) */
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Шапка листа -->
         <div class="header">
-            <h1>Нове замовлення №{{ order.id }}</h1>
+            <h1>Нове замовлення №{{ order.id }}</h1> <!-- Динамічне відображення номера замовлення -->
         </div>
-        
+
+        <!-- Основний вміст листа -->
         <div class="content">
             <h2>Деталі замовлення:</h2>
-            
+
+            <!-- Блок з детальною інформацією про замовлення -->
             <div class="order-details">
                 <p><strong>Замовник:</strong> {{ order.customer_name }}</p>
                 <p><strong>Телефон:</strong> {{ order.phone_number }}</p>
                 <p><strong>Email:</strong> {{ order.email }}</p>
-                <p><strong>Тип виробу:</strong> {{ order.get_product_type_display }}</p>
+                <p><strong>Товар:</strong> {{ order.product.name }}</p>
                 <p><strong>Кількість:</strong> {{ order.quantity }}</p>
                 <p><strong>Дата замовлення:</strong> {{ order.order_date }}</p>
                 <p><strong>Дата доставки:</strong> {{ order.delivery_date }}</p>
-                {% if order.comment %}
+                {% if order.comment %} <!-- Умова для відображення коментаря, якщо він існує -->
                 <p><strong>Коментар:</strong></p>
                 <p>{{ order.comment }}</p>
                 {% endif %}
             </div>
-            
+
+            <!-- Заклик до дії для адміністратора -->
             <p>
-                Будь ласка, зв'яжіться з клієнтом найближчим часом для підтвердження 
+                Будь ласка, зв'яжіться з клієнтом найближчим часом для підтвердження
                 замовлення та уточнення деталей.
             </p>
         </div>
-        
+
+        <!-- Підвал листа -->
         <div class="footer">
             <p>
-                Це автоматичне повідомлення, будь ласка, не відповідайте на нього.
-                Для управління замовленнями використовуйте адміністративну панель.
+                Це автоматичне повідомлення. Для управління замовленнями використовуйте адміністративну панель.
             </p>
         </div>
     </div>
 </body>
-</html> 
+</html>

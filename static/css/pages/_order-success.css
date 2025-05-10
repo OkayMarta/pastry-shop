@@ -1,0 +1,59 @@
+/* Загальний контейнер-обгортка для сторінки успішного оформлення замовлення */
+.order-success-page-wrapper {
+    background-color: var(--bg-light-pink); /* Фоновий колір сторінки */
+    display: flex;
+    align-items: center;     /* Вертикальне центрування вмісту */
+    justify-content: center; /* Горизонтальне центрування вмісту */
+    min-height: calc(100vh - 160px); /* Мінімальна висота для притискання футера донизу (орієнтовно) */
+    padding-top: 2rem;       /* Внутрішні відступи зверху та знизу */
+    padding-bottom: 2rem;
+}
+
+/* Стилі для картки, що відображає повідомлення про успішне замовлення */
+.order-success-card {
+    background-color: var(--bg-white); /* Фоновий колір картки */
+    border: 1px solid var(--border-light); /* Рамка картки */
+    border-radius: 0.75rem;            /* Заокруглення кутів */
+    padding: 2.5rem 2rem;              /* Внутрішні відступи */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); /* Тінь картки */
+    transition: none; /* Скасування анімацій переходу, успадкованих від загального класу .card */
+}
+
+/* Скасування ефектів наведення для картки успішного замовлення */
+.order-success-card:hover {
+    transform: none; /* Без "підйому" картки */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); /* Збереження статичної тіні */
+}
+
+/* Заголовок на сторінці успішного замовлення */
+.order-success-title {
+    color: var(--soft-pink-accent) !important; /* Колір тексту заголовка (!important для перевизначення можливих конфліктів) */
+    font-family: var(--font-headings);       /* Шрифт для заголовків */
+    font-size: 2.3rem;
+    font-weight: 700;
+    padding-bottom: 0.6rem; /* Внутрішній відступ знизу */
+    border-bottom: 2px solid var(--soft-pink-accent); /* Декоративне підкреслення */
+    display: inline-block;     /* Дозволяє підкресленню бути лише під текстом */
+}
+
+/* Стиль для іконки успіху (якщо використовується) */
+.text-success-icon {
+    color: var(--primary-pink); /* Колір іконки */
+}
+
+/* Кастомний стиль для блоку повідомлення про успіх (як альтернатива стандартним alert Bootstrap) */
+.alert-custom-success {
+    background-color: var(--bg-light-pink-alt); /* Фоновий колір блоку */
+    border-color: var(--accent-pink);     /* Колір рамки */
+    color: var(--text-primary);            /* Колір тексту */
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+}
+
+/* Заголовок всередині кастомного блоку повідомлення про успіх */
+.alert-custom-success .alert-heading {
+    color: inherit; /* Успадковує колір тексту від батьківського .alert-custom-success */
+    font-weight: 600;
+}
+
+/* Коментар: Стилі для кнопок на цій сторінці (наприклад, .btn-hero) вже визначені в _buttons.css */

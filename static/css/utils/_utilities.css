@@ -1,0 +1,9 @@
+/* --- 2.5 Перевизначення кольорів Bootstrap для фонів --- */
+/* Ці класи використовуються рідко в поточному дизайні, але можуть бути корисними */
+.bg-dark {
+    background-color: var(--bakery-brown) !important; /* Використовуємо наш фіолетовий */
+}
+
+.bg-light {
+    background-color: var(--bakery-cream) !important; /* Використовуємо наш кремовий */
+}

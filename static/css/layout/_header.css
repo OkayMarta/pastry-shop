@@ -1,0 +1,103 @@
+/* Загальні стилі для блоку хедера (верхньої навігаційної панелі) */
+.header-custom {
+    background-color: var(--bg-light-pink); /* Фоновий колір хедера */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Тінь під хедером */
+    border-bottom: 1px solid var(--border-light); /* Нижня рамка хедера */
+    position: sticky; /* "Прилипаючий" хедер при прокручуванні сторінки */
+    top: 0;           /* Позиція прилипання до верху екрана */
+    z-index: 1030;    /* Визначає порядок накладання (щоб хедер був поверх інших елементів) */
+    width: 100%;      /* Ширина хедера на весь екран */
+}
+
+/* Стилізація внутрішнього Bootstrap .navbar компонента */
+.header-custom .navbar {
+    padding-top: 0.2rem;    /* Внутрішній відступ зверху */
+    padding-bottom: 0.2rem; /* Внутрішній відступ знизу */
+    min-height: auto;       /* Автоматична мінімальна висота */
+}
+
+/* Стилі для бренду/логотипа в хедері */
+.navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: 1rem; /* Зовнішній відступ праворуч від логотипа */
+    transition: color 0.3s ease, transform 0.3s ease; /* Плавні переходи для ефектів */
+}
+.navbar-brand:hover {
+    color: var(--primary-pink); /* Колір при наведенні */
+    transform: scale(1.08);     /* Ефект збільшення при наведенні */
+}
+/* Стилі для зображення логотипа */
+.navbar-logo {
+    height: 70px;             /* Висота логотипа */
+    width: auto;              /* Автоматична ширина для збереження пропорцій */
+    display: block;           /* Забезпечує блочне відображення */
+    vertical-align: middle;   /* Вертикальне вирівнювання */
+}
+
+/* Стилі для посилань у навігаційному меню */
+.header-custom .navbar-nav .nav-link {
+    color: var(--soft-pink-accent); /* Колір тексту посилань */
+    font-weight: 600;               /* Насиченість шрифту */
+    padding-left: 11rem;            /* Внутрішній відступ ліворуч (відрегулювати за потребою) */
+    padding-right: 1.5rem;          /* Внутрішній відступ праворуч (відрегулювати за потребою) */
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    transition: color 0.3s ease;    /* Плавний перехід кольору */
+    font-size: 1.2rem;              /* Розмір шрифту */
+    text-align: center;             /* Вирівнювання тексту по центру (для мобільного меню) */
+}
+
+/* Стилі для посилань при наведенні курсора або для активного (поточного) посилання */
+.header-custom .navbar-nav .nav-link:hover,
+.header-custom .navbar-nav .nav-link.active {
+    color: var(--primary-pink); /* Колір тексту при наведенні/активності */
+}
+
+/* Стилі для кнопки "бургер" мобільного меню */
+.navbar-toggler {
+    border-color: rgba(0,0,0,.1); /* Колір рамки кнопки */
+    padding: 0.25rem 0.75rem;     /* Внутрішні відступи кнопки */
+}
+/* Іконка всередині кнопки "бургер" */
+.navbar-toggler-icon {
+     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(50, 50, 50, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); /* SVG-іконка для "бургера" */
+}
+
+
+/* Адаптивні стилі для хедера на планшетах (екрани до 991px) */
+@media (max-width: 991px){
+    .header-custom .navbar-nav .nav-link {
+        padding-left: 1.5rem;  /* Зменшені горизонтальні відступи для пунктів меню */
+        padding-right: 1.5rem;
+        font-size: 1.1rem;     /* Зменшений розмір шрифту */
+    }
+}
+
+/* Адаптивні стилі для хедера на мобільних пристроях (екрани до 767px) */
+@media (max-width: 767px){
+    /* Стилі для контейнера навігаційних посилань у розгорнутому мобільному меню */
+    .header-custom .navbar-nav {
+        margin-top: 1rem; /* Зовнішній відступ зверху */
+    }
+    /* Стилі для окремих посилань у розгорнутому мобільному меню */
+     .header-custom .navbar-nav .nav-link {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 0.6rem;
+        padding-bottom: 0.6rem;
+        font-size: 1.1rem;
+        border-bottom: 1px solid var(--border-light); /* Розділювальна лінія між пунктами */
+    }
+    /* Прибирає розділювальну лінію для останнього пункту меню */
+    .header-custom .navbar-nav .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+}
+
+/* Адаптивні стилі для хедера на дуже маленьких екранах (до 576px) */
+@media (max-width: 576px){
+     .header-custom .navbar-nav .nav-link {
+        font-size: 1rem; /* Додатково зменшений розмір шрифту */
+     }
+}

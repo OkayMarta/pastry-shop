@@ -1,0 +1,101 @@
+/* Загальні базові стилі для всіх кнопок */
+.btn {
+    text-transform: uppercase; /* Перетворення тексту на великі літери */
+    letter-spacing: 0.5px;   /* Міжлітерний інтервал */
+    font-weight: 500;        /* Насиченість шрифту */
+    transition: all 0.3s ease; /* Плавний перехід для всіх анімованих властивостей */
+    border-radius: 50px;     /* Радіус заокруглення кутів */
+    padding: 10px 25px;      /* Внутрішні відступи */
+}
+
+/* Основна кнопка (стиль Bootstrap .btn-primary, адаптований під фірмові кольори) */
+.btn-primary {
+    background-color: var(--primary-pink);
+    border-color: var(--primary-pink);
+    color: var(--bg-white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-pink-darker); /* Колір фону при наведенні (змінити на бажаний темніший відтінок --primary-pink) */
+    border-color: var(--primary-pink-darker);   /* Колір рамки при наведенні (аналогічно) */
+    transform: translateY(-2px); /* Ефект підйому кнопки */
+}
+
+/* Контурна кнопка (стиль Bootstrap .btn-outline-primary, адаптований) */
+.btn-outline-primary {
+    border-color: var(--primary-pink); /* Колір рамки */
+    color: var(--primary-pink);        /* Колір тексту */
+    font-weight: 600;
+    padding: 8px 15px;        /* Зменшені внутрішні відступи */
+    font-size: 0.9rem;        /* Зменшений розмір шрифту */
+    background-color: transparent; /* Прозорий фон */
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-pink); /* Колір фону при наведенні */
+    color: var(--bg-white);                /* Колір тексту при наведенні */
+    transform: translateY(-2px);
+}
+
+/* Спеціальна кнопка для Hero секції та подібних акцентних блоків */
+.btn-hero {
+    background-color: var(--bg-light-pink);
+    color: var(--primary-pink);
+    border: 1px solid var(--primary-pink);
+    padding: 12px 30px; /* Збільшені внутрішні відступи */
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(232, 62, 140, 0.2); /* Тінь кнопки */
+    max-width: fit-content; /* Ширина кнопки за вмістом */
+}
+
+.btn-hero:hover {
+    background-color: var(--primary-pink);
+    color: var(--bg-white);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(232, 62, 140, 0.3); /* Збільшена тінь при наведенні */
+}
+
+/* Спеціальна вторинна кнопка (наприклад, "Повний асортимент", "Скасувати") */
+.btn-secondary-custom {
+    background-color: var(--bg-light-pink);
+    color: var(--primary-pink);
+    border: 1px solid var(--primary-pink);
+    padding: 12px 30px;
+    font-weight: 600;
+}
+
+.btn-secondary-custom:hover {
+    background-color: var(--primary-pink);
+    color: var(--bg-white);
+    transform: translateY(-2px);
+}
+
+/* Кнопка "Замовити" для карток товарів */
+.btn-order-product {
+    display: inline-block;
+    padding: 12px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-decoration: none; /* Прибирає підкреслення, якщо це посилання */
+    border-radius: 50px;
+    cursor: pointer;        /* Вказує на інтерактивність елемента */
+    transition: all 0.3s ease;
+    margin-top: auto;       /* Притискає кнопку до низу, якщо батьківський елемент flex-контейнер */
+    width: 100%;            /* Розтягує кнопку на всю ширину батьківського елемента */
+
+    /* Стилі у спокійному стані */
+    background-color: var(--bg-light-pink);
+    color: var(--primary-pink);
+    border: 1px solid var(--primary-pink);
+    box-shadow: 0 4px 15px rgba(232, 62, 140, 0.2);
+}
+
+.btn-order-product:hover {
+    /* Стилі при наведенні курсора */
+    background-color: var(--primary-pink);
+    color: var(--bg-white);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(232, 62, 140, 0.3);
+}

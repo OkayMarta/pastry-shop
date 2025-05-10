@@ -1,59 +1,223 @@
 {% extends 'shop/base.html' %}
+{% load static %}
 
-{% block title %}Створення замовлення - Кондитерська{% endblock %}
+{% block title %}Оформлення замовлення - Confititeria{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-                <h2 class="text-center mb-0">Створення замовлення</h2>
-            </div>
-            <div class="card-body">
-                <form method="post" novalidate>
-                    {% csrf_token %}
-                    
-                    {% if form.non_field_errors %}
-                    <div class="alert alert-danger">
-                        {% for error in form.non_field_errors %}
-                        {{ error }}
-                        {% endfor %}
+<div class="order-form-page-wrapper py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="card order-form-card">
+                    <div class="card-header text-center">
+                        <h2 class="mb-4 section-title-decorated">Створення замовлення</h2>
                     </div>
-                    {% endif %}
-                    
-                    {% for field in form %}
-                    <div class="mb-3">
-                        <label for="{{ field.id_for_label }}" class="form-label">
-                            {{ field.label }}
-                            {% if field.field.required %}
-                            <span class="text-danger">*</span>
-                            {% endif %}
-                        </label>
-                        {{ field }}
-                        {% if field.help_text %}
-                        <div class="form-text">{{ field.help_text }}</div>
-                        {% endif %}
-                        {% if field.errors %}
-                        <div class="invalid-feedback d-block">
-                            {% for error in field.errors %}
-                            {{ error }}
+                    <div class="card-body">
+                        {# Передаємо JSON з цінами в data-атрибут для легкого доступу з JS #}
+                        <form method="post" novalidate data-prices="{{ assortment_prices_json }}">
+                            {% csrf_token %}
+
+                            {% for field in form %}
+                            <div class="mb-3">
+                                <label for="{{ field.id_for_label }}" class="form-label">
+                                    {{ field.label }}
+                                    {% if field.field.required %}
+                                    <span class="text-danger">*</span>
+                                    {% endif %}
+                                </label>
+                                {{ field }}
+                                {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                                {% endif %}
+                                {% if field.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in field.errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
                             {% endfor %}
-                        </div>
-                        {% endif %}
+
+                            <div class="mb-3 order-summary-total">
+                                <h5 class="mb-0">Загальна сума: <span id="formOrderTotalAmount" class="fw-bold">0.00</span> грн</h5>
+                            </div>
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="" id="onlinePaymentCheck">
+                                <label class="form-check-label" for="onlinePaymentCheck">
+                                    Оплатити онлайн зараз
+                                </label>
+                            </div>
+
+                            <div id="fakePaymentForm" class="fake-payment-form-container" style="display: none;">
+                                <h5 class="mb-3 text-center payment-form-title">Введіть дані картки</h5>
+                                <div class="mb-3">
+                                    <label for="cardNumber" class="form-label payment-label">Номер картки</label>
+                                    <input type="text" class="form-control payment-input" id="cardNumber" placeholder="XXXX XXXX XXXX XXXX" maxlength="19">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7 mb-3 mb-md-0">
+                                        <label for="expiryDate" class="form-label payment-label">Термін дії</label>
+                                        <input type="text" class="form-control payment-input" id="expiryDate" placeholder="ММ / РР" maxlength="7">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label for="cvv" class="form-label payment-label">
+                                            CVV/CVC
+                                            <span class="payment-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Три цифри на звороті картки">?</span>
+                                        </label>
+                                        <input type="text" class="form-control payment-input" id="cvv" placeholder="•••" maxlength="3">
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-payment-submit w-100 mt-4">
+                                    Оплатити <span id="orderTotalAmount">0.00</span> грн
+                                </button>
+                            </div>
+
+                            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 mt-4 pt-3">
+                                <button type="submit" class="btn btn-hero">
+                                    Відправити замовлення
+                                </button>
+                                <a href="{% url 'shop:home' %}" class="btn btn-secondary-custom">
+                                    Скасувати
+                                </a>
+                            </div>
+                        </form>
                     </div>
-                    {% endfor %}
-                    
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            Відправити замовлення
-                        </button>
-                        <a href="{% url 'shop:home' %}" class="btn btn-outline-secondary">
-                            Скасувати
-                        </a>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
-{% endblock %} 
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const onlinePaymentCheck = document.getElementById('onlinePaymentCheck');
+    const fakePaymentForm = document.getElementById('fakePaymentForm');
+    const orderTotalAmountSpanInButton = document.getElementById('orderTotalAmount');
+    const formOrderTotalAmountSpan = document.getElementById('formOrderTotalAmount');
+
+    const mainForm = document.querySelector('form[method="post"]'); // Знаходимо нашу форму
+
+    // Ініціалізуємо змінні для полів форми як null
+    let productSelector = null;
+    let quantityInput = null;
+    let prices = {}; // Об'єкт для зберігання цін
+
+    // Якщо форму знайдено, отримуємо доступ до її елементів та даних
+    if (mainForm) {
+        // Отримуємо елементи форми за їх атрибутом 'name'
+        productSelector = mainForm.elements.namedItem('product');
+        quantityInput = mainForm.elements.namedItem('quantity');
+
+        // Завантажуємо ціни з data-атрибута форми
+        if (mainForm.dataset.prices) {
+            try {
+                prices = JSON.parse(mainForm.dataset.prices);
+            } catch (e) {
+                console.error('Error parsing prices JSON:', e);
+                // Залишаємо prices порожнім об'єктом у випадку помилки
+            }
+        }
+    } else {
+        console.error('The main form (form[method="post"]) was not found on the page.');
+    }
+
+    function updateTotalAmount() {
+        let currentTotal = '0.00'; // Значення за замовчуванням
+
+        // Переконуємося, що productSelector та quantityInput існують і мають значення
+        if (productSelector && productSelector.value && quantityInput) {
+            const selectedProductId = productSelector.value;
+            const quantity = parseInt(quantityInput.value, 10);
+
+            if (selectedProductId && prices[selectedProductId] && !isNaN(quantity) && quantity > 0) {
+                const pricePerItem = parseFloat(prices[selectedProductId]);
+                const total = pricePerItem * quantity;
+                currentTotal = total.toFixed(2);
+            }
+        }
+
+        if (orderTotalAmountSpanInButton) {
+            orderTotalAmountSpanInButton.textContent = currentTotal;
+        }
+        if (formOrderTotalAmountSpan) {
+            formOrderTotalAmountSpan.textContent = currentTotal;
+        }
+    }
+
+    // Ініціалізація tooltip (якщо використовується Bootstrap 5)
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    if (onlinePaymentCheck) {
+        onlinePaymentCheck.addEventListener('change', function () {
+            if (this.checked) {
+                updateTotalAmount();
+                if (fakePaymentForm) fakePaymentForm.style.display = 'block';
+            } else {
+                if (fakePaymentForm) fakePaymentForm.style.display = 'none';
+            }
+        });
+    }
+
+    // Додаємо слухачі подій, тільки якщо елементи форми були знайдені
+    if (productSelector) {
+        productSelector.addEventListener('change', updateTotalAmount);
+    }
+    if (quantityInput) {
+        quantityInput.addEventListener('input', updateTotalAmount);
+    }
+
+    // Ініціальне оновлення суми, якщо поля вже заповнені
+    // setTimeout використовується, щоб дати браузеру час відрендерити все
+    // і для Django форм встановити початкові значення, якщо вони є
+    setTimeout(updateTotalAmount, 0);
+
+    // Опціонально: форматування номера картки та терміну дії при введенні
+    // Ці ID не генеруються Django, тому document.getElementById тут доречний
+    const cardNumberInput = document.getElementById('cardNumber');
+    if (cardNumberInput) {
+        cardNumberInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, ''); // Видаляємо всі нецифрові символи
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' '; // Додаємо пробіл кожні 4 цифри
+                }
+                formattedValue += value[i];
+            }
+            e.target.value = formattedValue.trim(); // Встановлюємо відформатоване значення
+        });
+    }
+
+    const expiryDateInput = document.getElementById('expiryDate');
+    if (expiryDateInput) {
+        expiryDateInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, ''); // Видаляємо нецифрові
+            let formattedValue = '';
+            if (value.length > 2) {
+                // Форматуємо як ММ / РР
+                formattedValue = value.substring(0, 2) + ' / ' + value.substring(2, 4);
+            } else {
+                formattedValue = value;
+            }
+            e.target.value = formattedValue;
+        });
+    }
+
+    const fakePayButton = document.querySelector('.btn-payment-submit');
+    if (fakePayButton) {
+        fakePayButton.addEventListener('click', function() {
+            // Тут може бути логіка для фейкової оплати, наприклад, показ повідомлення
+            // console.log('Fake payment attempt. Total: ', orderTotalAmountSpanInButton.textContent);
+            // alert('Це демонстраційна форма оплати. Замовлення буде оформлено без фактичної транзакції.');
+        });
+    }
+});
+</script>
+{% endblock %}

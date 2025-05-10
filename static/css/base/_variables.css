@@ -1,0 +1,44 @@
+:root {
+    /* === ОСНОВНА ПАЛІТРА КОНДИТЕРСЬКОЇ === */
+    --primary-pink: #E83E8C;
+    --primary-pink-darker: #c92a7a;
+    --accent-pink: #f4a8c7;
+    --soft-pink-accent: #8f4e4e;
+
+    /* === ФОНОВІ КОЛЬОРИ === */
+    --bg-light-pink: #FFF7F5;
+    --bg-light-pink-alt: #FFF2F2;
+    --bg-light-pink-hover: #fceeee;
+    --bg-hero-circle: rgba(255, 223, 230, 0.6);
+    --bg-white: #fff;
+    --bg-light-gray: #f8f9fa;
+
+    /* === КОЛЬОРИ ТЕКСТУ === */
+    --text-dark: #222;
+    --text-primary: #333;
+    --text-secondary: #555;
+    --text-light-gray: #666;
+    --text-very-light-gray: #777;
+    --text-form-label: #444;
+    --text-search-input: #6b4c4c;
+
+    /* === КОЛЬОРИ ДЛЯ ФОРМ ТА ІНПУТІВ === */
+    --form-input-border: #f0d4dd;
+    --search-input-border: #f8c8dc;
+    --search-input-bg: #fff0f5;
+    --search-input-placeholder: #d39dab;
+    --focus-border-color: var(--primary-pink);
+    --focus-box-shadow: rgba(232, 62, 140, 0.25);
+
+    /* === КОЛЬОРИ РАМОК ТА РОЗДІЛЮВАЧІВ === */
+    --border-light: #eee;
+    --divider-light: #ddd;
+
+    /* === ШРИФТИ === */
+    --font-primary: 'Montserrat', sans-serif; /* Основний шрифт */
+    --font-headings: 'Playfair Display', serif; /* Шрифт для заголовків */
+
+    /* === ІНШІ КОЛЬОРИ === */
+    --bakery-brown: #352c88; /* Темно-фіолетовий (для .bg-dark) */
+    --bakery-cream: #FFECB3; /* Кремовий (для .bg-light) */
+}
