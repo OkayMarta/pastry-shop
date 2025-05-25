@@ -122,30 +122,48 @@ def about(request):
 def assortment_list(request):
     """
     Відображає список товарів асортименту.
-    Підтримує пошук за назвою товару та фільтрацію за мінімальною/максимальною ціною.
+    Підтримує пошук за назвою товару, фільтрацію за ціною та сортування.
     """
-    items = AssortmentItem.objects.all()  # Отримання всіх товарів
+    items_query = AssortmentItem.objects.all()  # Починаємо з усіх товарів
 
-    # Пошук за назвою товару (параметр 'q' з GET-запиту)
-    q = request.GET.get('q', '')  # Отримання значення 'q', або порожній рядок якщо його немає
+    # Отримання параметрів фільтрації та пошуку
+    q = request.GET.get('q', '')
+    min_price_str = request.GET.get('min_price', '')
+    max_price_str = request.GET.get('max_price', '')
+    sort_option = request.GET.get('sort', 'default')  # 'default', 'price_asc', 'price_desc'
+
+    # Фільтрація за назвою
     if q:
-        items = items.filter(name__icontains=q)  # Фільтрація товарів, назва яких містить 'q' (нечутливо до регістру)
+        items_query = items_query.filter(name__icontains=q)
 
-    # Фільтрація за мінімальною ціною (параметр 'min_price')
-    min_price = request.GET.get('min_price')
-    if min_price:
+    # Фільтрація за мінімальною ціною
+    if min_price_str:
         try:
-            items = items.filter(price__gte=float(min_price))  # Фільтрація: ціна більша або дорівнює min_price
+            items_query = items_query.filter(price__gte=float(min_price_str))
         except ValueError:
             pass  # Ігнорувати, якщо min_price не є числом
 
-    # Фільтрація за максимальною ціною (параметр 'max_price')
-    max_price = request.GET.get('max_price')
-    if max_price:
+    # Фільтрація за максимальною ціною
+    if max_price_str:
         try:
-            items = items.filter(price__lte=float(max_price))  # Фільтрація: ціна менша або дорівнює max_price
+            items_query = items_query.filter(price__lte=float(max_price_str))
         except ValueError:
             pass  # Ігнорувати, якщо max_price не є числом
 
-    # Рендеринг шаблону assortment.html з передачею відфільтрованого списку товарів
-    return render(request, 'shop/assortment.html', {'items': items})
+    # Логіка сортування
+    if sort_option == 'price_asc':
+        items_query = items_query.order_by('price')
+    elif sort_option == 'price_desc':
+        items_query = items_query.order_by('-price')
+    else: # 'default' або будь-яке інше значення
+        items_query = items_query.order_by('pk') # Сортування за порядком додавання (за первинним ключем)
+
+    context = {
+        'items': items_query,
+        'current_sort': sort_option,
+        # Передаємо поточні значення фільтрів, щоб зберегти їх у формі та посиланнях
+        'q_value': q,
+        'min_price_value': min_price_str,
+        'max_price_value': max_price_str,
+    }
+    return render(request, 'shop/assortment.html', context)

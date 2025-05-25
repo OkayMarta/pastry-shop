@@ -1,7 +1,8 @@
 /* Загальний контейнер-обгортка для сторінки асортименту */
 .assort {
     background-color: var(--bg-white); /* Фоновий колір сторінки */
-    padding-bottom: 3rem;             /* Внутрішній відступ знизу */
+    padding-top: 1rem;                 /* Верхній відступ */
+    padding-bottom: 3rem;              /* Внутрішній відступ знизу */
 }
 
 /* Специфічний стиль для карток товарів на сторінці асортименту */
@@ -11,80 +12,240 @@
 
 /* Стилі для форми пошуку товарів */
 .custom-search-form {
-  display: flex;
-  justify-content: center; /* Горизонтальне центрування елементів форми */
-  align-items: center;   /* Вертикальне центрування елементів форми */
-  gap: 1rem;               /* Відстань між елементами форми */
-  margin-bottom: 2.5rem;   /* Зовнішній відступ знизу від форми */
-  flex-wrap: wrap;         /* Дозволяє елементам переноситися на новий рядок, якщо не вміщаються */
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Відступ між кнопкою сортування та групою пошуку/кнопки */
+    margin-bottom: 2.5rem;
 }
 
-/* Стилі для полів вводу у формі пошуку */
+.filter-dropdown-container {
+    /* Залишається зліва за замовчуванням */
+}
+
+.search-fields-and-button-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Відступ між полями пошуку та кнопкою */
+    margin-left: auto; /* Зсуває цей контейнер вправо */
+}
+
+.search-fields-container {
+    display: flex;
+    gap: 1rem; /* Відступ між полями пошуку */
+}
+
 .search-input {
-  padding: 0.75rem 1rem; /* Внутрішні відступи */
-  font-size: 1rem;       /* Розмір шрифту */
-  border: 2px solid var(--accent-pink); /* Рамка поля */
-  border-radius: 12px;   /* Заокруглення кутів */
-  background-color: var(--bg-light-pink); /* Фоновий колір поля */
-  color: var(--text-search-input); /* Колір тексту в полі */
-  width: 260px;          /* Ширина поля */
-  transition: all 0.3s ease; /* Плавний перехід для анімацій */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Тінь поля */
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--accent-pink);
+    border-radius: 12px;
+    background-color: var(--bg-light-pink);
+    color: var(--text-search-input);
+    min-width: 150px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    flex-grow: 1; /* Дозволяє полям пошуку розтягуватися */
 }
 
-/* Стиль для тексту-заповнювача (placeholder) у полях пошуку */
 .search-input::placeholder {
   color: var(--search-input-placeholder);
 }
 
-/* Стилі для полів вводу у формі пошуку при фокусі */
 .search-input:focus {
-  outline: none; /* Прибирає стандартний контур фокусу браузера */
-  border-color: var(--accent-pink); /* Колір рамки при фокусі */
-  box-shadow: 0 0 0 0.2rem var(--focus-box-shadow); /* Тінь при фокусі */
+  outline: none;
+  border-color: var(--accent-pink);
+  box-shadow: 0 0 0 0.2rem var(--focus-box-shadow);
 }
 
-/* Адаптивні стилі для сторінки асортименту */
+.btn-filter-dropdown {
+    background-color: var(--bg-light-pink);
+    color: var(--primary-pink);
+    border: 1px solid var(--primary-pink);
+    padding: 0.70rem 1rem;
+    font-weight: 500;
+    text-transform: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    min-width: 180px;
+    text-align: left;
+}
 
-/* Адаптація для мобільних пристроїв (екрани до 767px) */
-@media (max-width: 767px) {
-    .assort {
-        padding-left: 1rem;  /* Бічні відступи для контейнера */
-        padding-right: 1rem;
-    }
-    /* Форма пошуку займає всю ширину, елементи розташовуються вертикально */
+.btn-filter-dropdown:hover,
+.btn-filter-dropdown:focus,
+.btn-filter-dropdown.show {
+    background-color: var(--primary-pink);
+    color: var(--bg-white);
+    border-color: var(--primary-pink);
+    box-shadow: 0 0 0 0.2rem var(--focus-box-shadow);
+}
+
+.custom-search-form .search-btnn {
+    /* Стилі для кнопки пошуку в десктопній версії, якщо потрібні */
+}
+
+.dropdown-menu {
+    border-radius: 8px;
+    border: 1px solid var(--form-input-border);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    font-size: 0.9rem;
+}
+
+.dropdown-item {
+    padding: 0.6rem 1.2rem;
+    color: var(--text-secondary);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: var(--bg-light-pink-hover);
+    color: var(--primary-pink);
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    background-color: var(--primary-pink);
+    color: var(--bg-white) !important;
+}
+
+
+@media (max-width: 991px) {
     .custom-search-form {
-        flex-direction: column; /* Вертикальне розташування елементів */
-        align-items: stretch;   /* Елементи розтягуються на всю доступну ширину */
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
     }
-    .search-input {
-        width: 100%;            /* Поля вводу займають всю ширину */
-        margin-bottom: 0.5rem;  /* Відступ знизу між полями */
+    .filter-dropdown-container {
+        width: 100%;
+        margin-bottom: 1.5rem;
     }
-    /* Прибирає відступ для останнього поля вводу */
-    .search-input:last-of-type {
+    .btn-filter-dropdown {
+        width: 100%;
+        text-align: center;
+    }
+    .search-fields-and-button-container {
+        flex-direction: column;
+        gap: 1rem;
+        margin-left: 0;
+        width: 100%;
+    }
+    .search-fields-container {
+        display: flex;
+        gap: 1rem;
+        width: 100%;
         margin-bottom: 0;
     }
-    /* Кнопка пошуку також займає всю ширину */
-    .search-btn { /* Припускаючи, що є клас .search-btn для кнопки */
+    .search-input {
+        width: auto;
+        flex-grow: 1;
+        margin-bottom: 0;
+    }
+    .custom-search-form .search-btnn {
         width: 100%;
-        margin-top: 0.5rem;
+        margin-left: 0;
+        display: flex;
+        justify-content: center;
+    }
+    .custom-search-form .search-btnn .btn {
+        width: auto;
+        min-width: 200px;
     }
 }
 
-/* Адаптація для дуже маленьких екранів (до 576px) */
+@media (max-width: 767px) {
+    .assort {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .custom-search-form {
+        align-items: flex-start;
+    }
+
+    .filter-dropdown-container {
+        width: auto;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-filter-dropdown {
+        width: auto;
+        text-align: left;
+        min-width: auto;
+    }
+
+    .search-fields-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .search-fields-container .search-input {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .search-fields-container .search-input:first-child {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .search-fields-container .search-input:nth-child(2),
+    .search-fields-container .search-input:nth-child(3) {
+        width: auto;
+        flex-grow: 1;
+        flex-basis: 0;
+    }
+
+    .custom-search-form .search-btnn .btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
 @media (max-width: 576px) {
     .assort {
-        padding-top: 2rem;    /* Зменшені вертикальні відступи для контейнера */
-        padding-bottom: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
     }
+
     .custom-search-form {
-        margin-bottom: 2rem; /* Зменшений відступ під формою */
+        margin-bottom: 1.5rem;
     }
-    /* Зменшення розміру шрифту та відступів для елементів форми */
-     .search-input, .search-btn { /* Припускаючи, що є клас .search-btn для кнопки */
-        font-size: 0.9rem;
-        padding-top: 0.6rem;
-        padding-bottom: 0.6rem;
+
+    .filter-dropdown-container {
+         margin-bottom: 1rem;
     }
+
+     .search-fields-container {
+        gap: 0.5rem;
+     }
+
+     .search-fields-container .search-input:first-child {
+         margin-bottom: 0.5rem;
+     }
+
+    .search-input,
+    .btn-filter-dropdown,
+    .custom-search-form .search-btnn .btn {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.8rem;
+    }
+
+     .btn-filter-dropdown {
+        min-width: auto;
+    }
+
+     .custom-search-form .search-btnn .btn {
+         min-width: 150px;
+     }
+}
+
+/* Стилі для кнопки "Замовити" в картці товару */
+.product-card .btn-order-product {
+    white-space: nowrap; /* Забороняє перенос тексту на новий рядок */
+    padding-left: 1.2rem; /* Трохи збільшимо горизонтальні падінги */
+    padding-right: 1.2rem;/* щоб текст комфортно розміщувався */
+    text-align: center;   /* Переконуємось, що текст центрований */
 }

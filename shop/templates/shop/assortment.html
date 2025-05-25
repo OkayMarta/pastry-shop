@@ -1,74 +1,95 @@
-{% extends 'shop/base.html' %} <!-- Наслідування базового шаблону сайту -->
-{% load static %}                 <!-- Завантаження тегів для роботи зі статичними файлами -->
+{% extends 'shop/base.html' %}
+{% load static %}
 
-{% block title %}Асортимент - Кондитерська{% endblock %} <!-- Визначення заголовка сторінки -->
+{% block title %}Асортимент - Кондитерська{% endblock %}
 
-{% block content %} <!-- Початок блоку основного контенту сторінки -->
-<section class="assort"> <!-- Секція, що обгортає весь контент сторінки асортименту -->
-<div class="container py-5"> <!-- Основний контейнер Bootstrap з вертикальними відступами -->
+{% block content %}
+<section class="assort">
+<div class="container pt-2 pb-5">
 
-    <!-- Блок з формою пошуку та фільтрації товарів -->
-    <div class="search">
+    <!-- Блок з формою пошуку, фільтрації та сортування товарів -->
+    <div class="search-and-filter-controls mb-4">
         <form method="get" action="{% url 'shop:assortment_list' %}" class="custom-search-form">
-            <!-- Поле для пошуку за назвою товару -->
-            <input type="text" name="q" class="search-input" placeholder="Пошук десерту..." value="{{ request.GET.q }}">
-            <!-- Поле для введення мінімальної ціни -->
-            <input type="number" name="min_price" class="search-input" placeholder="Мін. ціна" value="{{ request.GET.min_price }}">
-            <!-- Поле для введення максимальної ціни -->
-            <input type="number" name="max_price" class="search-input" placeholder="Макс. ціна" value="{{ request.GET.max_price }}">
 
-            <!-- Контейнер для кнопки пошуку -->
-            <div class="search-btnn">
-                <button type="submit" class="btn btn-hero">Пошук</button>
+            <!-- Випадаючий список для сортування -->
+            <div class="filter-dropdown-container">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-filter-dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if current_sort == 'price_asc' %}
+                            Ціна: Від найменшої
+                        {% elif current_sort == 'price_desc' %}
+                            Ціна: Від найбільшої
+                        {% else %}
+                            Сортувати за
+                        {% endif %}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item {% if current_sort == 'default' %}active{% endif %}" href="?sort=default{% if q_value %}&q={{ q_value }}{% endif %}{% if min_price_value %}&min_price={{ min_price_value }}{% endif %}{% if max_price_value %}&max_price={{ max_price_value }}{% endif %}">За замовчуванням</a></li>
+                        <li><a class="dropdown-item {% if current_sort == 'price_asc' %}active{% endif %}" href="?sort=price_asc{% if q_value %}&q={{ q_value }}{% endif %}{% if min_price_value %}&min_price={{ min_price_value }}{% endif %}{% if max_price_value %}&max_price={{ max_price_value }}{% endif %}">Ціна: Від найменшої</a></li>
+                        <li><a class="dropdown-item {% if current_sort == 'price_desc' %}active{% endif %}" href="?sort=price_desc{% if q_value %}&q={{ q_value }}{% endif %}{% if min_price_value %}&min_price={{ min_price_value }}{% endif %}{% if max_price_value %}&max_price={{ max_price_value }}{% endif %}">Ціна: Від найбільшої</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Контейнер для полів пошуку та кнопки -->
+            <div class="search-fields-and-button-container">
+                <!-- Поля для пошуку -->
+                <div class="search-fields-container">
+                    <input type="text" name="q" class="search-input" placeholder="Назва десерту..." value="{{ q_value }}"> {# <--- ЗМІНЕНО ПЛЕЙСХОЛДЕР ТУТ #}
+                    <input type="number" name="min_price" class="search-input" placeholder="Мін. ціна" value="{{ min_price_value }}">
+                    <input type="number" name="max_price" class="search-input" placeholder="Макс. ціна" value="{{ max_price_value }}">
+                </div>
+
+                <!-- Приховане поле для збереження поточного сортування -->
+                {% if current_sort and current_sort != 'default' %}
+                    <input type="hidden" name="sort" value="{{ current_sort }}">
+                {% endif %}
+
+                <!-- Контейнер для кнопки пошуку -->
+                <div class="search-btnn">
+                    <button type="submit" class="btn btn-hero">Пошук</button>
+                </div>
             </div>
         </form>
     </div>
 
     <!-- Сітка для відображення карток товарів -->
-    <!-- Класи Bootstrap: row, row-cols-*, g-4 - для адаптивного розташування колонок та відступів між ними -->
     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-        {% for item in items %} <!-- Цикл для перебору кожного товару зі списку 'items' -->
-        <div class="col"> <!-- Колонка Bootstrap для розміщення однієї картки товару -->
-            <!-- Картка товару з класами Bootstrap (h-100, shadow-sm) та кастомними класами -->
+        {% for item in items %}
+        <div class="col">
             <div class="card h-100 shadow-sm product-card assortment-item-card">
-                <!-- Контейнер для зображення товару -->
                 <div class="product-image-container">
-                    {% if item.image %} <!-- Перевірка, чи існує зображення для товару -->
-                        <img src="{{ item.image.url }}" alt="{{ item.name }}"> <!-- Відображення зображення товару -->
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}">
                     {% else %}
-                        <img src="{% static 'img/no-image.jpg' %}" alt="Зображення відсутнє"> <!-- Відображення зображення-заглушки, якщо основне відсутнє -->
+                        <img src="{% static 'img/no-image.jpg' %}" alt="Зображення відсутнє">
                     {% endif %}
                 </div>
-
-                <!-- Тіло картки з інформацією про товар -->
                 <div class="card-body">
-                    <h5 class="card-title product-title">{{ item.name }}</h5> <!-- Назва товару -->
-                    <p class="card-text product-price">{{ item.price }} ГРН</p> <!-- Ціна товару -->
-                    <!-- Посилання-кнопка для переходу на сторінку створення замовлення з передачею ID поточного товару -->
+                    <h5 class="card-title product-title">{{ item.name }}</h5>
+                    <p class="card-text product-price">{{ item.price }} ГРН</p>
                     <a href="{% url 'shop:order_create' %}?product_id={{ item.id }}" class="btn btn-order-product">Замовити</a>
                 </div>
             </div>
         </div>
-        {% empty %} <!-- Блок, що виконується, якщо список 'items' порожній -->
+        {% empty %}
             <div class="col-12">
-                {% if request.GET.q or request.GET.min_price or request.GET.max_price %}
-                {# Якщо були параметри пошуку/фільтрації #}
-                <div class="d-flex justify-content-center"> <!-- Обгортка для центрування -->
+                {% if q_value or min_price_value or max_price_value or current_sort != 'default' %}
+                <div class="d-flex justify-content-center">
                     <div class="alert alert-pink-notice text-center" style="max-width: 70%; margin-top: 1rem; margin-bottom: 1rem;">
-                        На жаль, за вашими критеріями пошуку нічого не знайдено. <br>Спробуйте змінити параметри пошуку або переглянути повний асортимент.
+                        На жаль, за вашими критеріями пошуку/сортування нічого не знайдено. <br>Спробуйте змінити параметри або переглянути повний асортимент.
                     </div>
                 </div>
                 {% else %}
-                {# Якщо параметрів пошуку не було, тобто асортимент порожній спочатку #}
-                <div class="d-flex justify-content-center"> <!-- Обгортка для центрування (опціонально, якщо також хочете центрувати цей блок) -->
+                <div class="d-flex justify-content-center">
                     <div class="alert alert-info text-center" style="max-width: 70%; margin-top: 1rem; margin-bottom: 1rem;">
                         На жаль, зараз асортимент порожній. Спробуйте завітати пізніше.
                     </div>
                 </div>
                 {% endif %}
             </div>
-        {% endfor %} <!-- Кінець циклу перебору товарів -->
+        {% endfor %}
     </div>
 </div>
 </section>
-{% endblock %} <!-- Кінець блоку основного контенту -->
+{% endblock %}
