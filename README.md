@@ -218,7 +218,7 @@ pastry-shop/
 ### Основні розробники:
 *   **[Окілка Марта](https://github.com/OkayMarta)** - [Team Lead, Backend Developer]
 *   **[Ніжегородова Анастасія](https://github.com/nstasie)** - [UI/UX Designer]
-*   **[Сабат Ірина](https://github.com/NICKNAME_KOLEGY)** - [Frontend Developer]
-*   **[Круглова Анастасія](https://github.com/NICKNAME_KOLEGY)** - [QA, Frontend Developer]
+*   **[Сабат Ірина](https://github.com/iraaoa)** - [Frontend Developer]
+*   **[Круглова Анастасія](https://github.com/nkruhlovaaa)** - [QA, Frontend Developer]
 
 ---
